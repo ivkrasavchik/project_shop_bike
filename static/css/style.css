@@ -1,0 +1,264 @@
+html, body{
+            height: 100%;
+            max-width: 100%;
+            font-family: 'Roboto', sans-serif;
+            background-color: gray;
+        }
+.section-bg{
+
+    background-color: gray;
+    margin-top: 55px;
+}
+
+#img-responsive{
+    position: fixed;
+    max-width: 100%;
+
+}
+.line-img{
+    max-width: 100%;
+    display: flex;
+    overflow-x: scroll;
+}
+.img-adm{
+    display: inherit;
+    margin: 5px;
+    width: 210px;
+    height: 210px;
+    z-index: 10;
+}
+
+.bg-light{
+    top: 0;
+    position: fixed;
+    min-width: 100%;
+    background-color: dimgray!important;
+    z-index: 10;
+}
+
+.navbar-brand{
+    color: darkorange!important;
+}
+
+.nav-link {
+    color: white!important;
+}
+
+.btn-outline {
+    color: darkorange;
+    background-color: transparent;
+    background-image: none;
+    border-color: darkorange;
+}
+
+.btn-outline:hover {
+    color: #fff;
+    background-color: darkorange;
+    border-color: darkorange;
+}
+
+.btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(255, 251, 251, 0.25);
+}
+
+.text-footer-temp{
+    text-align: center;
+}
+
+/*.wrapper{*/
+    /*position: absolute;*/
+/*}*/
+
+/*.wrapper-content{*/
+    /*!*overflow: hidden ;*!*/
+
+    /*min-height: 100%;*/
+    /*padding-bottom: 90px;*/
+/*}*/
+
+.footer{
+    position: relative;
+    bottom: -90vh;
+    background-color: dimgray;
+    height: 90px;
+    /*margin-top: -90px;*/
+    clear: both;
+}
+
+.text-footer-temp{
+    color: darkorange;
+}
+
+/*блок для модального окна*/
+
+*{
+    font-family: Areal, serif;
+}
+
+.b-popup{
+    width:100%;
+    min-height:100%;
+    background-color: rgba(0,0,0,0.5);
+    overflow:hidden;
+    position:fixed;
+    top:0;
+}
+
+.b-popup-content{
+    width:300px;
+    height: 250px;
+    text-align: center;
+    font-size:13px;
+    color: white;
+    background-color: #5f2424;
+    position: fixed;
+    top: 57px;
+    right: 10px;
+    border: 3px solid darkorange;
+
+}
+.b-popup .section-bg{
+    margin:40px auto 0 auto;
+    width:200px;
+    height:300px;
+    padding:10px;
+    background-color: #c5c5c5;
+    border-radius:5px;
+    box-shadow: 0 0 10px #000;
+}
+
+/*конец блока для модального окна*/
+
+#reg{
+    margin-left: 10px;
+    color: darkorange;
+}
+
+#id_username{
+    background-color: burlywood;
+    width: 250px;
+    margin: 5px;
+    padding: 10px;
+    height: 30px;
+
+}
+
+#id_password{
+    background-color: burlywood;
+    margin: 5px;
+    padding: 10px;
+    height: 30px;
+}
+#id_password1{
+    background-color: burlywood;
+}
+#id_password2{
+    background-color: burlywood;
+}
+#reg_user_id{
+    background-color: burlywood;
+}
+
+#change-profile{
+    color: #5f2424;
+}
+
+.admin-container{
+    /*position: fixed;*/
+    top: 6vh;
+    padding: 0;
+    height: 70%;
+    width: 100%;
+}
+
+.list-users{
+    width: 100%;
+    height:93%;
+    background-color: burlywood;
+    padding: 15px;
+    overflow:scroll;
+
+}
+
+.order-users{
+    position: relative;
+    width: 100%;
+    height:93%;
+    background-color: lightblue;
+    padding: 15px;
+    min-width: 17%;
+    overflow-y:scroll;
+}
+
+.data-users{
+    /*position: fixed;*/
+    width: 100%;
+    min-height: 40%;
+    max-height:100%;
+    background-color: lightskyblue;
+    padding: 15px;
+
+}
+
+.list-order{
+    width: 70%;
+    /*position: fixed;*/
+    background-color: lemonchiffon;
+    padding: 15px;
+    height: 100%;
+
+
+}
+
+.table thead th {
+     vertical-align: bottom;
+     border-bottom: none;
+}
+.table thead th {
+    /* vertical-align: bottom; */
+     border-bottom: none;
+}
+.table td, .table th {
+     padding: 0;
+    /* vertical-align: top; */
+     border-top: none;
+}
+.table td, .table th {
+     padding: 0;
+    /* vertical-align: top; */
+     border-top:none;
+}
+#category{
+    width: 100px;
+    height: 30px;
+}
+
+#address_delivery{
+    width: 300px;
+    height: 100px;
+}
+#short_description{
+    width: 300px;
+    height: 100px;
+}
+/*#reg_btn{*/
+    /*!*background-color: #5f2424;*!*/
+    /*border: 1px darkorange;*/
+    /*color: darkorange;*/
+
+/*}*/
+.product-item{
+    /*position: fixed;*/
+    margin-top: 50px;
+    padding: 15px;
+}
+.product_list{
+    color: #9d2d0f;
+}
+#id_price{
+    width: 15vh;
+}
+#id_discount{
+    width: 7vh;
+}

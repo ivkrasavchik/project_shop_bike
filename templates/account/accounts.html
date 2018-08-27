@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="admin-container">
+        <div class="row">
+
+            <div class = "col-lg-2">
+                <div class="order-users">
+                    Order Users<br>
+                </div>
+            </div>
+
+
+
+
+            <div class = "col-lg-8">
+                <div class="data-users">
+                    <ul>
+
+                    </ul>
+                    Data User 2
+                    {{ username }}
+                     {% include 'account/profile.html' %}
+                </div>
+                <div class="row">
+                    <div class = "col-lg-12">
+
+                        <div class="list-order">
+                            list order
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class = "col-lg-2">
+                <div class="list-users">
+
+                    <table class="table text-left">
+                        <thead>
+                            <tr>
+                                <th>list Users</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for elem in users %}
+                                <tr>
+                                    <td>
+                                        <a href="javascript:" class="info-user"
+                                           data-username="{{ elem.username }}"
+                                           data-user_id="{{ elem.id }}"
+                                           data-email="{{ elem.email }}"
+                                           data-superusers="{{ elem.is_superuser }}"
+                                           data-first_name="{{ elem.first_name }}"
+                                           data-is_staff="{{ elem.is_staff }}"
+                                           data-is_active="{{ elem.is_active }}"
+                                           data-phone="{{ elem.profile.phone }}"
+                                           data-spare_phone="{{ elem.profile.spare_phone }}"
+                                           data-address_delivery="{{ elem.profile.address_delivery }}"
+                                           data-category="{{ elem.profile.category }}"
+                                           data-discount="{{ elem.profile.discount }}"
+                                           data-short_description="{{ elem.profile.short_description }}"
+{#                                           data-category_list="{{  }}"#}
+
+                                        >{{ elem.username }} </a>
+{#                                        <a href="javascript:GetInfoUser(elem.id)" class="info-user">{{ elem.username }}</a>#}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+{% endblock %}
+

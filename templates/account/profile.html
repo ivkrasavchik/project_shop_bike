@@ -1,0 +1,64 @@
+
+
+<form action="" method="post" id="form-profile">
+    {% csrf_token %}
+    <h3></h3>
+        <div class="form-group">
+
+            <div class="col-md-12">
+                <div class="data-js">
+                    <h3>
+                        Profile юзера
+                    </h3>
+                </div>
+
+
+                <input hidden id="username">
+                <input hidden id="password">
+                <input hidden id="user_id">
+
+                <input id="first_name" placeholder="first name">
+                <input id="phone" placeholder="number of telephone">
+                <input id="spare_phone" placeholder="spare number of telephone">
+{#                <input id="category_val" placeholder="category_val">#}
+                <label for="category">Категория клиента</label>
+{#                <select size="5" multiple="multiple" id="category" >#}
+{#                <select size="5" id="category" >#}
+{#                <select id="category_val" onchange="">#}
+                <select id="category_val">
+                    <option selected="selected">-------</option>
+                    {% for elem in category_list %}
+                    <option value="{{ elem }}">{{ elem }} | {{ elem.discount }} %</option>
+
+                    {% endfor %}
+{#                    <option disabled="disabled" value="0">0</option>#}
+{#                    <option selected="selected" value="5">5</option>#}
+
+                </select>
+
+                <input id="discount" placeholder="discount">
+                <textarea id="address_delivery" placeholder="address delivery"></textarea>
+                <textarea id="short_description" placeholder="short description"></textarea>
+
+                <label for="is_active">is active </label>
+                <input type="checkbox" id="is_active">
+
+                <label for="is_staff">is staff </label>
+                <input type="checkbox" id="is_staff">
+
+
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-12" >
+
+            </div>
+
+        </div>
+
+{#    <button type="submit" class="btn btn-outline my-2 my-sm-0">Поменяйка</button>#}
+        <a type="submit" class="btn btn-outline my-2 my-sm-0" href="javascript:" id="change-profile">Перекроить</a>
+</form>

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{#Создаем классы, для модального отображения#}
+
+{% block content %}
+    <div class="section-bg">
+        <img src="{% static '/img/moto0.jpg' %}" id="img-responsive">
+
+    </div>
+    <div class="b-popup" id="popup1">
+        <div class="b-popup-content">
+            {% include 'account/login.html' %}
+            {# <a href="javascript:PopUpHide()">Hide popup</a>#}
+        </div>
+    </div>
+    <div class="b-popup" id="popup2">
+        <div class="b-popup-content">
+            {% include 'account/register.html' %}
+            {# <a href="javascript:PopUpHide()">Hide popup</a>#}
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+{% endblock %}

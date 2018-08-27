@@ -1,0 +1,26 @@
+
+<form action="" method="post">
+    {% csrf_token %}
+
+
+    <h3>Введите log & pass</h3>
+        <div class="form-group">
+            <label for="id_username" class="control-label">Ваш Email</label>
+            <div class="col-md-12">
+                {{ form.username }}
+            </div>
+        </div>
+        <div class="form-group">
+{#            <label for="id_password" class="control-label">Password</label>#}
+            <div class="col-md-12" >
+
+                {{ form.password }}
+
+            </div>
+            {{ errortext }}
+        </div>
+
+    <button type="submit" class="btn btn-outline my-2 my-sm-0">Войти</button>
+    <a href="javascript:PopUpRegShow()" id="reg"> Зарегистрироваться </a>
+    <a href="javascript:PopUpHide()" class="btn btn-outline my-2 my-sm-0">Отмена</a>
+</form>

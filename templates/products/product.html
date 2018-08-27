@@ -1,0 +1,115 @@
+{#{% extends 'landing/home.html' %}#}
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+    <div class="product-item">
+        <div class="row">
+            <div class = "col-9">
+                {# url 'product_save' - в url name=product_save #}
+{#                <form id="form_product_change" method="post" action="{% url 'adm_products' %}">#}
+                <form id="form_product_change" action="{% url 'adm_products' %}">
+                    {% csrf_token %}
+                    {{ form1.article }}
+                    {{ form1.category }}
+                    {{ form1.name }}
+                    {{ form1.fabric }}
+                    {{ form1.year_model }}
+                    <br>
+                    {{ form1.price }}
+                    {{ form1.discount }}
+                    <br>
+                    {{ form1.short_description }}
+                    <br>
+                    {{ form1.description }}
+                    <br>
+                    <div class="row">
+                        <div class = "col-2">
+    {#                    <label for id="id_prod_active">active</label><br>#}
+                            active<br>
+                         {{ form1.prod_active }}
+                        </div>
+                        <div class = "col-2">
+    {#                    <label for id="id_status_sale">Sale</label><br>#}
+                            Sale<br>
+                        {{ form1.status_sale }}
+                        </div>
+                        <div class = "col-2">
+    {#                    <label for id="id_status_new">New</label><br>#}
+                            New<br>
+                        {{ form1.status_new }}
+                        </div>
+{#                        <div class = "col-2">#}
+{#                            <a type="submit" class="btn btn-outline my-2 my-sm-0" href="javascript:" id="change-product">Перекроить</a>#}
+{#                        </div>#}
+                    </div><br>
+    {#                {{ form2.as_table }}#}
+                    <div id="id_img-adm" class="line-img ">
+                        <!-- Заполняется из js-->
+    {#                    <img src="/madia/product_images/LS2OF562_Pink.jpg" class='img-adm'>#}
+                    </div>
+                </form>
+                <br>
+                <form id="form_img_add" method="POST" action="{% url 'adm_products' %}" enctype="multipart/form-data">{% csrf_token %}
+                    {% render_field form2.product type="hidden" %}
+{#                    {{ form2.instance.product }}#}
+{#                    {{ form2.product }}#}
+                    {{ form2.image }}
+                    {{ form2.is_main }}
+                    {{ form2.is_active }}
+                    <button type="submit" class="btn btn-outline my-2 my-sm-0" id="create-img">Добавить картинку</button>
+                </form>
+                <br>
+                <div class="row">
+                    <div class = "col-2">
+                        <a type="submit" class="btn btn-outline my-2 my-sm-0" href="javascript:" id="change-product">Перекроить</a>
+                    </div>
+{#                    <div class = "col-2">#}
+{#                        <button type="submit" class="btn btn-outline my-2 my-sm-0" href="javascript:" id="create-img">Добавить картинку</button>#}
+{#                    </div>#}
+{#                    <div class = "col-2">#}
+{#                        <button class="btn btn-outline my-2 my-sm-0" href="javascript:" id="create-product">Новый</button>#}
+{#                    </div>#}
+                </div>
+
+            </div>
+            <div class = "col-3">
+                <table class="table text-left">
+                    <thead>
+                        <tr>
+                            <th>Product list</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                            <tr>
+                            <td>
+
+                            <a href="javascript:" class="product_list"
+                               data-productname="{{ product.name }}"
+                               data-article="{{ product.article }}"
+                               data-price="{{ product.price|safe }}"
+                               data-discount="{{ product.discount }}"
+                               data-category="{{ product.category }}"
+                               data-short_description="{{ product.short_description }}"
+                               data-description="{{ product.description }}"
+                               data-prod_active="{{ product.prod_active }}"
+                               data-status_new="{{ product.status_new }}"
+                               data-status_sale="{{ product.status_sale }}"
+                               data-year_model="{{ product.year_model }}"
+                               data-fabric="{{ product.fabric }}"
+                                >{{ product.name }} | артикул {{ product.article }}|active {{ product.prod_active }}</a><br>
+                            </td>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
