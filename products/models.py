@@ -30,7 +30,7 @@ class ProductCategory(models.Model):
 
 
 class Product(models.Model):  # модели принято называть в ед. числе
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64, unique=True)
     article = models.CharField(max_length=7, default="артикул", unique=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     discount = models.IntegerField(default=0)

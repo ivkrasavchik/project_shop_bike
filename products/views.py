@@ -62,33 +62,12 @@ def adm_products(request):
     return render(request, 'products/product.html', args)
 
 
-# def add_img(request):
-#     args = {}
-#     if request.POST:
-#         args.update(csrf(request))
-#         img_form = ProductImageForm(request.POST, request.FILES)
-#
-#         if img_form.is_valid():
-#             print("OK_____________POST______________OK")
-#             img_form.save()
-#             return redirect("/")
-#
-#         args['img_form'] = img_form
-#     return render(request, 'products/temp_img.html', args)
-
-
 @login_required
 @transaction.atomic
 def adm_product_img(request):
     args = dict()
     products_img_list = []
     name = request.GET['name']
-
-    # args['products_img_list'] = ProductImage.objects.filter(product__name=name)
-    # args['a'] = "petya"
-    # args['b'] = "vasya"
-    # args['c'] = "Olya"
-    # args['name'] = name
 
     for img in ProductImage.objects.filter(product__name=name):
         products_img_list.append([img.image.url, img.is_main, img.is_active, img.id])
@@ -134,3 +113,7 @@ def adm_product_save(request):
     dumps = json.dumps("OK")
     return HttpResponse(dumps)
 
+
+def product(request, product_id):
+    product = Product.objects.get(id=product_id)
+    return render(request, 'products/us_product.html', locals())

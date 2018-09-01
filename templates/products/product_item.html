@@ -1,0 +1,21 @@
+{#{% extends 'landing/home.html' %}#}
+{% load static %}
+
+<div class="col-3">
+    <div class="product-item-list">
+{#        <div>#}
+{#        {% url 'product' product_image.product.id %}#}
+            <a href="{% url 'product' img.product.id %}">
+                {{ img.product.name }}<br>
+                <img src="{{ img.image.url }}" class="img-responsive-in-list center-block">
+            </a>
+
+{#        </div>#}
+        <div class="prod_it_list_footer">
+
+            {{ img.product.price }} Руб.
+            <input type="number" id="count_items" data-max="24" data-min="1"><br>
+            <button href="" class="btn btn-outline my-2 my-sm-0" id="">Закинуть в тележку</button>
+        </div>
+    </div>
+</div>

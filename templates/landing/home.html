@@ -4,8 +4,31 @@
 {#Создаем классы, для модального отображения#}
 
 {% block content %}
+
     <div class="section-bg">
         <img src="{% static '/img/moto0.jpg' %}" id="img-responsive">
+
+        <div class="row">
+            <div class="col-2">
+                <div class="filter-product">
+                    <h5>Выбор категории</h5>
+                    {% for elem in category_product %}
+                        <a href="#">{{ elem.name }}</a><br>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-10">
+                <div class="item-list">
+                <h2>Цены указаны с учетом вашей скидки</h2><br>
+                    <div class="row">
+
+                        {% for img in product_image %}
+                            {% include 'products/product_item.html' %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
     <div class="b-popup" id="popup1">
@@ -20,6 +43,9 @@
             {# <a href="javascript:PopUpHide()">Hide popup</a>#}
         </div>
     </div>
+
+
+
 
     {% include 'footer.html' %}
 {% endblock %}

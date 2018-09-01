@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^login/', include('landing.urls')),
     url(r'^profile/', include('landing.urls')),
     url(r'^admin_product/', include('products.urls')),
-    # url(r'^add_foto/', include('products.urls')),
+    url(r'^orders/', include('orders.urls')),
 
 ]\
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \

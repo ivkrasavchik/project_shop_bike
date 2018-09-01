@@ -22,15 +22,28 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="/account/">Accounts</a>
               <a class="dropdown-item" href="/admin_product">Products</a>
-              <a class="dropdown-item" href="#">Orders</a>
+              <a class="dropdown-item" href="/orders">Orders</a>
+              <a class="dropdown-item" href="/admin">admin</a>
 {#              <a class="dropdown-item" href="/add_foto/foto_add">Foto</a>#}
             </div>
         {% endif %}
+        <li class="text-context">
+            <span>Мобилы для связи: </span>
+            <h6>(029) 380 30 40,  (025) 720 63 25</h6>
+        </li>
+        <li class="text-context">
+            <span>Адрес склада: </span>
+            <h6>Не дом и не улица. Наш адрес Советский Союз.</h6>
+        </li>
+        <li class="text-context">
+            <span>Время работы: пн - пт: с 10:00 до 20:00, сб - вс: с 10:00 до 17:00</span>
+        </li>
 {#      </li>#}
 {#      <li class="nav-item">#}
 {#        <a class="nav-link disabled" href="#">Disabled</a>#}
 {#      </li>#}
     </ul>
+
     <form class="form-inline my-2 my-lg-0">
 {#      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
         {% if user.username %}

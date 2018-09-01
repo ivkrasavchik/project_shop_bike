@@ -68,15 +68,12 @@ jQuery(document).ready(function ($) {
 
 
         $('#id_name').val(data.name);
-        console.log("TTTTT"+document.getElementById('id_product').value);
 
         $('#id_article').val(data.article);
         $('#id_discount').val(data.discount);
 
         $('#id_category').val(data.category);
         $('#id_fabric').val(data.fabric);
-        // $('#id_manufacturer').val(data.manufacturer);
-        // $('#123').val(data.manufacturer);
 
         $('#id_short_description').val(data.short_description);
         $('#id_description').val(data.description);
@@ -100,11 +97,6 @@ jQuery(document).ready(function ($) {
                     var url_img="{% url 'image_product'"+data.products_img_list[i][3]+"%}";
                     var img = "<img src='" + data.products_img_list[i][0] + "' class='img-adm' id="+data.products_img_list[i][3]+">";
                     $('#id_img-adm').append("<a href=" + url_img + " >"+img+"</a><br>");
-
-
-                    // $('#id_img-adm').append("<img src='" + data.products_img_list[i][0] + "' class='img-adm' id="+data.products_img_list[i][3]+">");
-                    // console.log(data.products_img_list[i][1]);
-
                     if (data.products_img_list[i][1] == true){
                         $('#id_img-adm').append("<input type='checkbox' checked class='img-adm-ck' id='"+data.products_img_list[i][3]+"_id_main'>is main");
 
@@ -126,7 +118,6 @@ jQuery(document).ready(function ($) {
         var data = {};
 
         for (i=0; i < prodImgList.length; i++){
-            // console.log(prodImgList[i][3]);
             var el_id = prodImgList[i][3];
             var result_id_main = el_id + "_id_main";
             var result_id_active = el_id + "_id_active";
@@ -138,16 +129,9 @@ jQuery(document).ready(function ($) {
                 bool_active = true
             }else{bool_active = false}
             tdata[prodImgList[i][3]] = [bool_main, bool_active]
-            // tdata[data.products_img_list[i][3]] = [bool_main, bool_active]
-            // tdata[data.products_img_list[i][3]] = [document.getElementById(result_id_main).checked, document.getElementById(result_id_active).checked]
         }
 
         data.image_id = tdata;
-        //
-        // data.article = document.getElementById('id_article').value;
-
-        // console.log(prodImgList);
-
         $.ajax({
             type: "GET",
             url: "product_save/",
@@ -258,8 +242,6 @@ jQuery(document).ready(function ($) {
         data.discount = $(this).attr('data-discount');
         data.short_description = $(this).attr('data-short_description');
 
-        // data.csrfmiddlewaretoken = $('#form-profile [name="csrfmiddlewaretoken"]').val();
-
         $('.data-js h3').text(data.username);
         $('#first_name').val(data.first_name);
         $('#username').val(data.username);
@@ -272,11 +254,8 @@ jQuery(document).ready(function ($) {
         $('#category_val').val(data.category);
         $('#discount').val(data.discount);
         $('#short_description').val(data.short_description);
-        // console.log(document.getElementById('category_val').value +' Ya ' + data.category);
 
         if (data.is_active === "True"){
-            // console.log(data.is_active +' Ya');
-            // $('#is_active').prop('checked', true)
             $('#is_active').attr('checked', true)
         }else {
             $('#is_active').attr('checked', false)
@@ -286,9 +265,6 @@ jQuery(document).ready(function ($) {
         }else {
             $('#is_staff').prop('checked', false)
         }
-
-
-        // $('.data-js ul').append('<li>'+ data.username +'</li>');
     }
 
     function change_profile_view() {
@@ -296,7 +272,6 @@ jQuery(document).ready(function ($) {
 
         data.username = document.getElementById('username').value;
         data.user_id = document.getElementById('user_id').value;
-        // data.password = document.getElementById('password').value;
         data.first_name = document.getElementById('first_name').value;
         data.is_active = document.getElementById('is_active').checked;
         data.is_staff = document.getElementById('is_staff').checked;
@@ -308,8 +283,6 @@ jQuery(document).ready(function ($) {
         data.discount = document.getElementById('discount').value;
         data.short_description = document.getElementById('short_description').value;
 
-        // console.log(data.user_id, data.username, data.first_name, data.is_active, data.is_staff);
-
         var url = "/profile/";
         $.ajax({
             type: "GET",
@@ -320,12 +293,7 @@ jQuery(document).ready(function ($) {
 
 
             success: function(){
-                // $('.data-js h3').text(data.username);
                 location.reload();
-                // if (data == 'ok'){
-                    //console.log(data);
-                //
-                // }
             }
        });
     }

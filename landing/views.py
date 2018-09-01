@@ -11,8 +11,9 @@ from django.template.context_processors import csrf
 from django.views.generic import FormView, View
 from django.contrib.auth.forms import UserCreationForm
 
+from products.models import ProductCategory, Product, ProductImage
 from . import models
-from .models import Category, Profile
+from .models import Category
 from .forms import Login, UserCreation, UserChange, ProfileChange
 
 
@@ -27,6 +28,8 @@ def home(request):
     args['tempText'] = 'Сайт находится в стадии разработки'
     args['form'] = Login()
     args['form2'] = UserCreation()
+    args['category_product'] = ProductCategory.objects.all()
+    args['product_image'] = ProductImage.objects.filter(is_main=True, is_active=True)
     if request.POST:  # and args['form'].is_valid():
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
@@ -73,19 +76,18 @@ def home(request):
             if us == us1.username:
                 error_text += "Такой пользователь уже существует. "
         except User.DoesNotExist:
-            pass
-            # error_text = "ok"
-            # password = request.GET['password']
-            password1 = request.GET['password1']
-            password2 = request.GET['password2']
+            # pass
+            # # error_text = "ok"
+            # # password = request.GET['password']
+            # password1 = request.GET['password1']
+            # password2 = request.GET['password2']
 
             if newuser_form.is_valid():
-                print("вьюха -> login:  GgggggGGGGGGGGGGggggg", request.GET['username'])
+                # print("вьюха -> login:  GgggggGGGGGGGGGGggggg", request.GET['username'])
                 newuser_form.save()
                 newuser = auth.authenticate(username=newuser_form.cleaned_data['username'],
                                             password=newuser_form.cleaned_data['password2'])
                 auth.login(request, newuser)
-
                 # return redirect('/')
                 return HttpResponse(error_text)
             error_text += " Пароль слишком легкий"
@@ -95,8 +97,6 @@ def home(request):
     else:
 
         return render_to_response('landing/home.html', args)
-
-    # return render_to_response('landing/home.html', args)
 
 
 def logout(request):
@@ -153,6 +153,7 @@ def profile_view(request):
         return HttpResponse('ok', content_type='text/html')
     else:
         return HttpResponse('no', content_type='text/html')
+
 
 
 # def home(request):

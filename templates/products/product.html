@@ -21,11 +21,31 @@
                     <br>
                     {{ form1.price }}
                     {{ form1.discount }}
-                    <br>
-                    {{ form1.short_description }}
-                    <br>
-                    {{ form1.description }}
-                    <br>
+                    <br><br>
+
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active ">
+                                <a href="#short_description" aria-controls="home" role="tab" data-toggle="tab" class="my-tabs">
+                                    Краткое описание
+                                </a>
+                            </li>
+                            <li role="presentation"><a href="#description" class="my-tabs" aria-controls="profile" role="tab" data-toggle="tab">
+                                Полное описание
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content product-description-tabs">
+                            <div role="tabpanel" class="tab-pane active" id="short_description">
+                                {{ form1.short_description }}
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="description">
+                                {{ form1.description }}
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="row">
                         <div class = "col-2">
     {#                    <label for id="id_prod_active">active</label><br>#}
@@ -42,45 +62,38 @@
                             New<br>
                         {{ form1.status_new }}
                         </div>
-{#                        <div class = "col-2">#}
-{#                            <a type="submit" class="btn btn-outline my-2 my-sm-0" href="javascript:" id="change-product">Перекроить</a>#}
-{#                        </div>#}
                     </div><br>
-    {#                {{ form2.as_table }}#}
                     <div id="id_img-adm" class="line-img ">
                         <!-- Заполняется из js-->
     {#                    <img src="/madia/product_images/LS2OF562_Pink.jpg" class='img-adm'>#}
                     </div>
                 </form>
                 <br>
+            <div class="row">
+                <div class = "col-5">
                 <form id="form_img_add" method="POST" action="{% url 'adm_products' %}" enctype="multipart/form-data">{% csrf_token %}
-                    {% render_field form2.product type="hidden" %}
+{#                    {% render_field form2.product type="hidden" %}#}
 {#                    {{ form2.instance.product }}#}
-{#                    {{ form2.product }}#}
+                    {{ form2.product| add_class:"HiddenInput" }}
+
                     {{ form2.image }}
                     {{ form2.is_main }}
                     {{ form2.is_active }}
                     <button type="submit" class="btn btn-outline my-2 my-sm-0" id="create-img">Добавить картинку</button>
                 </form>
-                <br>
-                <div class="row">
+                </div>
                     <div class = "col-2">
                         <a type="submit" class="btn btn-outline my-2 my-sm-0" href="javascript:" id="change-product">Перекроить</a>
                     </div>
-{#                    <div class = "col-2">#}
-{#                        <button type="submit" class="btn btn-outline my-2 my-sm-0" href="javascript:" id="create-img">Добавить картинку</button>#}
-{#                    </div>#}
-{#                    <div class = "col-2">#}
-{#                        <button class="btn btn-outline my-2 my-sm-0" href="javascript:" id="create-product">Новый</button>#}
-{#                    </div>#}
                 </div>
 
             </div>
-            <div class = "col-3">
+            <div class = "col-3" id="product_list">
                 <table class="table text-left">
                     <thead>
                         <tr>
-                            <th>Product list</th>
+                            <th>Article</th>
+                            <th>Product</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -101,7 +114,10 @@
                                data-status_sale="{{ product.status_sale }}"
                                data-year_model="{{ product.year_model }}"
                                data-fabric="{{ product.fabric }}"
-                                >{{ product.name }} | артикул {{ product.article }}|active {{ product.prod_active }}</a><br>
+                                > {{ product.article }}</a><br>
+                            </td>
+                            <td>
+                                {{ product.name }}
                             </td>
                             </tr>
                         {% endfor %}

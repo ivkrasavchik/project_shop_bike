@@ -4,17 +4,36 @@ html, body{
             font-family: 'Roboto', sans-serif;
             background-color: gray;
         }
+
 .section-bg{
-
-    background-color: gray;
-    margin-top: 55px;
+    background-color: black;
 }
-
 #img-responsive{
+
+    text-align: center;
     position: fixed;
     max-width: 100%;
-
 }
+.item-list{
+    display: block;
+    position: relative;
+    background-color: rgba(10,10,10, 0.8);
+    width: 80%;
+    margin: 0 auto;
+    color: darkorange;
+    top: 8vh;
+    text-align: center;
+}
+.filter-product{
+    left: 13%;
+    top: 8vh;
+    color: darkorange;
+    width: 12%;
+    position: fixed;
+    background-color: rgba(0,0,0, 0.9);
+    padding: 10px;
+}
+
 .line-img{
     max-width: 100%;
     display: flex;
@@ -79,11 +98,11 @@ html, body{
 
 .footer{
     position: relative;
-    bottom: -90vh;
+    /*bottom: -90vh;*/
     background-color: dimgray;
     height: 90px;
     /*margin-top: -90px;*/
-    clear: both;
+    /*clear: both;*/
 }
 
 .text-footer-temp{
@@ -249,16 +268,97 @@ html, body{
 
 /*}*/
 .product-item{
-    /*position: fixed;*/
-    margin-top: 50px;
+    position: fixed;
+    width: 100%;
+    /*height:100%;*/
+    top: 6vh;
+    /*margin-top: 50px;*/
     padding: 15px;
 }
 .product_list{
     color: #9d2d0f;
+}
+#product_list{
+    /*width: 100%;*/
+    height:80vh;
+    /*background-color: lightblue;*/
+    padding: 15px;
+    /*min-width: 17%;*/
+    overflow-y:scroll;
 }
 #id_price{
     width: 15vh;
 }
 #id_discount{
     width: 7vh;
+}
+.HiddenInput{
+    display: none;
+}
+
+.product-description-tabs{
+    /*padding: 10px;*/
+}
+.my-tabs{
+    border: 1px darkorange solid;
+    border-top-left-radius:  5px;
+    border-top-right-radius:  5px;
+    color: darkorange;
+    padding: 3px;
+    margin-right: 10px;
+}
+.my-tabs:hover{
+    color: white;
+    background-color: darkorange;
+}
+.nav-tabs {
+    border-bottom: 1px solid darkorange;
+}
+.orders-list{
+    position: fixed;
+    width: 100%;
+    /*height:100%;*/
+    top: 6vh;
+    /*margin-top: 50px;*/
+    padding: 15px;
+}
+.text-context{
+    color: darkorange;
+    text-align: left;
+    padding-left: 15px;
+}
+
+.img-responsive-in-list{
+    width: 200px;
+}
+.product-item-list{
+    height: 360px;
+    /*background-color: lemonchiffon;*/
+    border: 1px solid lightgray;
+    position: relative;
+    padding: 10px 0 10px 0;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.prod_it_list_footer{
+    color: white;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 15px;
+}
+
+.center-block{
+    max-width: 100%;
+    height: auto;
+    margin-right: auto;
+    margin-left: auto;
+}
+#count_items{
+    width: 70px;
+}
+.us-product-view{
+    position: relative;
+    top: 7vh;
 }
