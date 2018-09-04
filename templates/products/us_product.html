@@ -1,11 +1,37 @@
-{% extends 'base.html' %}
+{% extends 'wrapper.html' %}
 {% load static %}
 {% load i18n %}
 
-{% block content %}
-    <div class="us-product-view">
-        <h1>Тут что нить будет</h1>
-        {{ product.name }}
+{% block user_content %}
+    <div class="col-7">
+        <div class="us-product-view">
+            <div class="row">
+                <div class="col-4">
+                    <div>
+                        {% for img in pr_img %}
+                            <img src="{{ img.image.url }}" class="center-block img-full-size-block">
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-8">
+                    <h3>{{ product.category }}</h3>
+                    <h3>{{ product.name }}</h3><br>
+                    <h4> Артикл - {{ product.article }}</h4><br>
+                    <h4> Производство - {{ product.fabric }}</h4><br>
+                    <h5>{{ product.description }}</h5><br><br>
+                    <h4> Ваша скидка - {{ product.discount }}</h4><br><br>
+                    <h4> Цена - {{ product.price }}</h4><br><br>
+                    <h4> Размеры - {{ product.sizes }}</h4><br><br>
+                    <form action="" method="post">{% csrf_token %}
+{#                        {{ form.session_key }}<br>#}
+                       {{ form.nmb }}
+                        <button type="submit" class="btn btn-outline my-2 my-sm-0">Бросить в тележку</button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
     </div>
 
 {% endblock %}

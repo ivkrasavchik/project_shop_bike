@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from products.models import ProductImage, ProductCategory, Product, Fabric
+from products.models import ProductImage, ProductCategory, Product, Fabric, ProductSizes
 
 
 class ProductImageInLine(admin.TabularInline):
@@ -39,3 +39,4 @@ admin.site.register(Product, ProductAdmin)
 
 
 admin.site.register(Fabric)
+admin.site.register(ProductSizes)

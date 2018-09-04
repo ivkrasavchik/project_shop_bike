@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 from django.utils.datastructures import MultiValueDictKeyError
 
+from orders.forms import BasketForm
 from .forms import ProductImageForm, ProductForm
 from products.models import *
 # import requests
@@ -71,7 +72,8 @@ def adm_product_img(request):
 
     for img in ProductImage.objects.filter(product__name=name):
         products_img_list.append([img.image.url, img.is_main, img.is_active, img.id])
-        print("UUUUUUUUUUUUU", img.product.name, "url", img.image.url, "is_main", img.is_main, "is_activ", img.is_active, "id", img.id)
+        print("UUUUUUUUUUUUU", img.product.name, "url", img.image.url, "is_main", img.is_main,
+              "is_activ", img.is_active, "id", img.id)
 
     args['products_img_list'] = products_img_list
     dumps = json.dumps(args)
@@ -92,28 +94,39 @@ def adm_product_save(request):
                 for dic in json_data_elem:
                     if dic == "image_id":
                         for id in json_data_elem[dic]:
-                            print("image_id____________________image_id__", json_data_elem[dic][id], "type elem ->", type(json_data_elem[dic][id]), end="\n")
+                            print("image_id____________________image_id__", json_data_elem[dic][id],
+                                  "type elem ->", type(json_data_elem[dic][id]), end="\n")
                             fotka = ProductImage.objects.get(id=int(id))
                             fotka.is_main = json_data_elem[dic][id][0]
                             fotka.is_active = json_data_elem[dic][id][1]
                             fotka.save()
 
                     else:
-                        print("test____________________test", json_data_elem[dic], "type elem ->", type(json_data_elem[dic]), end="\n")
-    #                         print("FFFFFFFFFFFFFFFFFFFFFFFFFFFF", json_data)
-    #                 return HttpResponse("ok")
-    #             except JSONDecodeError:
-    #                 print("FFFFFFFFFFFFFFFFFFFFFFFFFFFF", elem)
-    #                 # return HttpResponse("ok")
-    #         else:
-    #             print("else____________________else", list_img, "type list_img ->", type(list_img), end="\n")
-    #     return HttpResponse("ok")
-    #
-    # print("YYYYYYYYYYYYYYYY")
+                        print("test____________________test", json_data_elem[dic],
+                              "type elem ->", type(json_data_elem[dic]), end="\n")
+
     dumps = json.dumps("OK")
     return HttpResponse(dumps)
 
 
 def product(request, product_id):
     product = Product.objects.get(id=product_id)
+    pr_img = ProductImage.objects.filter(product=product_id)
+    # form = BasketForm(request.POST, instance=product)
+    form = BasketForm(request.POST)
+    if request.POST:
+        form = BasketForm(request.POST)
+        # print(form.errors)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.session_key = request.session.session_key
+            obj.product = product
+            obj.save()
+            return redirect("/admin_product/product/" + str(product_id))
+
     return render(request, 'products/us_product.html', locals())
+
+
+def product_by_category(request, category_id):
+    product_image = ProductImage.objects.filter(is_main=True, is_active=True, product__category=category_id)
+    return render(request, 'landing/home.html', locals())

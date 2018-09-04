@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="section-bg">
+        <img src="{% static '/img/moto0.jpg' %}" id="img-responsive">
+
+        <div class="row">
+            <div class="col-2">
+                <div class="filter-product">
+                    <h5>Выбор категории</h5><br>
+                    <h5><a href="/">Все категории</a> </h5>
+                    {% for elem in context_category_product %}
+                        <a href="{% url 'product_by_category' elem.id %}">{{ elem.name }}</a><br>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {% block user_content %}
+            {% endblock user_content %}
+
+
+            <div class="col-3" >
+                <div class="right-content">
+                    <div id="basket_view">
+                        <h5>Корзина</h5><br>
+                        {% if context_product_in_basket %}
+                            {% for elem in context_product_in_basket %}
+                                <a href="{% url 'product' elem.product.id %}">{{ elem.product.name }} <br> {{ elem.nmb }} шт по
+                                    {{ elem.product.price }} Руб.</a><a class="del-from-basket"
+                                    href="{% url 'delfrombasket' elem.id %}">Удалить</a> <br><br>
+                            {% endfor %}
+                                <br>
+                            <button type="submit" class="btn btn-outline my-2 my-sm-0">Подтвердить заказ</button>
+                            {% else %}
+                            <div class="text_for_basket">
+                                <h2>Ваша корзина пуста</h2>
+                            </div>
+                        {% endif %}
+                            <div class="text_for_basket">
+                                Доставка по Минску на сумму от 100 руб. бесплатно
+                                Стоимость доставки по регионам уточняйте по телефонам.
+                            </div>
+                    </div>
+                    <div  id="reklama1">
+                        Блок рекламы
+                    </div>
+                </div>
+            </div>
+{#        <div class="row">#}
+
+{#        </div>#}
+        </div>
+
+    </div>
+    <div class="b-popup" id="popup1">
+        <div class="b-popup-content">
+            {% include 'account/login.html' %}
+            {# <a href="javascript:PopUpHide()">Hide popup</a>#}
+        </div>
+    </div>
+    <div class="b-popup" id="popup2">
+        <div class="b-popup-content">
+            {% include 'account/register.html' %}
+            {# <a href="javascript:PopUpHide()">Hide popup</a>#}
+        </div>
+    </div>
+
+
+
+
+{#    {% include 'footer.html' %}#}
+{% endblock %}

@@ -1,51 +1,79 @@
-{% extends 'base.html' %}
+{% extends 'wrapper.html' %}
+{#{% extends 'base.html' %}#}
 {% load static %}
+{% load i18n %}
 
 {#Создаем классы, для модального отображения#}
 
-{% block content %}
+{#{% block content %}#}
+{##}
+{#    <div class="section-bg">#}
+{#        <img src="{% static '/img/moto0.jpg' %}" id="img-responsive">#}
+{##}
+{#        <div class="row">#}
+{#            <div class="col-2">#}
+{#                <div class="filter-product">#}
+{#                    <h5>Выбор категории</h5>#}
+{#                    {% for elem in category_product %}#}
+{#                        <a href="#">{{ elem.name }}</a><br>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#            </div>#}
 
-    <div class="section-bg">
-        <img src="{% static '/img/moto0.jpg' %}" id="img-responsive">
 
-        <div class="row">
-            <div class="col-2">
-                <div class="filter-product">
-                    <h5>Выбор категории</h5>
-                    {% for elem in category_product %}
-                        <a href="#">{{ elem.name }}</a><br>
-                    {% endfor %}
-                </div>
+{% block user_content %}
+{#    {% for elem in category_product %}#}
+{#        <a href="#">{{ elem.name }}</a><br>#}
+{#    {% endfor %}#}
+
+    <div class="col-7">
+        <div class="item-list">
+        <h2>Цены указаны с учетом вашей скидки</h2><br>
+            <div class="row">
+
+                {% for img in product_image %}
+                    {% include 'products/product_item.html' %}
+                {% endfor %}
             </div>
-            <div class="col-10">
-                <div class="item-list">
-                <h2>Цены указаны с учетом вашей скидки</h2><br>
-                    <div class="row">
-
-                        {% for img in product_image %}
-                            {% include 'products/product_item.html' %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="b-popup" id="popup1">
-        <div class="b-popup-content">
-            {% include 'account/login.html' %}
-            {# <a href="javascript:PopUpHide()">Hide popup</a>#}
         </div>
     </div>
-    <div class="b-popup" id="popup2">
-        <div class="b-popup-content">
-            {% include 'account/register.html' %}
-            {# <a href="javascript:PopUpHide()">Hide popup</a>#}
-        </div>
-    </div>
-
-
-
-
-    {% include 'footer.html' %}
+{#            {% include 'footer.html' %}#}
 {% endblock %}
+
+
+{#            <div class="col-3" id="basket_view">#}
+{#                <div>#}
+{#                    <h5>Корзина</h5><br>#}
+{#                    <h6>Товар1 в корзине</h6><br>#}
+{#                    <h6>Товар2 в корзине</h6><br>#}
+{#                    <h6>Товар3 в корзине</h6><br>#}
+{#                    <h6>Товар4 в корзине</h6><br>#}
+{#                    <h6>Товар5 в корзине</h6><br>#}
+{#                </div>#}
+{#            </div>#}
+{#        <div class="row">#}
+{#            <div class="col-3" id="reklama1">#}
+{#               Блок рекламы#}
+{#            </div>#}
+{#        </div>#}
+{#        </div>#}
+{##}
+{#    </div>#}
+{#    <div class="b-popup" id="popup1">#}
+{#        <div class="b-popup-content">#}
+{#            {% include 'account/login.html' %}#}
+            {# <a href="javascript:PopUpHide()">Hide popup</a>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="b-popup" id="popup2">#}
+{#        <div class="b-popup-content">#}
+{#            {% include 'account/register.html' %}#}
+            {# <a href="javascript:PopUpHide()">Hide popup</a>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{##}
+{##}
+{##}
+{#    {% include 'footer.html' %}#}
+{#{% endblock %}#}

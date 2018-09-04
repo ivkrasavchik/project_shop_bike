@@ -29,6 +29,17 @@ class ProductCategory(models.Model):
         return "%s" % self.name
 
 
+class ProductSizes(models.Model):
+    name_size = models.CharField(max_length=5)
+
+    class Meta:
+        verbose_name = "Размер"  # приомзносимое имя в единственном числе
+        verbose_name_plural = "Размеры"  # приомзносимое имя во множественном числе
+
+    def __str__(self):  # настройка презинтации модели вадминке
+        return "%s" % self.name_size
+
+
 class Product(models.Model):  # модели принято называть в ед. числе
     name = models.CharField(max_length=64, unique=True)
     article = models.CharField(max_length=7, default="артикул", unique=True)
@@ -44,6 +55,7 @@ class Product(models.Model):  # модели принято называть в 
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     update = models.DateTimeField(auto_now_add=True, auto_now=False)
     fabric = models.ForeignKey(Fabric, blank=True, null=True, default=None, on_delete=models.SET_NULL)
+    sizes = models.ManyToManyField(ProductSizes, blank=True, null=True, default=None)
 
     class Meta:
         # django само определяет единственное и множественное число, но можно переопределить

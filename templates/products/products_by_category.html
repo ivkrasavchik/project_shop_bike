@@ -1,0 +1,17 @@
+{% extends 'wrapper.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block user_content %}
+    <div class="col-7">
+        <div class="item-list">
+        <h2>Цены указаны с учетом вашей скидки</h2><br>
+            <div class="row">
+
+                {% for img in product_image %}
+                    {% include 'products/product_item.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

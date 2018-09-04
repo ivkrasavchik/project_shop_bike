@@ -24,12 +24,18 @@ def home(request):
 
     args = {}
     args.update(csrf(request))
-    args['user'] = auth.get_user(request)
+    session_key = request.session.session_key
+    # args['user'] = auth.get_user(request)
     args['tempText'] = 'Сайт находится в стадии разработки'
-    args['form'] = Login()
-    args['form2'] = UserCreation()
+    # args['form'] = Login()
+    # args['form2'] = UserCreation()
     args['category_product'] = ProductCategory.objects.all()
-    args['product_image'] = ProductImage.objects.filter(is_main=True, is_active=True)
+    # args['product_image'] = ProductImage.objects.filter(is_main=True, is_active=True)
+    user = auth.get_user(request)
+    product_image = ProductImage.objects.filter(is_main=True, is_active=True)
+    form = Login()
+    form2 = UserCreation()
+
     if request.POST:  # and args['form'].is_valid():
         username = request.POST.get('username', '')
         password = request.POST.get('password', '')
@@ -96,7 +102,9 @@ def home(request):
         return HttpResponse(error_text)
     else:
 
-        return render_to_response('landing/home.html', args)
+        # return render_to_response('landing/home.html', args)
+        return render(request, 'landing/home.html', locals())
+        # return render_to_response('wrapper.html', args)
 
 
 def logout(request):
@@ -124,7 +132,7 @@ def update_profile(request):
 def profile_view(request):
     args = {}
     args.update(csrf(request))
-    session_key = request.session.session_key
+
 
     if request.method == "GET":
         user = User.objects.get(pk=request.GET['user_id'])

@@ -18,20 +18,48 @@ html, body{
     display: block;
     position: relative;
     background-color: rgba(10,10,10, 0.8);
-    width: 80%;
-    margin: 0 auto;
+    /*width: 70%;*/
+    /*margin: 0 auto;*/
     color: darkorange;
     top: 8vh;
     text-align: center;
 }
 .filter-product{
-    left: 13%;
+    left: 2%;
     top: 8vh;
     color: darkorange;
     width: 12%;
     position: fixed;
     background-color: rgba(0,0,0, 0.9);
     padding: 10px;
+}
+.right-content{
+    position: fixed;
+    top: 8vh;
+
+}
+#basket_view{
+    /*position: fixed;*/
+    background-color: rgba(0,0,0, 0.9);
+    /*top: 8vh;*/
+    right: 0;
+    color: darkorange;
+    overflow-y: auto;
+    padding: 20px;
+    max-height: 80vh;
+    /*z-index: 2;*/
+}
+#reklama1{
+    /*position: fixed;*/
+    /*top: 62vh;*/
+    height: 32vh;
+    width: 25vw;
+    /*right: 0;*/
+    background-color: #5a1613ba;
+    color: darkorange;
+    /*margin-left: -15px;*/
+    margin-top: 35px;
+    padding: 20px;
 }
 
 .line-img{
@@ -51,7 +79,7 @@ html, body{
     top: 0;
     position: fixed;
     min-width: 100%;
-    background-color: dimgray!important;
+    background-color: #2f2f25!important;
     z-index: 10;
 }
 
@@ -132,7 +160,7 @@ html, body{
     color: white;
     background-color: #5f2424;
     position: fixed;
-    top: 57px;
+    top: 7vh;
     right: 10px;
     border: 3px solid darkorange;
 
@@ -184,7 +212,7 @@ html, body{
 }
 
 .admin-container{
-    /*position: fixed;*/
+    position: fixed;
     top: 6vh;
     padding: 0;
     height: 70%;
@@ -311,6 +339,17 @@ html, body{
     color: white;
     background-color: darkorange;
 }
+.my-btn{
+    border: 1px darkorange solid;
+    border-radius:  5px;
+    color: darkorange;
+    padding: 10px;
+    margin: 13px;
+}
+.my-btn:hover{
+    color: white;
+    background-color: darkorange;
+}
 .nav-tabs {
     border-bottom: 1px solid darkorange;
 }
@@ -361,4 +400,18 @@ html, body{
 .us-product-view{
     position: relative;
     top: 7vh;
+    color: white;
+    background-color: black;
+}
+.img-full-size-block{
+    margin: 10px;
+    padding: 10px;
+}
+.del-from-basket{
+    margin-left: 15px;
+    margin-right: 15px;
+    color: darkorange;
+}
+.del-from-basket:hover{
+    color: red;
 }

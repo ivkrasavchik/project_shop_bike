@@ -27,6 +27,7 @@
 {#                <select id="category_val" onchange="">#}
                 <select id="category_val">
                     <option selected="selected">-------</option>
+
                     {% for elem in category_list %}
                     <option value="{{ elem }}">{{ elem }} | {{ elem.discount }} %</option>
 
