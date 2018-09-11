@@ -10,7 +10,8 @@
             <div class="col-2">
                 <div class="filter-product">
                     <h5>Выбор категории</h5><br>
-                    <h5><a href="/">Все категории</a> </h5>
+                    <h5><a href="/">На главную</a> </h5>
+                    <h5><a href="{% url 'all_product'%}">Все категории</a> </h5>
                     {% for elem in context_category_product %}
                         <a href="{% url 'product_by_category' elem.id %}">{{ elem.name }}</a><br>
                     {% endfor %}
@@ -32,10 +33,26 @@
                                     href="{% url 'delfrombasket' elem.id %}">Удалить</a> <br><br>
                             {% endfor %}
                                 <br>
-                            <button type="submit" class="btn btn-outline my-2 my-sm-0">Подтвердить заказ</button>
-                            {% else %}
+                                <a href="/orders/add_order/" class="btn btn-outline my-2 my-sm-0">Подтвердить заказ 1</a>
+{#                                {% if au_user.username %}#}
+{#                                    <a href="/orders/add_order/" class="btn btn-outline my-2 my-sm-0">Подтвердить заказ 1</a>#}
+{#                                {% else %}#}
+{#                                    <button href="" class="btn btn-outline my-2 my-sm-0">Подтвердить заказ 2</button>#}
+{#                                {% endif %}#}
+                        {% else %}
                             <div class="text_for_basket">
                                 <h2>Ваша корзина пуста</h2>
+                                {% if context_order_user %}
+                                    <h2>Ваши заказы {{ au_user }}</h2>
+                                    {% for elem in context_order_user%}
+                                        <a href="{% url 'user_orders' elem.id %}">{{ elem }}</a><br>
+                                    {% endfor %}
+                                {% elif context_order_for_no_user %}
+                                    <h2>Ваши заказы</h2>
+                                    {% for elem in context_order_for_no_user%}
+                                        <a href="{% url 'user_orders' elem.id %}">{{ elem }}</a><br>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                         {% endif %}
                             <div class="text_for_basket">

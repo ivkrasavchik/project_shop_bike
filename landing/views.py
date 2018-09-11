@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AnonymousUser
 from django.db import transaction
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, render_to_response, redirect
@@ -11,6 +11,7 @@ from django.template.context_processors import csrf
 from django.views.generic import FormView, View
 from django.contrib.auth.forms import UserCreationForm
 
+from orders.forms import AdmProductInOrder
 from products.models import ProductCategory, Product, ProductImage
 from . import models
 from .models import Category
@@ -31,7 +32,9 @@ def home(request):
     # args['form2'] = UserCreation()
     args['category_product'] = ProductCategory.objects.all()
     # args['product_image'] = ProductImage.objects.filter(is_main=True, is_active=True)
-    user = auth.get_user(request)
+    if auth.get_user(request).username != AnonymousUser.username:
+        user = auth.get_user(request)
+    print(auth.get_user(request))
     product_image = ProductImage.objects.filter(is_main=True, is_active=True)
     form = Login()
     form2 = UserCreation()
@@ -51,13 +54,10 @@ def home(request):
                 auth.login(request, newuser)
 
                 return redirect('/')
-                # return HttpResponse('ok', content_type='text/html')
             else:
                 args['form'] = newuser_form
 
-                return HttpResponse(args)  # , content_type='text/html')
-                # return redirect('/')
-                # return render_to_response('landing/home.html', args)
+                return HttpResponse(args)
         else:
             print("вьюха -> UUUU: ", username, password2)
             user = auth.authenticate(username=username, password=password)
@@ -66,8 +66,6 @@ def home(request):
                 auth.login(request, user)
                 return redirect('/')
             else:
-                # if username:
-                #     print("вьюха -> login:  NONONOONONONONONONONONONO")
                 args['login_error'] = "Вход не выполнен"
                 print("вьюха -> login: ", username, password)
                 return redirect('/')
@@ -82,14 +80,8 @@ def home(request):
             if us == us1.username:
                 error_text += "Такой пользователь уже существует. "
         except User.DoesNotExist:
-            # pass
-            # # error_text = "ok"
-            # # password = request.GET['password']
-            # password1 = request.GET['password1']
-            # password2 = request.GET['password2']
 
             if newuser_form.is_valid():
-                # print("вьюха -> login:  GgggggGGGGGGGGGGggggg", request.GET['username'])
                 newuser_form.save()
                 newuser = auth.authenticate(username=newuser_form.cleaned_data['username'],
                                             password=newuser_form.cleaned_data['password2'])
@@ -121,6 +113,7 @@ def update_profile(request):
     args['tempText'] = 'Сайт находится в стадии разработки'
     args['users'] = User.objects.all()
     args['category_list'] = Category.objects.all()
+    # args['form_adm_ord'] = AdmProductInOrder
 
     # for elem in args['users']:
     #     print(elem.profile.__dict__)

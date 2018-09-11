@@ -1,5 +1,4 @@
-from django.conf.urls import url, include
-
+from django.conf.urls import url
 from . import views
 
 urlpatterns = [
@@ -8,4 +7,5 @@ urlpatterns = [
     url(r'^$', views.adm_products, name="adm_products"),
     url(r'product/(?P<product_id>\w+)/$', views.product, name="product"),
     url(r'product_by_category/(?P<category_id>\w+)/$', views.product_by_category, name="product_by_category"),
+    url(r'all_product/$', views.all_product, name="all_product"),
 ]

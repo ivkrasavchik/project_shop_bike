@@ -2,7 +2,7 @@
 
 <form action="" method="post" id="form-profile">
     {% csrf_token %}
-    <h3></h3>
+
         <div class="form-group">
 
             <div class="col-md-12">
@@ -52,14 +52,11 @@
 
         </div>
 
-        <div class="form-group">
-
-            <div class="col-md-12" >
-
-            </div>
-
-        </div>
-
 {#    <button type="submit" class="btn btn-outline my-2 my-sm-0">Поменяйка</button>#}
         <a type="submit" class="btn btn-outline my-2 my-sm-0" href="javascript:" id="change-profile">Перекроить</a>
+
 </form>
+            <div id="total-orders-summ-label">
+                <h4>Заказов на сумму: </h4>
+            </div>
+            <div id="total-orders-summ"><h3></h3></div>

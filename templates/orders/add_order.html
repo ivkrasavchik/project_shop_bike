@@ -1,0 +1,25 @@
+{% extends 'wrapper.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block user_content %}
+    <div class="col-7">
+        <div class="item-list">
+            <h1>ТУТ ЗАКАЗ ОФОРМИМ</h1>
+            <form action="" method="post" id="">{% csrf_token %}
+                <label for="id_customer_name">Ваше имя</label>
+                {{ form.customer_name }}<br>
+                <label for="id_customer_phone">Ваш телефон</label>
+                {{ form.customer_phone }}<br>
+                <label for="id_customer_address">Адрес доставки</label>
+                {{ form.customer_address }}<br>
+                <label for="id_comments">Дополнительные пояснения</label><br>
+                {{ form.comments }}<br>
+{#                {{ form.status_ord }}#}
+                <h3>Вего на сумму {{ amount }}</h3>
+                <button type="submit" class="btn btn-outline my-2 my-sm-0">Отправить</button>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

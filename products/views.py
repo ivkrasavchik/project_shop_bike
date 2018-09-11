@@ -129,4 +129,10 @@ def product(request, product_id):
 
 def product_by_category(request, category_id):
     product_image = ProductImage.objects.filter(is_main=True, is_active=True, product__category=category_id)
-    return render(request, 'landing/home.html', locals())
+    # return render(request, 'landing/home.html', locals())
+    return render(request, 'products/products_by_category.html', locals())
+
+
+def all_product(request):
+    product_image = ProductImage.objects.filter(is_main=True, is_active=True)
+    return render(request, 'products/products_by_category.html', locals())

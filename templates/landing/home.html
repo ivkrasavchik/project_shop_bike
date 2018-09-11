@@ -3,32 +3,34 @@
 {% load static %}
 {% load i18n %}
 
-{#Создаем классы, для модального отображения#}
-
-{#{% block content %}#}
-{##}
-{#    <div class="section-bg">#}
-{#        <img src="{% static '/img/moto0.jpg' %}" id="img-responsive">#}
-{##}
-{#        <div class="row">#}
-{#            <div class="col-2">#}
-{#                <div class="filter-product">#}
-{#                    <h5>Выбор категории</h5>#}
-{#                    {% for elem in category_product %}#}
-{#                        <a href="#">{{ elem.name }}</a><br>#}
-{#                    {% endfor %}#}
-{#                </div>#}
-{#            </div>#}
-
-
 {% block user_content %}
-{#    {% for elem in category_product %}#}
-{#        <a href="#">{{ elem.name }}</a><br>#}
-{#    {% endfor %}#}
 
     <div class="col-7">
         <div class="item-list">
-        <h2>Цены указаны с учетом вашей скидки</h2><br>
+            <div class="img-home">
+                <img src="{% static '/img/moto_1.jpg' %}" id="img-home1">
+                <div class="link" id="link-1">
+                    <a href="" class="orange-link">
+                       <h3>Актуальные бренды </h3>
+                    </a>
+                </div>
+                <div class="link" id="link-2">
+                    <a href="" class="orange-link">
+                        <h3>Новости из Байк-клубов</h3>
+                    </a>
+                </div>
+                <div class="link" id="link-3">
+                    <a href="" class="orange-link">
+                        <h3>Где наша не пропадала</h3>
+                    </a>
+                </div>
+                <div class="link" id="link-4">
+                    <a href="" class="orange-link">
+                        <h3>Барахолка</h3>
+                    </a>
+                </div>
+            </div>
+        <h2>Товары на распродаже</h2><br>
             <div class="row">
 
                 {% for img in product_image %}

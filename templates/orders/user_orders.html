@@ -1,0 +1,22 @@
+{% extends 'wrapper.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block user_content %}
+    <div class="col-7">
+        <div class="prod-list">
+        <h2>товар в заказе № {{ elem_id }} Ваш заказ {{ status.status_ord }}</h2><br>
+                {% for elem in product_in_users_order %}
+                    <div class="us-prod-ord">
+                        <a href="{% url 'product' elem.product_id %}">
+                            <img src="{{ elem.image }}" class="img-in-order">
+                            {{ elem.product_name }}
+                            | {{ elem.nmb }} шт | по
+                            {{ elem.price }} руб.
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+{#        </div>#}
+    </div>
+{% endblock %}

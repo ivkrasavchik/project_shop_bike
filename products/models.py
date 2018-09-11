@@ -43,7 +43,9 @@ class ProductSizes(models.Model):
 class Product(models.Model):  # модели принято называть в ед. числе
     name = models.CharField(max_length=64, unique=True)
     article = models.CharField(max_length=7, default="артикул", unique=True)
+    # purchase_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # Цена закупки
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    # allowance = models.DecimalField(max_digits=4, decimal_places=2, blank=True, default=20)  # торговая надбавка
     discount = models.IntegerField(default=0)
     category = models.ForeignKey(ProductCategory, blank=True, null=True, default=None, on_delete=models.SET_NULL)
     short_description = models.TextField(max_length=128, blank=True, null=True, default=None)

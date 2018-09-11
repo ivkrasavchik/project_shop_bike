@@ -24,12 +24,21 @@ function PopUpRegHide(){
     $("#popup2").hide();
 }
 
+// $('.adm_order_item').click(AdmOrderItem);
+// function AdmOrderItem() {
+//         var ord_id = $(this).attr('data-order_id');
+//
+//         console.log(ord_id);
+//         console.log("ORD_ID_NO")
+//     }
+
 jQuery(document).ready(function ($) {
     $('.info-user').click(profile_view);
     $('#change-profile').click(change_profile_view);
     $('#reg_btn').click(ValueReg);
     $('.product_list').click(AutoProductList);
     $('#change-product').click(changeproduct);
+    // $('.adm_order_item').click(AdmOrderItem);
     var prodImgList = {};
 
     function AutoProductList() {
@@ -65,19 +74,13 @@ jQuery(document).ready(function ($) {
         }
 
         $('#id_product').val(data.name);
-
-
         $('#id_name').val(data.name);
-
         $('#id_article').val(data.article);
         $('#id_discount').val(data.discount);
-
         $('#id_category').val(data.category);
         $('#id_fabric').val(data.fabric);
-
         $('#id_short_description').val(data.short_description);
         $('#id_description').val(data.description);
-
         $('#id_year_model').val(data.year_model);
         $('#id_price').val(data.price);
 
@@ -96,6 +99,7 @@ jQuery(document).ready(function ($) {
 
                     var url_img="{% url 'image_product'"+data.products_img_list[i][3]+"%}";
                     var img = "<img src='" + data.products_img_list[i][0] + "' class='img-adm' id="+data.products_img_list[i][3]+">";
+                    console.log(img);
                     $('#id_img-adm').append("<a href=" + url_img + " >"+img+"</a><br>");
                     if (data.products_img_list[i][1] == true){
                         $('#id_img-adm').append("<input type='checkbox' checked class='img-adm-ck' id='"+data.products_img_list[i][3]+"_id_main'>is main");
@@ -265,6 +269,97 @@ jQuery(document).ready(function ($) {
         }else {
             $('#is_staff').prop('checked', false)
         }
+
+        var csrf_token = $('#form-profile [name="csrfmiddlewaretoken"]').val();
+        data["csrfmiddlewaretoken"] = csrf_token;
+
+        $.ajax({
+            type: "POST",
+            url: "/orders/order_list/",
+            data: data,
+            success: function (arv) {
+
+                var json_dict = JSON.parse(arv);
+                var sum = 0;
+                $('.order-item-list > tbody ').empty();
+                $('.table_orders > tbody ').empty();
+                $('.adm-prod_in_ord_img').empty();
+                for (var i=0; i < json_dict.length; i++) {
+                    $('.table_orders > tbody ').append('<tr>');
+                    sum += Number(json_dict[i][1]);
+                    for (var j=0; j < json_dict[i].length; j++){
+                        $('.table_orders > tbody tr:last-child').append('<td><a href="javascript:" class="adm_order_item"'
+                             +' data-order_id="'+json_dict[i][0]+'">'+json_dict[i][j]+'</a>'+
+                        '</td>');
+                    }
+                    $('.table_orders > tbody ').append('</tr>');
+                }
+                $('#total-orders-summ h3').text(sum);
+               $('.adm_order_item').click(AdmOrderItem);
+
+            }
+        })
+    }
+    function AdmOrderItem() {
+        var ord_id = $(this).attr('data-order_id');
+        var data = {};
+
+        var csrf_token = $('#form-profile [name="csrfmiddlewaretoken"]').val();
+        data["csrfmiddlewaretoken"] = csrf_token;
+        data['ord_id'] = ord_id;
+
+        $.ajax({
+            type: "POST",
+            url: "/orders/order_items/",
+            data: data,
+
+            success: function (arg) {
+                var json_dict = JSON.parse(arg);
+                var sum = 0;
+                $('.adm-prod_in_ord_img').empty();
+                $('.order-item-list > tbody ').empty();
+                for (var i=0; i < json_dict.length; i++) {
+                    $('.order-item-list > tbody ').append('<tr>');
+                    // sum += Number(json_dict[i][1]);
+                    for (var j=0; j < json_dict[i].length; j++){
+                        $('.order-item-list > tbody tr:last-child').append('<td><a href="javascript:" class="adm_ord_prod_item"'
+                             +' data-prod_id="'+json_dict[i][0]+'">'+json_dict[i][j]+'</a>'+
+                        '</td>');
+                    }
+                    $('.order-item-list > tbody ').append('</tr>');
+                }
+                $('.adm_ord_prod_item').click(AdmOrdProdItem);
+            }
+        })
+    }
+    function AdmOrdProdItem() {
+        var prod_id = $(this).attr('data-prod_id');
+        var data = {};
+
+        var csrf_token = $('#form-profile [name="csrfmiddlewaretoken"]').val();
+        data["csrfmiddlewaretoken"] = csrf_token;
+        data['prod_id'] = prod_id;
+
+        $.ajax({
+            type: "POST",
+            url: "/orders/adm_ord_prod_items/",
+            data: data,
+
+            success: function (arg) {
+                var json_dict = JSON.parse(arg);
+                $('.adm-prod_in_ord_img').empty();
+                for (var i=0; i < json_dict.length; i++) {
+                    // $('#adm-prod_in_ord_img').append("<a href='' >"+json_dict[i][0]+"</a><br>");
+                    var img = "<img src='/media/" + json_dict[i][0] + "' class='img-responsive-in-list-mini'>";
+                    $('.adm-prod_in_ord_img').append(img);
+                }
+                for (var ii=0; ii < json_dict[0].length; ii++){
+                    $('.adm-prod_in_ord_img').append("<h4>"+json_dict[0][ii]+"</h4>");
+                }
+                    console.log(json_dict[0].length);
+            }
+        })
+
     }
 
     function change_profile_view() {

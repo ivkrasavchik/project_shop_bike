@@ -5,16 +5,43 @@
     <div class="admin-container">
         <div class="row">
 
-            <div class = "col-lg-2">
+            <div class = "col-lg-3">
                 <div class="order-users">
-                    Order Users<br>
+                    <h4>Product in order</h4>
+                    <button type="submit" class="btn btn-outline my-2 my-sm-0">Редактировать</button>
+                    <table class="table text-left order-item-list" cellspacing="2" border="1" cellpadding="5">
+                        <thead>
+                            <tr>
+                                <th>Арт.</th>
+                                <th>Товар</th>
+                                <th>кол-во</th>
+                                <th>Цена</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+
+                                </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+                <div class="row">
+                    <div class = "col-lg-12">
+                        <div class="adm-prod_in_ord">
+                            Продукт
+                            <div class="adm-prod_in_ord_img" >
+
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
 
-
-
-            <div class = "col-lg-8">
+            <div class = "col-lg-7">
                 <div class="data-users">
                     <ul>
 
@@ -27,14 +54,32 @@
                     <div class = "col-lg-12">
 
                         <div class="list-order">
-                            list order
+
+                            <table class="table text-left table_orders" cellspacing="2" border="1" cellpadding="5">
+                                <thead>
+                                    <tr>
+                                        <th>Номер заказа</th>
+                                        <th>total_price</th>
+                                        <th>status_ord</th>
+                                        <th>created</th>
+                                        <th>data_completed</th>
+                                        <th>курс $</th>
+                                        <th>? Удалить</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr >
+
+                                    </tr>
+                                </tbody>
+                            </table>
+{#                            {% include 'orders/orders.html' %}#}
+
                         </div>
 
                     </div>
                 </div>
             </div>
-
-
 
 
 

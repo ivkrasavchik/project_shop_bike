@@ -24,8 +24,7 @@ class ProductForm(forms.ModelForm):
 
 
 class ProductImageForm(forms.ModelForm):
-    product = forms.ModelChoiceField(queryset=Product.objects.all(),
-                                      to_field_name="name", widget=forms.Select())
+    product = forms.ModelChoiceField(queryset=Product.objects.all(), to_field_name="name", widget=forms.Select())
 
     class Meta:
         model = ProductImage
