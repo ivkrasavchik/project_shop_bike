@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'landing',
     'widget_tweaks',
     'products',
-    'orders'
+    'orders',
+    'mathfilters'
 ]
 
 MIDDLEWARE = [

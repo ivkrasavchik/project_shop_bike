@@ -28,17 +28,14 @@
                         <h5>Корзина</h5><br>
                         {% if context_product_in_basket %}
                             {% for elem in context_product_in_basket %}
-                                <a href="{% url 'product' elem.product.id %}">{{ elem.product.name }} <br> {{ elem.nmb }} шт по
-                                    {{ elem.product.price }} Руб.</a><a class="del-from-basket"
+                                <a href="{% url 'product' elem.product.id %}">{{ elem.product.name }} <br>
+                                    размер {{ elem.sizes }},
+                                    {{ elem.nmb }} шт по
+                                    {{ elem.price_per_item }} Руб.</a><a class="del-from-basket"
                                     href="{% url 'delfrombasket' elem.id %}">Удалить</a> <br><br>
                             {% endfor %}
                                 <br>
-                                <a href="/orders/add_order/" class="btn btn-outline my-2 my-sm-0">Подтвердить заказ 1</a>
-{#                                {% if au_user.username %}#}
-{#                                    <a href="/orders/add_order/" class="btn btn-outline my-2 my-sm-0">Подтвердить заказ 1</a>#}
-{#                                {% else %}#}
-{#                                    <button href="" class="btn btn-outline my-2 my-sm-0">Подтвердить заказ 2</button>#}
-{#                                {% endif %}#}
+                                <a href="/orders/add_order/" class="btn btn-outline my-2 my-sm-0">Подтвердить заказ</a>
                         {% else %}
                             <div class="text_for_basket">
                                 <h2>Ваша корзина пуста</h2>
@@ -71,17 +68,19 @@
         </div>
 
     </div>
-    <div class="b-popup" id="popup1">
-        <div class="b-popup-content">
+
+    <div class="b-popup hidediv" id="popup1">
+        <div class="b-popup-content ">
             {% include 'account/login.html' %}
             {# <a href="javascript:PopUpHide()">Hide popup</a>#}
         </div>
     </div>
-    <div class="b-popup" id="popup2">
-        <div class="b-popup-content">
+    <div class="b-popup hidediv" id="popup2">
+        <div class="b-popup-content ">
             {% include 'account/register.html' %}
             {# <a href="javascript:PopUpHide()">Hide popup</a>#}
         </div>
+
     </div>
 
 

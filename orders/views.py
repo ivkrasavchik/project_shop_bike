@@ -3,7 +3,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.core.serializers import json
 import json
-
+from django.contrib.auth.models import AnonymousUser
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import transaction
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
@@ -27,7 +27,7 @@ def adm_orders(request):
 def del_from_basket(request, elem_id):
     position = ProductInBasket.objects.get(id=elem_id)
     position.delete()
-    product_image = ProductImage.objects.filter(is_main=True, is_active=True)
+    # product_image = ProductImage.objects.filter(is_main=True, is_active=True)
     return render(request, 'landing/home.html', locals())
 
 
@@ -39,7 +39,7 @@ def add_order(request):
     product_in_orders = ProductInBasket.objects.filter(session_key=session_key, order=None)
     amount = 0
     for elem in product_in_orders:
-        amount += elem.product.price * elem.nmb
+        amount += elem.price_per_item * elem.nmb
 
     form = AddOrder()
     if request.POST:
@@ -47,12 +47,11 @@ def add_order(request):
         status = StatusOrder.objects.get(status_name="created")
 
         if form.is_valid():
-            user = auth.get_user(request)
             nf = form.save(commit=False)
-
             nf.status_ord = status
             nf.total_price = amount
-            nf.user = user
+            if auth.get_user(request).username != AnonymousUser.username:
+                nf.user = auth.get_user(request)
             nf.save()
 
             for elem in product_in_orders:
@@ -94,7 +93,7 @@ def order_items(request):
     args = {}
     args.update(csrf(request))
     orders_itm = ProductInBasket.objects.filter(order_id=request.POST.get('ord_id')).values_list(
-        'product__article', 'product__name', 'nmb', 'product__price')
+        'product__article', 'product__name', 'sizes', 'nmb', 'price_per_item')
     json_orders_user = json.dumps(list(orders_itm), cls=DjangoJSONEncoder)
     return JsonResponse(json_orders_user, safe=False)
 

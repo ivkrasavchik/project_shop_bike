@@ -1,5 +1,6 @@
 {#{% extends 'landing/home.html' %}#}
 {% load static %}
+{% load mathfilters %}
 
 <div class="col-3">
     <div class="product-item-list">
@@ -7,9 +8,26 @@
                 {{ img.product.name }}<br>
                 <img src="{{ img.image.url }}" class="img-responsive-in-list center-block">
             </a>
+            {% if img.product.discount %}
+                <div class="discount_container">
+                    {{ img.product.discount }} %
+                </div>
+            {% endif %}
         <div class="prod_it_list_footer">
-            XS, S, L, XL, XXL<br><br>
-            {{ img.product.price }} Руб.
+            {% for tag in img.product.sizes.all %}
+                {{ tag }},
+            {% endfor %}
+            <br><br>
+                            {#add:+, sub:-,mul:*,numerator|div:denominator - /#}
+            {% if img.product.discount %}
+                <div class="old_price">
+                    {{ img.product.price }}
+                </div>
+                <div class="line-draw"></div>
+                {{ img.product.price|div:100|mul:img.product.discount|sub:img.product.price|abs|floatformat:"-2"}} Руб.
+             {% else %}
+                {{ img.product.price|floatformat:"-2"}} Руб.
+            {% endif %}
             <a href="{% url 'product' img.product.id %}" class="my-btn">Описание</a>
         </div>
     </div>

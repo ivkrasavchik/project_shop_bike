@@ -1,6 +1,8 @@
 from json import JSONDecodeError
 
+from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import AnonymousUser
 from django.core.serializers import json
 from django.db import transaction
 from django.http import HttpResponse, JsonResponse
@@ -8,6 +10,7 @@ from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 from django.utils.datastructures import MultiValueDictKeyError
 
+from landing.forms import Login, UserCreation
 from orders.forms import BasketForm
 from .forms import ProductImageForm, ProductForm
 from products.models import *
@@ -111,16 +114,25 @@ def adm_product_save(request):
 
 def product(request, product_id):
     product = Product.objects.get(id=product_id)
+    # prod1 = product.productinbasket_set.values('price_per_item')
+    if auth.get_user(request).username != AnonymousUser.username:
+        user = auth.get_user(request)
+
+    # else:
+    #     user = False
+
     pr_img = ProductImage.objects.filter(product=product_id)
     # form = BasketForm(request.POST, instance=product)
     form = BasketForm(request.POST)
     if request.POST:
         form = BasketForm(request.POST)
-        # print(form.errors)
+        data = request.POST
+        price_per_item = data.get('price_per_item')
         if form.is_valid():
             obj = form.save(commit=False)
             obj.session_key = request.session.session_key
             obj.product = product
+            obj.price_per_item = price_per_item
             obj.save()
             return redirect("/admin_product/product/" + str(product_id))
 

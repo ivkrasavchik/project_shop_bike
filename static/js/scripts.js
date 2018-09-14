@@ -2,8 +2,8 @@
 
 $(document).ready(function(){
     //Скрыть PopUp при загрузке страницы
-    PopUpHide();
-    PopUpRegHide();
+    // PopUpHide();
+    // PopUpRegHide();
 
 });
 //Функция отображения PopUp
@@ -38,8 +38,23 @@ jQuery(document).ready(function ($) {
     $('#reg_btn').click(ValueReg);
     $('.product_list').click(AutoProductList);
     $('#change-product').click(changeproduct);
-    // $('.adm_order_item').click(AdmOrderItem);
+
     var prodImgList = {};
+    var form = $('#form_buying_product');
+
+    form.on('submit', function (e) {
+        // e.preventDefault();
+        var submit_btn = $('#btn-by');
+        // temp_price_per_item = submit_btn.data("price_per_itm");
+        // console.log(temp_price_per_item);
+        var product_price = +submit_btn.data("price_per_itm").replace(/,/,'.');
+        console.log(product_price);
+        $('#id_price_per_item').val(product_price);
+        $('#id_sizes').val(document.getElementById('select-size').value);
+        temp = document.getElementById('select-size').value;
+        console.log(temp);
+        return true
+    });
 
     function AutoProductList() {
         var data = {};
@@ -205,9 +220,12 @@ jQuery(document).ready(function ($) {
 
         console.log("ajax ->" + data.username + "pass1 ->" + data.password1);
 
+        var csrf_token = $('#reg_form [name="csrfmiddlewaretoken"]').val();
+        data["csrfmiddlewaretoken"] = csrf_token;
+
         $.ajax({
-            type: "GET",
-            url: "",
+            type: "POST",
+            url: "/alt_register/",
             data: data,
             dataType: "html",
             cache: false,
@@ -216,11 +234,12 @@ jQuery(document).ready(function ($) {
 
                 console.log(data);
                 if (data == ''){
-                    // console.log("все ОК");
+                    console.log("все ОК");
                     location.reload();
                     // return true;
                 }else {
                     alert(data);
+                    location.reload();
                     return false;
                 }
             }
@@ -286,7 +305,7 @@ jQuery(document).ready(function ($) {
                 $('.adm-prod_in_ord_img').empty();
                 for (var i=0; i < json_dict.length; i++) {
                     $('.table_orders > tbody ').append('<tr>');
-                    sum += Number(json_dict[i][1]);
+                    sum += parseFloat(json_dict[i][1]);
                     for (var j=0; j < json_dict[i].length; j++){
                         $('.table_orders > tbody tr:last-child').append('<td><a href="javascript:" class="adm_order_item"'
                              +' data-order_id="'+json_dict[i][0]+'">'+json_dict[i][j]+'</a>'+
@@ -294,7 +313,7 @@ jQuery(document).ready(function ($) {
                     }
                     $('.table_orders > tbody ').append('</tr>');
                 }
-                $('#total-orders-summ h3').text(sum);
+                $('#total-orders-summ h3').text(sum.toFixed(2));
                $('.adm_order_item').click(AdmOrderItem);
 
             }
@@ -352,11 +371,19 @@ jQuery(document).ready(function ($) {
                     // $('#adm-prod_in_ord_img').append("<a href='' >"+json_dict[i][0]+"</a><br>");
                     var img = "<img src='/media/" + json_dict[i][0] + "' class='img-responsive-in-list-mini'>";
                     $('.adm-prod_in_ord_img').append(img);
+                    $('.adm-prod_in_ord_img').append(json_dict[i][0]);
                 }
-                for (var ii=0; ii < json_dict[0].length; ii++){
-                    $('.adm-prod_in_ord_img').append("<h4>"+json_dict[0][ii]+"</h4>");
+                for (var ii=1; ii < json_dict[0].length; ii++){
+                    if(ii == 1){
+                        $('.adm-prod_in_ord_img').append("<h4>Текущая цена: "+json_dict[0][ii]+"</h4>");
+                    }else if(ii == 2){
+                        $('.adm-prod_in_ord_img').append("<h4>Текущая скидка: "+json_dict[0][ii]+"</h4>");
+                    }else if(ii == 3){
+                        $('.adm-prod_in_ord_img').append("<h4>Категория: "+json_dict[0][ii]+"</h4>");
+                    }else{
+                        $('.adm-prod_in_ord_img').append("<h4>Категория: "+json_dict[0][ii]+"</h4>");
+                    }
                 }
-                    console.log(json_dict[0].length);
             }
         })
 

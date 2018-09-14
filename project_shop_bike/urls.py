@@ -22,7 +22,7 @@ from django.conf.urls import url, include
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('landing.urls')),
-    url(r'^login/', include('landing.urls')),
+    # url(r'^login/', include('landing.urls')),
     url(r'^profile/', include('landing.urls')),
     url(r'^admin_product/', include('products.urls')),
     url(r'^orders/', include('orders.urls')),

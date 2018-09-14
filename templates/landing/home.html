@@ -5,12 +5,13 @@
 
 {% block user_content %}
 
+
     <div class="col-7">
         <div class="item-list">
             <div class="img-home">
                 <img src="{% static '/img/moto_1.jpg' %}" id="img-home1">
                 <div class="link" id="link-1">
-                    <a href="" class="orange-link">
+                    <a href="/temp_link/" class="orange-link">
                        <h3>Актуальные бренды </h3>
                     </a>
                 </div>
@@ -34,6 +35,7 @@
             <div class="row">
 
                 {% for img in product_image %}
+
                     {% include 'products/product_item.html' %}
                 {% endfor %}
             </div>

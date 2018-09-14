@@ -13,6 +13,7 @@ class BasketForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(BasketForm, self).__init__(*args, **kwargs)
         self.fields['session_key'].required = False
+        self.fields['price_per_item'].required = False
 
 
 class AddOrder(forms.ModelForm):

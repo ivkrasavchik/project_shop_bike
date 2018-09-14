@@ -44,7 +44,8 @@ class ProductInBasket(models.Model):
     order = models.ForeignKey(Order, blank=True, null=True, default=None, on_delete=models.SET_NULL)
     product = models.ForeignKey(Product, blank=True, null=True, default=None, on_delete=models.SET_NULL)
     nmb = models.PositiveSmallIntegerField(default=1)
-    # price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    sizes = models.CharField(max_length=128, blank=True)
     # total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # price*nmb
 
     class Meta:

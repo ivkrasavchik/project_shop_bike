@@ -5,14 +5,20 @@
 {% block user_content %}
     <div class="col-7">
         <div class="prod-list">
-        <h2>товар в заказе № {{ elem_id }} Ваш заказ {{ status.status_ord }}</h2><br>
+        <h2>товар в заказе № {{ elem_id }} Ваш заказ
+                {% if status.status_ord.status_name == "created" %}
+                    ожидает обработки. <br> Подожите пжлста. Мы Вам скоро перезвоним.</h2>
+                {% else %}
+                    {{ status.status_ord }} </h2><br>
+                {% endif %}
                 {% for elem in product_in_users_order %}
                     <div class="us-prod-ord">
                         <a href="{% url 'product' elem.product_id %}">
                             <img src="{{ elem.image }}" class="img-in-order">
-                            {{ elem.product_name }}
+                            {{ elem.product_name }}| размер
+                            "{{ elem.sizes }}"
                             | {{ elem.nmb }} шт | по
-                            {{ elem.price }} руб.
+                            {{ elem.price_per_item }} руб.
                         </a>
                     </div>
                 {% endfor %}
