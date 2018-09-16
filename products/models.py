@@ -15,6 +15,9 @@ class Fabric(models.Model):
     def __str__(self):  # настройка презинтации модели вадминке
         return "%s" % self.name
 
+    def __unicode__(self):
+        return self.logo.url
+
 
 class ProductCategory(models.Model):
     name = models.CharField(max_length=64)
@@ -54,6 +57,7 @@ class Product(models.Model):  # модели принято называть в 
     year_model = models.CharField(max_length=10, default="2018")
     status_new = models.BooleanField(default=True)
     status_sale = models.BooleanField(default=True)
+    second_hands = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     update = models.DateTimeField(auto_now_add=True, auto_now=False)
     fabric = models.ForeignKey(Fabric, blank=True, null=True, default=None, on_delete=models.SET_NULL)

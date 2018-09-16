@@ -10,8 +10,8 @@
             <div class="col-2">
                 <div class="filter-product">
                     <h5>Выбор категории</h5><br>
-                    <h5><a href="/">На главную</a> </h5>
-                    <h5><a href="{% url 'all_product'%}">Все категории</a> </h5>
+                    <h5><a href="/" class="my-href">На главную</a> </h5><br>
+                    <h5><a href="{% url 'all_product'%}" class="my-href">Каталог</a> </h5><br>
                     {% for elem in context_category_product %}
                         <a href="{% url 'product_by_category' elem.id %}">{{ elem.name }}</a><br>
                     {% endfor %}

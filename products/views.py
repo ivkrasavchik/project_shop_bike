@@ -140,11 +140,27 @@ def product(request, product_id):
 
 
 def product_by_category(request, category_id):
-    product_image = ProductImage.objects.filter(is_main=True, is_active=True, product__category=category_id)
-    # return render(request, 'landing/home.html', locals())
+    product_image = ProductImage.objects.filter(is_main=True, is_active=True, product__category=category_id,
+                                                product__second_hands=False)
     return render(request, 'products/products_by_category.html', locals())
 
 
 def all_product(request):
-    product_image = ProductImage.objects.filter(is_main=True, is_active=True)
+    product_image = ProductImage.objects.filter(is_main=True, is_active=True, product__second_hands=False)
     return render(request, 'products/products_by_category.html', locals())
+
+
+def baraholka(request):
+    product_image = ProductImage.objects.filter(is_main=True, is_active=True, product__second_hands=True)
+    return render(request, 'products/products_by_category.html', locals())
+
+
+def brands(request):
+    args = {}
+    args['brands'] = Fabric.objects.all()
+    return render(request, 'products/brands.html', args)
+
+
+def brand(request, brand_id):
+    fabric = Fabric.objects.filter(id=brand_id)
+    return render(request, 'products/brand.html', locals())

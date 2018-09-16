@@ -64,11 +64,11 @@ def home(request):
     args = {}
     args.update(csrf(request))
     # args['session_key'] = request.session.session_key
-    args['tempText'] = 'Сайт находится в стадии разработки'
-    args['category_product'] = ProductCategory.objects.all()
+    # args['tempText'] = 'Сайт находится в стадии разработки'
+    # args['category_product'] = ProductCategory.objects.all()
     if auth.get_user(request).username != AnonymousUser.username:
         args['user'] = auth.get_user(request)
-    args['product_image'] = ProductImage.objects.filter(is_main=True, is_active=True)
+    args['product_image'] = ProductImage.objects.filter(is_main=True, is_active=True, product__status_new=True)
     return render(request, 'landing/home.html', args)
 
 
@@ -123,9 +123,11 @@ def profile_view(request):
 
 
 def temp_link(request):
-    args1 = {}
-    args1['tempText'] = "АКТУАЛЬНЫЕ БРЕНДЫ"
-    return render(request, 'temp.html', args1)
+    args = {}
+    args['tempText'] = "Гори асфальт"
+    return render(request, 'temp.html', args)
+
+
 
 # def home(request):
 #     args = {}

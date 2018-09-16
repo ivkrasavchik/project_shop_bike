@@ -11,34 +11,37 @@
             <div class="img-home">
                 <img src="{% static '/img/moto_1.jpg' %}" id="img-home1">
                 <div class="link" id="link-1">
-                    <a href="/temp_link/" class="orange-link">
+                    <a href="{% url 'brands'%}" class="orange-link">
                        <h3>Актуальные бренды </h3>
                     </a>
                 </div>
                 <div class="link" id="link-2">
-                    <a href="" class="orange-link">
+                    <a href="/temp_link/" class="orange-link">
                         <h3>Новости из Байк-клубов</h3>
                     </a>
                 </div>
                 <div class="link" id="link-3">
-                    <a href="" class="orange-link">
-                        <h3>Где наша не пропадала</h3>
+                    <a href="{% url 'all_product'%}" class="orange-link">
+                        <h3>Каталог</h3>
                     </a>
                 </div>
                 <div class="link" id="link-4">
-                    <a href="" class="orange-link">
+                    <a href="{% url 'baraholka'%}" class="orange-link">
                         <h3>Барахолка</h3>
                     </a>
                 </div>
             </div>
-        <h2>Товары на распродаже</h2><br>
-            <div class="row">
+{#        <h2>Товары на распродаже</h2><br>#}
+{#            <div class="row">#}
 
+
+{#            </div>#}
+        </div>
+        <div id="home-img-flex" class="line-img">
                 {% for img in product_image %}
 
                     {% include 'products/product_item.html' %}
                 {% endfor %}
-            </div>
         </div>
     </div>
 {#            {% include 'footer.html' %}#}

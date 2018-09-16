@@ -3,7 +3,98 @@
 {% load i18n %}
 
 {% block content %}
-    <div class="orders-list">
-        <h2>{{ test }}</h2>
+    <div class="row">
+        <div class="col-7">
+
+          <div class="orders-list scroll_ord">
+            <div class="fix">
+
+                <form action="" id="" method="post">{% csrf_token %}
+                    <div class="N-ord">
+                        <label for="N-ord">№ ord.</label><br>
+                        <input id="N-ord" name="nord">
+                    </div>
+                    <div class="id_user_f">
+                        <label for="id_user_f">User</label><br>
+                        <select id="id_user_f" name="user">
+                            <option></option>
+                        {% for elem in users %}
+                            <option>{{ elem }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                    <div class="id_customer_name_f">
+                        <label for="id_customer_name_f">Name</label><br>
+                        <select id="id_customer_name_f" name="name">
+                            <option></option>
+                            {% for elem in all_cust_name %}
+                                <option>{{ elem }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="id_customer_phone_f">
+                        <label for="id_customer_phone_f">Phone</label><br>
+                        <input id="id_customer_phone_f" name="phone">
+                    </div>
+                    <div class="id_create_f">
+                        <label for="id_create_f">Data create</label><br>
+                        <input type="date" id="id_create_f" name="create">
+                    </div>
+                    <div class="id_data_completed_f">
+                        <label for="id_data_completed_f">Data completed</label><br>
+                        <input type="date" id="id_data_completed_f" name="completed">
+                    </div>
+                    <div class="id_status_ord_f">
+                        <label for="id_status_ord_f">Status ord</label><br>
+                        <select id="id_status_ord_f" name="status">
+                            <option></option>
+                            {% for elem in status_ord %}
+                                <option>{{ elem }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button href="" class="btn btn-outline my-2 my-sm-0" id="ord-filter">Фильтровать</button>
+                </form>
+            </div>
+
+            <table class="" cellspacing="2" border="1" cellpadding="5">
+                <thead>
+                    <tr>
+{#                        <th>номер заказа</th>#}
+{#                        <th>заказчик</th>#}
+{#                        <th>имя заказчика</th>#}
+{#                        <th>телефон</th>#}
+{#                        <th>дата заказа</th>#}
+{#                        <th>дата выполнения заказа</th>#}
+{#                        <th>статус заказа</th>#}
+                    </tr>
+                </thead>
+                <tbody class="list">
+                    {% for order in orders %}
+
+                    <tr >
+
+                        <td style="width: 95px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.pk }}</a></td>
+                        <td style="width: 130px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.user }}</a></td>
+                        <td style="width: 130px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.customer_name }}</a></td>
+                        <td style="width: 120px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.customer_phone }}</a></td>
+                        <td  style="width: 190px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.created }}</a></td>
+                        <td style="width: 190px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.data_completed }}</a></td>
+                        <td style="width: 110px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.status_ord }}</a></td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-5">
+            <div class="order_item">
+                {{ order_form.as_table }}
+            </div>
+
+        </div>
     </div>
 {% endblock %}

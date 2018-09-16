@@ -16,6 +16,7 @@ html, body{
 }
 .img-home{
     /*position: absolute;*/
+    height: 61vh;
 }
 #img-home1{
     max-width: 100%;
@@ -105,6 +106,7 @@ html, body{
     max-width: 100%;
     display: flex;
     overflow-x: scroll;
+    overflow-y: hidden;
 }
 .img-adm{
     display: inherit;
@@ -258,7 +260,7 @@ html, body{
 
 .list-users{
     width: 100%;
-    height:93%;
+    height:93vh;
     background-color: burlywood;
     padding: 15px;
     overflow:scroll;
@@ -278,8 +280,8 @@ html, body{
 .data-users{
     /*position: fixed;*/
     width: 100%;
-    min-height: 40%;
-    max-height:100%;
+    min-height: 35vh;
+    max-height:65vh;
     background-color: lightskyblue;
     padding: 15px;
 
@@ -290,8 +292,8 @@ html, body{
     /*position: fixed;*/
     background-color: lemonchiffon;
     padding: 15px;
-    height: 100%;
-
+    height: 58vh;
+    overflow: auto;
 
 }
 
@@ -407,10 +409,14 @@ html, body{
 .orders-list{
     position: fixed;
     width: 100%;
+    color: darkorange;
     /*height:100%;*/
     top: 6vh;
     /*margin-top: 50px;*/
     padding: 15px;
+}
+.orders-list a{
+    color: darkorange;
 }
 .text-context{
     color: darkorange;
@@ -532,4 +538,107 @@ html, body{
     width: 100px;
     margin: 10px;
 }
+#home-img-flex{
+    background-color: rgba(0,0,0,0.8);
+    position: relative;
+    padding: 10px;
+}
+#brand_back{
+    position: relative;
+    top: 3vh;
+    left: -480px;
+}
+.scroll_ord{
+    max-height: 81vh;
+    overflow-y: auto;
+    position: relative;
+    top: 14vh;
+}
+.fix{
+    /*display: block;*/
+    position: fixed;
+    top: 11vh;
+    /*background-color: black;*/
+}
+.list{
+    /*display: grid;*/
+    /*position: initial;*/
+    /*top: 1vh;*/
+    /*margin-top: 3vh;*/
+    /*z-index: 10;*/
+}
+/*/////////////////////////////////////TABLE////////////////*/
+.N-ord{
+    position: absolute;
+    top: -4vh;
+}
+#N-ord{
+    width: 95px;
+    height: 30px;
+}
+.id_user_f{
+    position: absolute;
+    top: -4vh;
+    left: 120px;
+}
+#id_user_f{
+    width: 125px;
+    height: 30px;
+}
+.id_customer_name_f{
+    position: absolute;
+    top: -4vh;
+    left: 260px;
+}
+#id_customer_name_f{
+    width: 125px;
+    height: 30px;
+}
+.id_customer_phone_f{
+    position: absolute;
+    top: -4vh;
+    left: 395px;
+}
+#id_customer_phone_f{
+    width: 110px;
+    height: 30px;
+}
+.id_create_f{
+    position: absolute;
+    top: -4vh;
+    left: 520px;
+}
+#id_create_f{
+    width: 160px;
+    height: 30px;
+}
+.id_data_completed_f{
+    position: absolute;
+    top: -4vh;
+    left: 700px;
+}
+#id_data_completed_f{
+    width: 160px;
+    height: 30px;
+}
+.id_status_ord_f{
+    position: absolute;
+    top: -4vh;
+    left: 885px;
+}
+#id_status_ord_f{
+    width: 105px;
+    height: 30px;
+}
+#ord-filter{
+    position: absolute;
+    top: -3vh;
+    left: 1010px;
+}
 
+/*//////////////////////////////////END///TABLE////////////////*/
+.order_item{
+    position: relative;
+    top: 14vh;
+    color: darkorange;
+}

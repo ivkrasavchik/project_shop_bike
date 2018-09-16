@@ -3,7 +3,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.core.serializers import json
 import json
-from django.contrib.auth.models import AnonymousUser
+from django.contrib.auth.models import AnonymousUser, User
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import transaction
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
@@ -11,7 +11,7 @@ from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 from django.urls import reverse
 
-from orders.forms import AddOrder
+from orders.forms import AddOrder, OrderAdmOrders
 from orders.models import ProductInBasket, Order, StatusOrder
 from products.models import ProductImage
 
@@ -20,7 +20,60 @@ from products.models import ProductImage
 @transaction.atomic
 def adm_orders(request):
     args = {}
-    args['test'] = "Ща всех порвем"
+    args['orders'] = Order.objects.all()
+    args['order_form'] = OrderAdmOrders()
+    args['users'] = User.objects.all()
+    args['status_ord'] = StatusOrder.objects.all()
+    args['all_cust_name'] = set()
+    for elem in args['orders'].values_list('customer_name'):
+        args['all_cust_name'].add(elem[0])
+
+    if request.POST:
+        args.update(csrf(request))
+        id_ord = request.POST.get('nord')
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        create = request.POST.get('create')
+        completed = request.POST.get('completed')
+        user = request.POST.get('user')
+        status = request.POST.get('status')
+
+        if id_ord:
+            args['orders'] = Order.objects.filter(id=id_ord)
+        elif user and create and status:
+            args['orders'] = Order.objects.filter(user__username=user, created__gte=create, status_ord__status_name=status)
+        elif name and create and status:
+            args['orders'] = Order.objects.filter(customer_name=name, created__gte=create, status_ord__status_name=status)
+        elif phone and create and status:
+            args['orders'] = Order.objects.filter(customer_phone=phone, created__gte=create, status_ord__status_name=status)
+        elif user and status:
+            args['orders'] = Order.objects.filter(user__username=user, status_ord__status_name=status)
+        elif name and status:
+            args['orders'] = Order.objects.filter(customer_name=name, status_ord__status_name=status)
+        elif phone and status:
+            args['orders'] = Order.objects.filter(customer_phone=phone, status_ord__status_name=status)
+        elif user and create:
+            args['orders'] = Order.objects.filter(user__username=user, created__gte=create)
+        elif name and create:
+            args['orders'] = Order.objects.filter(customer_name=name, created__gte=create)
+        elif phone and create:
+            args['orders'] = Order.objects.filter(customer_phone=phone, created__gte=create)
+
+        elif user:
+            args['orders'] = Order.objects.filter(user__username=user)
+        elif name:
+            args['orders'] = Order.objects.filter(customer_name=name)
+        elif phone:
+            args['orders'] = Order.objects.filter(customer_phone__contains=phone)
+        elif create:
+            args['orders'] = Order.objects.filter(created__gte=create)
+        elif completed:
+            args['orders'] = Order.objects.filter(data_completed__gte=completed)
+        elif status:
+            args['orders'] = Order.objects.filter(status_ord__status_name=status)
+
+        print("UUUUUUUUUU", id_ord, name, phone, create, completed, user, status)
+
     return render(request, 'orders/orders.html', args)
 
 

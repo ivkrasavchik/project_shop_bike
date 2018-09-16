@@ -1,0 +1,17 @@
+{% extends 'wrapper.html' %}
+{#{% extends 'base.html' %}#}
+{% load static %}
+{% load i18n %}
+
+{% block user_content %}
+    <div class="col-7 item-list">
+        {% for elem in brands %}
+            <a href="{% url 'brand' elem.id %}">
+            {% if elem.logo %}
+                <img src="{{ elem.logo.url }}" class="img-responsive-in-list center-block">
+            {% endif %}
+            {{ elem.name }}
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

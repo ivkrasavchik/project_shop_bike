@@ -38,6 +38,7 @@ jQuery(document).ready(function ($) {
     $('#reg_btn').click(ValueReg);
     $('.product_list').click(AutoProductList);
     $('#change-product').click(changeproduct);
+    $('#ord-filter').click(ord_filter);
 
     var prodImgList = {};
     var form = $('#form_buying_product');
@@ -55,6 +56,10 @@ jQuery(document).ready(function ($) {
         console.log(temp);
         return true
     });
+    function ord_filter() {
+        var data = {};
+
+    }
 
     function AutoProductList() {
         var data = {};

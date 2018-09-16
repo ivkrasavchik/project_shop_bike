@@ -37,3 +37,21 @@ class AdmProductInOrder(forms.ModelForm):
     class Meta:
         model = Order
         fields = '__all__'
+
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
+class OrderAdmOrders(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = '__all__'
+        # fields = ['id', 'user', 'customer_name', 'customer_phone', 'created', 'data_completed', 'status_ord']
+
+    # def __init__(self, *args, **kwargs):
+    #     super(OrderAdmOrders, self).__init__(*args, **kwargs)
+    #     self.fields['data_completed'].widget = widgets.AdminSplitDateTime()
+        widgets = {'data_completed': DateInput(),
+                   'created': forms.DateField
+                   }

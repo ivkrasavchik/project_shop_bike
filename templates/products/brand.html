@@ -1,0 +1,19 @@
+{% extends 'wrapper.html' %}
+{#{% extends 'base.html' %}#}
+{% load static %}
+{% load i18n %}
+
+{% block user_content %}
+    <div class="col-7 item-list">
+    <div >
+        <a href="{% url 'brands'%}" id="brand_back" class="my-href">Назад</a>
+    </div>
+        {% for elem in fabric %}
+            {% if elem.logo %}
+                <img src="{{ elem.logo.url }}" class="img-responsive-in-list ">
+            {% endif %}
+            {{ elem.name }}<br>
+            <h4>{{ elem.description }}</h4>
+        {% endfor %}
+    </div>
+{% endblock %}
