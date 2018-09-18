@@ -28,7 +28,7 @@ class Order(models.Model):  # модели принято называть в е
     status_ord = models.ForeignKey(StatusOrder, null=True, on_delete=models.SET_NULL, default="created")
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     update = models.DateTimeField(auto_now_add=False, auto_now=True)
-    data_completed = models.DateTimeField(blank=True, null=True)
+    data_completed = models.DateField(blank=True, null=True)
 
     class Meta:
         # django само определяет единственное и множественное число, но можно переопределить

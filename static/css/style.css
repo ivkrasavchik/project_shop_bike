@@ -585,6 +585,10 @@ html, body{
     width: 125px;
     height: 30px;
 }
+#id_user{
+    width: 125px;
+    height: 30px;
+}
 .id_customer_name_f{
     position: absolute;
     top: -4vh;
@@ -594,12 +598,20 @@ html, body{
     width: 125px;
     height: 30px;
 }
+#id_customer_name{
+    width: 125px;
+    height: 30px;
+}
 .id_customer_phone_f{
     position: absolute;
     top: -4vh;
     left: 395px;
 }
 #id_customer_phone_f{
+    width: 110px;
+    height: 30px;
+}
+#id_customer_phone{
     width: 110px;
     height: 30px;
 }
@@ -621,12 +633,19 @@ html, body{
     width: 160px;
     height: 30px;
 }
+#id_data_completed{
+    height: 30px;
+}
 .id_status_ord_f{
     position: absolute;
     top: -4vh;
     left: 885px;
 }
 #id_status_ord_f{
+    width: 105px;
+    height: 30px;
+}
+#id_status_ord{
     width: 105px;
     height: 30px;
 }
@@ -641,4 +660,105 @@ html, body{
     position: relative;
     top: 14vh;
     color: darkorange;
+    /*outline: 1px solid darkorange;*/
+}
+.ord_customer_name{
+    position: absolute;
+    top: 0;
+    left: 140px;
+}
+.ord_customer_phone{
+    position: absolute;
+    top: 0;
+    left: 277px;
+}
+.ord_customer_address{
+    position: absolute;
+    top: 8vh;
+}
+.ord_comments{
+    position: absolute;
+    top: 8vh;
+    left: 277px;
+}
+.ord_status_ord{
+    position: absolute;
+    top: 15vh;
+}
+.ord_data_completed{
+    position: absolute;
+    top: 15vh;
+    left: 112px;
+}
+.ord_total_price{
+    position: absolute;
+    top: 0vh;
+    left: 396px;
+}
+#id_total_price{
+    width: 140px;
+}
+#btn_ord_edit{
+    position: absolute;
+    top: 19vh;
+    /*left: 450px;*/
+}
+#btn_ord_del{
+    position: absolute;
+    top: 19vh;
+    left: 120px;
+}
+#line_ord_form{
+    position: relative;
+    top: 30vh;
+    width: 30vw;
+}
+.prod_list_ord{
+    position: relative;
+    top: 31vh;
+    color: darkorange;
+}
+/*//////////////////////////Модальное окно 2 ////////////////////////*/
+.add_block{
+    width:100%;
+    min-height:100%;
+    background-color: rgba(0,0,0,0.5);
+    overflow:hidden;
+    position:fixed;
+    top:0;
+}
+
+.add_block_content{
+    width:65vw;
+    height: 75vh;
+    text-align: center;
+    font-size:13px;
+    color: white;
+    background-color: #0e0404e0;
+    position: fixed;
+    top: 10vh;
+    right: 16vw;
+    border: 3px solid darkorange;
+
+}
+.add_block .main_ord{
+    /*margin:40px auto 0 auto;*/
+    /*width:200px;*/
+    /*height:300px;*/
+    /*padding:10px;*/
+    /*background-color: #c5c5c5;*/
+    /*border-radius:5px;*/
+    /*box-shadow: 0 0 10px #000;*/
+}
+/*//////////////////////Конец модального окна 2 ////////////////////////*/
+.ord_prod_list{
+    font-size: 17pt;
+    color: darkorange;
+    text-align: center;
+    padding-left: 4vh;
+}
+#ord_number_info{
+    position: absolute;
+    top: -6vh;
+    right: 4vw;
 }

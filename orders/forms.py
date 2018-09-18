@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import Textarea, NumberInput
 
 from .models import *
 
@@ -47,11 +48,11 @@ class OrderAdmOrders(forms.ModelForm):
     class Meta:
         model = Order
         fields = '__all__'
-        # fields = ['id', 'user', 'customer_name', 'customer_phone', 'created', 'data_completed', 'status_ord']
 
     # def __init__(self, *args, **kwargs):
     #     super(OrderAdmOrders, self).__init__(*args, **kwargs)
     #     self.fields['data_completed'].widget = widgets.AdminSplitDateTime()
         widgets = {'data_completed': DateInput(),
-                   'created': forms.DateField
+                   'comments': Textarea(attrs={'cols': 30, 'rows': 4, 'placeholder': "Что нам надо знать"}),
+                   'customer_address': Textarea(attrs={'cols': 30, 'rows': 2, 'placeholder': "Введите адрес"}),
                    }

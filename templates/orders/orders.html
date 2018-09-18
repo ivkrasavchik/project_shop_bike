@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
+{% load widget_tweaks %}
 
 {% block content %}
+    <div class="main_ord">
     <div class="row">
-        <div class="col-7">
+        <div class="col-8">
 
           <div class="orders-list scroll_ord">
             <div class="fix">
@@ -18,9 +20,9 @@
                         <label for="id_user_f">User</label><br>
                         <select id="id_user_f" name="user">
                             <option></option>
-                        {% for elem in users %}
-                            <option>{{ elem }}</option>
-                        {% endfor %}
+                            {% for elem in users %}
+                                <option>{{ elem }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="id_customer_name_f">
@@ -81,6 +83,7 @@
                         <td  style="width: 190px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.created }}</a></td>
                         <td style="width: 190px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.data_completed }}</a></td>
                         <td style="width: 110px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.status_ord }}</a></td>
+                        <td style="width: 130px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.total_price }}</a></td>
 
                     </tr>
 
@@ -90,11 +93,51 @@
             </table>
           </div>
         </div>
-        <div class="col-5">
+        <div class="col-4">
             <div class="order_item">
-                {{ order_form.as_table }}
+                <form action="{% url 'ord_editing_save' %}" method="post" id="ord_editing">
+                    {% csrf_token %}
+                    <div id="ord_number_info"><h2></h2></div>
+                    <input hidden id="order_ord" name="order_id">
+                    <div class="ord_user"><label for="id_user">User</label><br>{{ order_form.user }}</div>
+                    <div class="ord_customer_name"><label for="id_customer_name">Имя</label><br>{{ order_form.customer_name }}</div>
+                    <div class="ord_customer_phone"><label for="id_customer_phone">Телефон</label><br>{{ order_form.customer_phone }}</div>
+                    <div class="ord_customer_address">{{ order_form.customer_address }}</div>
+                    <div class="ord_comments">{{ order_form.comments }}</div>
+                    <div class="ord_data_completed">{{ order_form.data_completed }}</div>
+                    <div class="ord_status_ord">{{ order_form.status_ord }}</div>
+                    <div class="ord_total_price"><label for="id_total_price">Сумма заказа</label><br>{{ order_form.total_price }}</div>
+                    <br>
+                    <button type="submit" class="btn btn-outline my-2 my-sm-0" id="btn_ord_edit">Изменить</button>
+                </form>
+                <form action="{% url 'ord_editing_del' %}" method="post" id="ord_del">
+                    {% csrf_token %}
+                    <input hidden id="order_ord_del" name="order_id_del">
+                    <button type="submit" class="btn btn-outline my-2 my-sm-0" id="btn_ord_del">Удалить</button>
+                </form>
             </div>
+            <div class="nav-tabs" id="line_ord_form"></div>
+            <div class="prod_list_ord">
+                <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_prod_in_ord_list" href="javascript:">Список товаров в заказе</button>
+                <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_prod_in_ord_add" href="javascript:">Добавть товар в заказ</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div id="add_block_list" class="add_block hidediv">
+        <div class="add_block_content">
+{#            <h1>Список товаров в заказе</h1>#}
+            {% include 'orders/order_prod_list.html' %}
+            <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_list_ok" href="javascript:">OK</button>
+            <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_list_cancel" href="javascript:">Cancel</button>
+        </div>
 
+    </div>
+    <div id="add_block_add" class="add_block hidediv">
+        <div class="add_block_content">
+            <h1>Добавить товар в заказ</h1>
+            <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_add_ok" href="javascript:">OK</button>
+            <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_add_cancel" href="javascript:">Cancel</button>
         </div>
     </div>
 {% endblock %}

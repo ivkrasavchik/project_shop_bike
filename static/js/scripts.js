@@ -1,11 +1,11 @@
 
 
-$(document).ready(function(){
+// $(document).ready(function(){
     //Скрыть PopUp при загрузке страницы
     // PopUpHide();
     // PopUpRegHide();
 
-});
+// });
 //Функция отображения PopUp
 function PopUpShow(){
     $("#popup1").show();
@@ -32,13 +32,129 @@ function PopUpRegHide(){
 //         console.log("ORD_ID_NO")
 //     }
 
+
 jQuery(document).ready(function ($) {
     $('.info-user').click(profile_view);
     $('#change-profile').click(change_profile_view);
     $('#reg_btn').click(ValueReg);
     $('.product_list').click(AutoProductList);
     $('#change-product').click(changeproduct);
-    $('#ord-filter').click(ord_filter);
+    $('.href_on_ord').click(ord_filter);
+
+    $('#btn_list_cancel').click(function(){$("#add_block_list").hide();location.reload()});
+    $('#btn_add_cancel').click(function(){$("#add_block_add").hide();});
+
+
+    $('#btn_prod_in_ord_list').click(function(){
+        var data = {};
+        data['order_ord'] = document.getElementById('order_ord').value;
+
+        var csrf_token = $('#ord_editing [name="csrfmiddlewaretoken"]').val();
+        data["csrfmiddlewaretoken"] = csrf_token;
+        $.ajax({
+            type: "POST",
+            url: "ord_editing_list/",
+            data: data,
+
+            success: function (arv) {
+                var json_dict = JSON.parse(arv);
+                console.log(json_dict);
+                if (json_dict == false){
+                    alert("Не выбран заказ, или заказ пустой (ну нет там товара)");
+                }else{
+                $("#add_block_list").show();
+                $('.table_prod_in_ord > tbody ').empty();
+                for (i=0; i < json_dict.length; i++){
+                    var img = "<img src='/media/" + json_dict[i].image + "' class='img-responsive-in-list-mini'>";
+                    var id_nmb_prod = "prod_nmb_"+json_dict[i].product__productinbasket;
+                    console.log(id_nmb_prod);
+                    $('.table_prod_in_ord > tbody ').append(
+                        '<tr><td>'+img+'</td><td>'
+                        + json_dict[i].product__article +'</td><td>'
+                        + json_dict[i].product__name +'</td><td>'
+                        // + json_dict[i].product__productinbasket__nmb +'</td><td>'
+                        + '<input id="'+id_nmb_prod+'" style="width: 95px" type="number" min="0" value="'+ json_dict[i].product__productinbasket__nmb +'"></td><td>'
+                        + json_dict[i].product__productinbasket__price_per_item +'</td><td>'
+                        + json_dict[i].product__productinbasket__sizes +'</td><td>' +
+                        '<button type="button" class="btn btn-outline my-2 my-sm-0 edit-prod" id="" href="javascript:" ' +
+                        'data-prod_in_bask="'+json_dict[i].product__productinbasket+'">Изменить</button></td><td>'+
+                        '<button type="button" class="btn btn-outline my-2 my-sm-0 del-prod" id="" href="javascript:" ' +
+                        'data-prod_in_bask="'+json_dict[i].product__productinbasket+'">Удалить</button></td></tr>'
+                    );
+
+                }
+                $('.del-prod').click(DelFromBasket);
+                $('.edit-prod').click(EditFromBasket);
+
+                }
+            }
+        })
+    });
+
+    $('#btn_prod_in_ord_add').click(function(){$("#add_block_add").show();});
+    // $('#btn_prod_in_ord_list').click(AddBlockListShow);
+    // $('#btn_prod_in_ord_add').click(AddBlockAddShow);
+    // $('#btn_list_cancel').click(AddBlockListHide);
+    // $('#btn_add_cancel').click(AddBlockAddHide);
+    // function AddBlockListShow(){$("#add_block_list").show();}
+    // function AddBlockAddShow(){$("#add_block_add").show();}
+    // function AddBlockListHide(){$("#add_block_list").hide();}
+    // function AddBlockAddHide(){$("#add_block_add").hide();}
+
+    function DelFromBasket(){
+        var data = {};
+        data.product = $(this).attr('data-prod_in_bask');
+        console.log(data.product, data.temp);
+        var csrf_token = $('#ord_editing [name="csrfmiddlewaretoken"]').val();
+        data["csrfmiddlewaretoken"] = csrf_token;
+        $.ajax({
+            type: "POST",
+            url: "ord_del_product/",
+            data: data,
+
+            success: function (arv) {
+                var json_dict = JSON.parse(arv);
+                console.log(json_dict);
+                if (json_dict == false){
+                    // alert("Не выбран заказ, или заказ пустой (ну нет там товара)");
+                    location.reload()
+                }else{
+                $("#add_block_list").show();
+                $('.table_prod_in_ord > tbody ').empty();
+                for (i=0; i < json_dict.length; i++){
+                    var img = "<img src='/media/" + json_dict[i].image + "' class='img-responsive-in-list-mini'>";
+                    var id_nmb_prod = "prod_nmb_"+json_dict[i].product__productinbasket;
+                    console.log(id_nmb_prod);
+                    $('.table_prod_in_ord > tbody ').append(
+                        '<tr><td>'+img+'</td><td>'
+                        + json_dict[i].product__article +'</td><td>'
+                        + json_dict[i].product__name +'</td><td>'
+                        // + json_dict[i].product__productinbasket__nmb +'</td><td>'
+                        + '<input id="'+id_nmb_prod+'" style="width: 95px" type="number" min="0" value="'+ json_dict[i].product__productinbasket__nmb +'"></td><td>'
+                        + json_dict[i].product__productinbasket__price_per_item +'</td><td>'
+                        + json_dict[i].product__productinbasket__sizes +'</td><td>' +
+                        '<button type="button" class="btn btn-outline my-2 my-sm-0 edit-prod" id="" href="javascript:" ' +
+                        'data-prod_in_bask="'+json_dict[i].product__productinbasket+'">Изменить</button></td><td>'+
+                        '<button type="button" class="btn btn-outline my-2 my-sm-0 del-prod" id="" href="javascript:" ' +
+                        'data-prod_in_bask="'+json_dict[i].product__productinbasket+'">Удалить</button></td></tr>'
+                    );
+
+                }
+                $('.del-prod').click(DelFromBasket);
+                $('.edit-prod').click(EditFromBasket);
+
+                }
+            }
+        })
+    }
+    function EditFromBasket(){
+        var datar = {};
+        datar.product = $(this).attr('data-prod_in_bask');
+        var nmb_id = "prod_nmb_"+datar.product;
+        // datar.json_dict = $(this).attr('data-json_dict');
+        datar.temp = document.getElementById(nmb_id).value;
+        console.log(datar.product, datar.temp);
+    }
 
     var prodImgList = {};
     var form = $('#form_buying_product');
@@ -46,19 +162,40 @@ jQuery(document).ready(function ($) {
     form.on('submit', function (e) {
         // e.preventDefault();
         var submit_btn = $('#btn-by');
-        // temp_price_per_item = submit_btn.data("price_per_itm");
-        // console.log(temp_price_per_item);
         var product_price = +submit_btn.data("price_per_itm").replace(/,/,'.');
-        console.log(product_price);
         $('#id_price_per_item').val(product_price);
         $('#id_sizes').val(document.getElementById('select-size').value);
-        temp = document.getElementById('select-size').value;
-        console.log(temp);
         return true
     });
+
     function ord_filter() {
         var data = {};
+        data.order = $(this).attr('data-ord_id');
 
+        var csrf_token = $('#ord_editing [name="csrfmiddlewaretoken"]').val();
+        data["csrfmiddlewaretoken"] = csrf_token;
+
+        $.ajax({
+            type: "POST",
+            url: "ord_editing/",
+            data: data,
+            cache: false,
+
+            success: function (datavada) {
+                var json_dict = JSON.parse(datavada);
+                $('#id_user').val(json_dict[0][0]);
+                $('#id_total_price').val(json_dict[0][1]);
+                $('#id_customer_name').val(json_dict[0][2]);
+                $('#id_customer_phone').val(json_dict[0][3]);
+                $('#id_data_completed').val(json_dict[0][5]);
+                $('#id_customer_address').val(json_dict[0][6]);
+                $('#id_comments').val(json_dict[0][7]);
+                $('#id_status_ord').val(json_dict[0][4]);
+                $('#order_ord').val(json_dict[0][8]);
+                $('#order_ord_del').val(json_dict[0][8]);
+                $('#ord_number_info h2').text("Заказ № "+json_dict[0][8]);
+            }
+        })
     }
 
     function AutoProductList() {
@@ -110,7 +247,6 @@ jQuery(document).ready(function ($) {
             data: data,
             dataType: "json",
             cache: false,
-
 
             success: function(data){
                 prodImgList = data.products_img_list;

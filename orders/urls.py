@@ -10,5 +10,10 @@ urlpatterns = [
     url(r'order_list/$', views.order_list, name="order_list"),
     url(r'order_items/$', views.order_items, name="order_items"),
     url(r'adm_ord_prod_items/$', views.adm_ord_prod_items, name="adm_ord_prod_items"),
+    url(r'ord_editing/$', views.ord_editing, name="ord_editing"),
+    url(r'ord_editing_save/$', views.ord_editing_save, name="ord_editing_save"),
+    url(r'ord_editing_del/$', views.ord_editing_del, name="ord_editing_del"),
+    url(r'ord_editing_list/$', views.ord_editing_list, name="ord_editing_list"),
+    url(r'ord_del_product/$', views.ord_del_product, name="ord_del_product"),
     # url(r'foto_add/$', views.add_img, name="add_img"),
 ]
