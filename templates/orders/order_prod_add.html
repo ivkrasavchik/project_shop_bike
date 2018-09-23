@@ -1,0 +1,108 @@
+<div class="add_product">
+    <h1>Добавим позицию</h1>
+{#    <form action="" id="" method="post">{% csrf_token %}#}
+        <div id="id_filter_add_prod_a">
+            <label for="id_field_filter_article">Article</label><br>
+            <input id="id_field_filter_article" style="width:120px; height: 30px">
+        </div>
+        <div id="id_filter_add_prod_p">
+            <label for="id_field_filter_prod">Product</label><br>
+            <input id="id_field_filter_prod" style="width:220px; height: 30px">
+        </div>
+
+        <button type="button" href="javascript:" class="btn btn-outline my-2 my-sm-0" id="btn_prod_filter">Откопать</button>
+{#    </form>#}
+    <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_add_prod_hide" href="javascript:">Выйти</button>
+    <div class="row">
+        <div class="col-7" id="col7top2">
+            <div id="id-ord-list-prod">
+            <table class="tbl_ord_add_prod" cellspacing="2" border="1" cellpadding="5">
+                <thead>
+                    <tr>
+                        <th width="110"></th>
+                        <th width="90">Артикул</th>
+                        <th width="300">Наименование</th>
+                        <th width="80">Price</th>
+                        <th width="20">Скидка</th>
+                    </tr>
+                </thead>
+                <tbody class="list">
+                    {% for product in products %}
+
+                    <tr >
+
+                        <td ><a class="href_on_prod" href="javascript:" data-product_id="{{ product.product.pk }}"
+                                                                        data-product_img="{{ product.image.url }}"
+                                                                        data-product_article="{{ product.product.article }}"
+                                                                        data-product_name="{{ product.product.name }}"
+                                                                        data-product_price="{{ product.product.price|safe }}"
+                                                                        data-product_discount="{{ product.product.discount }}"
+                        ><img src="{{ product.image.url }}" class="img-responsive-in-list-mini">
+                            </a></td>
+                        <td width="90"><a class="href_on_prod" href="javascript:" data-product_id="{{ product.product.pk }}"
+                                                                        data-product_img="{{ product.image.url }}"
+                                                                        data-product_article="{{ product.product.article }}"
+                                                                        data-product_name="{{ product.product.name }}"
+                                                                        data-product_price="{{ product.product.price|safe }}"
+                                                                        data-product_discount="{{ product.product.discount }}"
+                        >{{ product.product.article }}</a></td>
+                        <td width="300"><a class="href_on_prod" href="javascript:" data-product_id="{{ product.product.pk }}"
+                                                                        data-product_img="{{ product.image.url }}"
+                                                                        data-product_article="{{ product.product.article }}"
+                                                                        data-product_name="{{ product.product.name }}"
+                                                                        data-product_price="{{ product.product.price|safe }}"
+                                                                        data-product_discount="{{ product.product.discount }}"
+                        >{{ product.product.name }}</a></td>
+                        <td width="80"><a class="href_on_prod"  href="javascript:" data-product_id="{{ product.product.pk }}"
+                                                                        data-product_img="{{ product.image.url }}"
+                                                                        data-product_article="{{ product.product.article }}"
+                                                                        data-product_name="{{ product.product.name }}"
+                                                                        data-product_price="{{ product.product.price|safe }}"
+                                                                        data-product_discount="{{ product.product.discount }}"
+                        >{{ product.product.price }}</a></td>
+                        <td width="20"><a class="href_on_prod" href="javascript:" data-product_id="{{ product.product.pk }}"
+                                                                        data-product_img="{{ product.image.url }}"
+                                                                        data-product_article="{{ product.product.article }}"
+                                                                        data-product_name="{{ product.product.name }}"
+                                                                        data-product_price="{{ product.product.price| safe }}"
+                                                                        data-product_discount="{{ product.product.discount }}"
+                        >{{ product.product.discount }}</a></td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+            </table>
+            <div id="adm-ord-addprod" class="ord_add_prod hidediv">
+                <br><h1>Творю что хочу</h1>
+                <div id="adm-ord-addprod-1">
+{#                  <form action="{% url 'adding_product_in_order' %}" method="post" id="form_adding_prod">#}
+{#                      {% csrf_token %}#}
+{#                    <input hidden id="id-session_key" >#}
+                    <input hidden id="id-prod-id" name="product_id">
+                    <input hidden id="id-price-id" type="number" min="0" step="0.01" pattern="\d+(\.\d{2})?">
+                    <input hidden id="id-discount-id" type="number" min="0">
+
+                    <div class="input_nmb"><label for="id-ord-prod-nmb">кол-во</label><br>
+                    <input type="number" min="0" style="width: 70px; height: 30px" id="id-ord-prod-nmb" value="1" name="nmb"></div>
+                    <div class="input_price"><label for="id-ord-price_per_item">цена</label><br>
+                    <input type="number" min="0" step="0.01" pattern="\d+(\.\d{2})?" style="width: 120px; height: 30px" id="id-ord-price_per_item" name="price_per_item"></div>
+                    <div class="select_sizes"><label for="id-ord-sizes">размер</label><br>
+                    <select id="id-ord-sizes" style="width: 120px; height: 30px" name="size"></select></div>
+                    <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_add_prod_to_ord" href="javascript:">Добавть товар в заказ</button>
+{#                  </form>#}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-5" id="col5top2">
+        <h3>Описание продукта</h3>
+        <div id="col5top_1">
+
+        </div>
+        <div id="col5top_2"></div>
+    </div>
+    </div>
+</div>

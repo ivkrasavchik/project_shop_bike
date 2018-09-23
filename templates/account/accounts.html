@@ -8,7 +8,7 @@
             <div class = "col-lg-3">
                 <div class="order-users">
                     <h4>Product in order</h4>
-                    <button type="submit" class="btn btn-outline my-2 my-sm-0">Редактировать</button>
+{#                    <button type="submit" class="btn btn-outline my-2 my-sm-0">Редактировать</button>#}
                     <table class="table text-left order-item-list" cellspacing="2" border="1" cellpadding="5">
                         <thead>
                             <tr>
@@ -24,9 +24,7 @@
 
                                 </tr>
                         </tbody>
-
                     </table>
-
                 </div>
                 <div class="row">
                     <div class = "col-lg-12">
@@ -53,9 +51,7 @@
                 </div>
                 <div class="row">
                     <div class = "col-lg-12">
-
                         <div class="list-order">
-
                             <table class="table text-left table_orders" cellspacing="2" border="1" cellpadding="5">
                                 <thead>
                                     <tr>
@@ -65,7 +61,6 @@
                                         <th>created</th>
                                         <th>data_completed</th>
                                         <th>курс $</th>
-                                        <th>? Удалить</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -74,23 +69,25 @@
                                     </tr>
                                 </tbody>
                             </table>
-{#                            {% include 'orders/orders.html' %}#}
-
                         </div>
 
                     </div>
                 </div>
             </div>
 
-
-
             <div class = "col-lg-2">
+                <div id="DivSearchForm">
+                    <form action="" method="post">{% csrf_token %}
+                        <input name="SearchUser" type="search" class="search-label-icon"><br><br>
+                        <button class="btn  btn-outline my-2 my-sm-0">Search</button>
+                    </form>
+                </div>
                 <div class="list-users">
 
                     <table class="table text-left">
                         <thead>
                             <tr>
-                                <th>list Users</th>
+                                <th><h3>Список зарегистрированных пользователей</h3></th>
                             </tr>
                         </thead>
                         <tbody>

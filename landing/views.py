@@ -63,9 +63,6 @@ def alt_register(request):
 def home(request):
     args = {}
     args.update(csrf(request))
-    # args['session_key'] = request.session.session_key
-    # args['tempText'] = 'Сайт находится в стадии разработки'
-    # args['category_product'] = ProductCategory.objects.all()
     if auth.get_user(request).username != AnonymousUser.username:
         args['user'] = auth.get_user(request)
     args['product_image'] = ProductImage.objects.filter(is_main=True, is_active=True, product__status_new=True)
@@ -81,14 +78,20 @@ def logout(request):
 @transaction.atomic
 def update_profile(request):
     args = {}
-    args.update(csrf(request))
     args['user'] = auth.get_user(request)
     args['tempText'] = 'Сайт находится в стадии разработки'
     args['users'] = User.objects.all()
     args['category_list'] = Category.objects.all()
+    if request.POST:
+        args.update(csrf(request))
+        if request.POST.get('SearchUser'):
+            args['users'] = User.objects.filter(username__contains=request.POST.get('SearchUser'))
     return render(request, 'account/accounts.html', args)
 
 
+# (Accounts)<-- Change user data (js:change_profile_view)
+@login_required
+@transaction.atomic
 def profile_view(request):
     args = {}
     args.update(csrf(request))

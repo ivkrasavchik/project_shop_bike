@@ -55,7 +55,7 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <button href="" class="btn btn-outline my-2 my-sm-0" id="ord-filter">Фильтровать</button>
+                    <button class="btn btn-outline my-2 my-sm-0" id="ord-filter">Фильтровать / Показать все</button>
                 </form>
             </div>
 
@@ -82,7 +82,7 @@
                         <td style="width: 120px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.customer_phone }}</a></td>
                         <td  style="width: 190px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.created }}</a></td>
                         <td style="width: 190px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.data_completed }}</a></td>
-                        <td style="width: 110px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.status_ord }}</a></td>
+                        <td style="width: 120px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.status_ord }}</a></td>
                         <td style="width: 130px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.total_price }}</a></td>
 
                     </tr>
@@ -97,8 +97,12 @@
             <div class="order_item">
                 <form action="{% url 'ord_editing_save' %}" method="post" id="ord_editing">
                     {% csrf_token %}
-                    <div id="ord_number_info"><h2></h2></div>
-                    <input hidden id="order_ord" name="order_id">
+                    <div id="ord_number_info"><h2></h2><h5></h5></div>
+                    {% if request.session.pk == False %}
+                        <input class="input_order_ord" hidden id="order_ord" name="order_id" >
+                    {% else %}
+                        <input class="input_order_ord" hidden id="order_ord" name="order_id" value="{{ request.session.pk }}">
+                    {% endif %}
                     <div class="ord_user"><label for="id_user">User</label><br>{{ order_form.user }}</div>
                     <div class="ord_customer_name"><label for="id_customer_name">Имя</label><br>{{ order_form.customer_name }}</div>
                     <div class="ord_customer_phone"><label for="id_customer_phone">Телефон</label><br>{{ order_form.customer_phone }}</div>
@@ -108,8 +112,9 @@
                     <div class="ord_status_ord">{{ order_form.status_ord }}</div>
                     <div class="ord_total_price"><label for="id_total_price">Сумма заказа</label><br>{{ order_form.total_price }}</div>
                     <br>
-                    <button type="submit" class="btn btn-outline my-2 my-sm-0" id="btn_ord_edit">Изменить</button>
+                    <button type="submit" class="btn btn-outline my-2 my-sm-0" id="btn_ord_edit">Изменить / Создать</button>
                 </form>
+                    <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_ord_calc" href="javascript:">calc</button>
                 <form action="{% url 'ord_editing_del' %}" method="post" id="ord_del">
                     {% csrf_token %}
                     <input hidden id="order_ord_del" name="order_id_del">
@@ -119,7 +124,7 @@
             <div class="nav-tabs" id="line_ord_form"></div>
             <div class="prod_list_ord">
                 <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_prod_in_ord_list" href="javascript:">Список товаров в заказе</button>
-                <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_prod_in_ord_add" href="javascript:">Добавть товар в заказ</button>
+                <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_create_ord" href="javascript:">Анекдот</button>
             </div>
         </div>
     </div>
@@ -128,16 +133,39 @@
         <div class="add_block_content">
 {#            <h1>Список товаров в заказе</h1>#}
             {% include 'orders/order_prod_list.html' %}
-            <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_list_ok" href="javascript:">OK</button>
-            <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_list_cancel" href="javascript:">Cancel</button>
         </div>
+    </div>
 
-    </div>
-    <div id="add_block_add" class="add_block hidediv">
+    {% if request.session.pk == False %}
+        <div id="add_product" class="add_block hidediv">
+    {% else %}
+        <div id="add_product" class="add_block">
+        <h1>Незакончена операция добавления товара в ордер № {{ request.session.pk }}</h1>
+        <form action="{% url 'sessionFalse' %}">{% csrf_token %}
+        <button type="submit" class="btn btn-outline my-2 my-sm-0" id="btn_session_false" href="">Жесткое завершение</button>
+        </form>
+    {% endif %}
         <div class="add_block_content">
-            <h1>Добавить товар в заказ</h1>
-            <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_add_ok" href="javascript:">OK</button>
-            <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_add_cancel" href="javascript:">Cancel</button>
+            {% include 'orders/order_prod_add.html' %}
         </div>
     </div>
+
+{#    {% if request.session.pk %}#}
+{#        <div id="add_block_add" class="add_block">#}
+{#        <div class="add_block_content">#}
+{#            <h1>Создаем новый заказ</h1>#}
+{#            {% include 'orders/add_order_adm.html' %}#}
+{##}
+{#        </div>#}
+{#    </div>#}
+{#    {% else %}#}
+        <div id="add_block_add" class="add_block hidediv">
+        <div class="add_block_content">
+            <h1>Создаем новый заказ</h1>
+            {% include 'orders/add_order_adm.html' %}
+
+        </div>
+    </div>
+{#    {% endif %}#}
+
 {% endblock %}
