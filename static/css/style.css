@@ -105,13 +105,13 @@ html, body{
 .line-img{
     max-width: 100%;
     display: flex;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
 }
 .img-adm{
     display: inherit;
     margin: 5px;
-    width: 210px;
+    /*width: 210px;*/
     height: 210px;
     z-index: 10;
 }
@@ -343,7 +343,7 @@ html, body{
     top: 6vh;
     /*margin-top: 50px;*/
     padding: 15px;
-    background-color: dimgray;
+    /*background-color: dimgray;*/
 }
 .product_list{
     color: #9d2d0f;
@@ -354,7 +354,7 @@ html, body{
     /*background-color: lightblue;*/
     padding: 15px;
     /*min-width: 17%;*/
-    overflow-y:scroll;
+    overflow-y:auto;
 }
 #id_price{
     width: 15vh;
@@ -864,4 +864,111 @@ html, body{
 #DivSearchForm{
     position: fixed;
     top: 8vh;
+}
+#ord_prod_list_cont{
+    height: 62vh;
+    overflow-y: auto;
+}
+/* //////////////////////////////////////////admin product*/
+.orange_div{
+    font-size: 21px;
+    color: darkorange;
+}
+#adm-prod-article{
+    position: absolute;
+    top: 0vh;
+    left: 1vw;
+}
+#id_article{
+    height: 30px;
+}
+#adm-prod-category{
+    position: absolute;
+    top: 0vh;
+    left: 9vw;
+}
+#id_category{
+    height: 30px;
+    width: 9vw;
+}
+#adm-prod-name{
+    position: absolute;
+    top: 0vh;
+    left: 19.7vw;
+}
+#id_name{
+    height: 30px;
+}
+#adm-prod-fabric{
+    position: absolute;
+    top: 0vh;
+    left: 34.8vw;
+}
+#id_fabric{
+    height: 30px;
+}
+#adm-prod-year_model{
+    position: absolute;
+    top: 0vh;
+    left: 45.4vw;
+}
+#id_year_model{
+    height: 30px;
+    width: 5vw;
+}
+#adm-prod-price{
+    position: absolute;
+    top: 8vh;
+    left: 34.8vw;
+}
+#id_price{
+    height: 30px;
+}
+#adm-prod-discount{
+    position: absolute;
+    top: 8vh;
+    left: 46.5vw;
+}
+#id_discount{
+    height: 30px;
+}
+#adm-prod-description{
+    position: absolute;
+    top: 19vh;
+    left: 1vw;
+}
+#id-active{
+    position: absolute;
+    top: 10vh;
+    left: 1vw;
+}
+#id-status_sale{
+    position: absolute;
+    top: 10vh;
+    left: 6vw;
+}
+#id-status_new{
+    position: absolute;
+    top: 10vh;
+    left: 11vw;
+}
+#div-prod-form-img{
+    position: absolute;
+    top: 80vh;
+    left: 1vw;
+}
+#id_img-adm{
+    position: absolute;
+    top: 55vh;
+    left: 1vw;
+}
+#change-product{
+    position: absolute;
+    top: 80vh;
+    left: 50vw;
+}
+.in_col_9{
+    position: relative;
+    margin-left: 7vw;
+    margin-top: 3vh;
 }

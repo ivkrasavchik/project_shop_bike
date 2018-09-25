@@ -469,7 +469,7 @@ jQuery(document).ready(function ($) {
     });
 
 
-
+    //(Admin_product) <!-- Fill out the form to change the product data.
     function AutoProductList() {
         var data = {};
         data.name = $(this).attr('data-productname');
@@ -513,8 +513,12 @@ jQuery(document).ready(function ($) {
         $('#id_year_model').val(data.year_model);
         $('#id_price').val(data.price);
 
+
+        var csrf_token = $('#form_product_change [name="csrfmiddlewaretoken"]').val();
+        data["csrfmiddlewaretoken"] = csrf_token;
+
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: "adm_img/",
             data: data,
             dataType: "json",
@@ -527,7 +531,7 @@ jQuery(document).ready(function ($) {
 
                     var url_img="{% url 'image_product'"+data.products_img_list[i][3]+"%}";
                     var img = "<img src='" + data.products_img_list[i][0] + "' class='img-adm' id="+data.products_img_list[i][3]+">";
-                    console.log(img);
+
                     $('#id_img-adm').append("<a href=" + url_img + " >"+img+"</a><br>");
                     if (data.products_img_list[i][1] == true){
                         $('#id_img-adm').append("<input type='checkbox' checked class='img-adm-ck' id='"+data.products_img_list[i][3]+"_id_main'>is main");

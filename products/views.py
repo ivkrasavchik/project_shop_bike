@@ -18,6 +18,7 @@ from products.models import *
 import json
 
 
+# adm_product (product.html)
 @login_required
 @transaction.atomic
 def adm_products(request):
@@ -29,10 +30,10 @@ def adm_products(request):
     args['form1'] = ProductForm(request.POST or None)
     args['form2'] = ProductImageForm()
 
-    if request.method == "GET":
-
+    # if request.method == "GET":
+    if request.POST:
         try:
-            article = request.GET['article']
+            article = request.POST.get('article')
             if Product.objects.filter(article=article).exists():
                 print("наш запрос изменение", request)
                 product = Product.objects.get(article=article)
@@ -66,21 +67,21 @@ def adm_products(request):
     return render(request, 'products/product.html', args)
 
 
+# sends js data to the output of pictures for the selected product (js:AutoProductList)
 @login_required
 @transaction.atomic
 def adm_product_img(request):
     args = dict()
+    # args.update(csrf(request))
     products_img_list = []
-    name = request.GET['name']
+    if request.POST:
+        name = request.POST.get('name')
+        for img in ProductImage.objects.filter(product__name=name):
+            products_img_list.append([img.image.url, img.is_main, img.is_active, img.id])
 
-    for img in ProductImage.objects.filter(product__name=name):
-        products_img_list.append([img.image.url, img.is_main, img.is_active, img.id])
-        print("UUUUUUUUUUUUU", img.product.name, "url", img.image.url, "is_main", img.is_main,
-              "is_activ", img.is_active, "id", img.id)
-
-    args['products_img_list'] = products_img_list
-    dumps = json.dumps(args)
-    return HttpResponse(dumps)
+        args['products_img_list'] = products_img_list
+        dumps = json.dumps(args)
+        return HttpResponse(dumps)
 
 
 @login_required

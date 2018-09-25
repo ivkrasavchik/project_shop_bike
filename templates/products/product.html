@@ -9,21 +9,41 @@
     <div class="product-item">
         <div class="row">
             <div class = "col-9">
+                <div class="in_col_9">
                 {# url 'product_save' - в url name=product_save #}
 {#                <form id="form_product_change" method="post" action="{% url 'adm_products' %}">#}
                 <form id="form_product_change" action="{% url 'adm_products' %}">
                     {% csrf_token %}
-                    {{ form1.article }}
-                    {{ form1.category }}
-                    {{ form1.name }}
-                    {{ form1.fabric }}
-                    {{ form1.year_model }}
-                    <br>
-                    {{ form1.price }}
-                    {{ form1.discount }}
-                    <br><br>
+                    <div class="orange_div" id="adm-prod-article">
+                        <label for="id_article">Артикул</label><br>
+                        {{ form1.article }}
+                    </div>
+                    <div class="orange_div" id="adm-prod-category">
+                        <label for="id_category">Category</label><br>
+                        {{ form1.category }}
+                    </div>
+                    <div class="orange_div" id="adm-prod-name">
+                        <label for="id_name">name</label><br>
+                        {{ form1.name }}
+                    </div>
+                    <div class="orange_div" id="adm-prod-fabric">
+                        <label for="id_fabric">fabric</label><br>
+                        {{ form1.fabric }}
+                    </div>
+                    <div class="orange_div" id="adm-prod-year_model">
+                        <label for="id_year_model">year_model</label><br>
+                        {{ form1.year_model }}
+                    </div>
+                    <div class="orange_div" id="adm-prod-price">
+                        <label for="id_price">price</label><br>
+                        {{ form1.price }}
+                    </div>
+                    <div class="orange_div" id="adm-prod-discount">
+                        <label for="id_discount">discount</label><br>
+                        {{ form1.discount }}
+                    </div>
 
-                    <div>
+                    <div class="orange_div" id="adm-prod-description">
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active ">
                                 <a href="#short_description" aria-controls="home" role="tab" data-toggle="tab" class="my-tabs">
@@ -46,31 +66,38 @@
                     </div>
 
 
-                    <div class="row">
-                        <div class = "col-2">
+{#                    <div class="row">#}
+                        <div class = "orange_div" id="id-active">
     {#                    <label for id="id_prod_active">active</label><br>#}
                             active<br>
                          {{ form1.prod_active }}
                         </div>
-                        <div class = "col-2">
+                        <div class = "orange_div" id="id-status_sale">
     {#                    <label for id="id_status_sale">Sale</label><br>#}
                             Sale<br>
                         {{ form1.status_sale }}
                         </div>
-                        <div class = "col-2">
+                        <div class = "orange_div" id="id-status_new">
     {#                    <label for id="id_status_new">New</label><br>#}
                             New<br>
                         {{ form1.status_new }}
                         </div>
-                    </div><br>
-                    <div id="id_img-adm" class="line-img ">
+{#                    </div>#}
+
+{#                    <div id="id_img-adm" class="line-img orange_div">#}
+{#                        <!-- Заполняется из js-->#}
+    {#                    <img src="/madia/product_images/LS2OF562_Pink.jpg" class='img-adm'>#}
+{#                    </div>#}
+                </form>
+                </div>
+
+                    <div id="id_img-adm" class="line-img orange_div">
                         <!-- Заполняется из js-->
     {#                    <img src="/madia/product_images/LS2OF562_Pink.jpg" class='img-adm'>#}
                     </div>
-                </form>
-                <br>
-            <div class="row">
-                <div class = "col-5">
+
+{#            <div class="row">#}
+                <div class = "orange_div" id="div-prod-form-img">
                 <form id="form_img_add" method="POST" action="{% url 'adm_products' %}" enctype="multipart/form-data">{% csrf_token %}
 {#                    {% render_field form2.product type="hidden" %}#}
 {#                    {{ form2.instance.product }}#}
@@ -82,13 +109,13 @@
                     <button type="submit" class="btn btn-outline my-2 my-sm-0" id="create-img">Добавить картинку</button>
                 </form>
                 </div>
-                    <div class = "col-2">
-                        <a type="submit" class="btn btn-outline my-2 my-sm-0" href="javascript:" id="change-product">Перекроить</a>
-                    </div>
-                </div>
+{#                    <div class = "orange_div" id="">#}
+                <a type="submit" class="btn btn-outline my-2 my-sm-0" href="javascript:" id="change-product">Перекроить</a>
+{#                    </div>#}
+{#                </div>#}
 
             </div>
-            <div class = "col-3" id="product_list">
+            <div class = "col-3 orange_div" id="product_list">
                 <table class="table text-left">
                     <thead>
                         <tr>
