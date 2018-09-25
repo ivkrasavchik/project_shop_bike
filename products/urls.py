@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^brands/$', views.brands, name="brands"),
     url(r'^brand/(?P<brand_id>\w+)/$', views.brand, name="brand"),
     url(r'^baraholka/$', views.baraholka, name="baraholka"),
+    url(r'^adm_products_img_add/$', views.adm_products_img_add, name="adm_products_img_add"),
+    url(r'^image_product_del/$', views.image_product_del, name="image_product_del"),
 ]

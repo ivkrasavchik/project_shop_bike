@@ -52,6 +52,9 @@ jQuery(document).ready(function ($) {
     $('#btn_add_cancel').click(function(){$("#add_block_add").hide();});
 
     $('#btn_prod_add').click(AddProductInOrder);
+    $('#btn_add-show-img_block').click(ShowBlockAddingImg);
+    $('#btn_end-create-img').click(ClouseBlockAddingImg);
+    $('#btn_cancel-del-img').click(ClouseBlockDeleteImg);
 
 //; location.reload()
     <!--Resets the order number in the session-->
@@ -468,9 +471,20 @@ jQuery(document).ready(function ($) {
         return true
     });
 
+    //(Admin_product) <!-- Show div "div-prod-form-img".
+    function ShowBlockAddingImg() {
+        $('#div-prod-form-img').show();
+    }
+    function ClouseBlockAddingImg() {
+        $('#div-prod-form-img').hide();
+        // $('#btn_add-show-img_block').show();
+    }
 
-    //(Admin_product) <!-- Fill out the form to change the product data.
+    //(Admin_product) <!-- Filles out the form to change the product data.
     function AutoProductList() {
+        $('#change-product').show();
+        $('#btn_add-show-img_block').show();
+        $('#btn_adding-product').hide();
         var data = {};
         data.name = $(this).attr('data-productname');
         data.article = $(this).attr('data-article');
@@ -529,26 +543,51 @@ jQuery(document).ready(function ($) {
                 $('#id_img-adm').empty();
                 for (i=0; i < data.products_img_list.length; i++){
 
-                    var url_img="{% url 'image_product'"+data.products_img_list[i][3]+"%}";
+                    var url_img="javascript:";
+                    // var url_img="{% url 'image_product' "+data.products_img_list[i][3]+" %}";
                     var img = "<img src='" + data.products_img_list[i][0] + "' class='img-adm' id="+data.products_img_list[i][3]+">";
 
-                    $('#id_img-adm').append("<a href=" + url_img + " >"+img+"</a><br>");
-                    if (data.products_img_list[i][1] == true){
-                        $('#id_img-adm').append("<input type='checkbox' checked class='img-adm-ck' id='"+data.products_img_list[i][3]+"_id_main'>is main");
+                    $('#id_img-adm').append("<a href=" + url_img + " class='img_id_for_del' data-id_img = '" + data.products_img_list[i][3] + "' " +
+                        "data-img = '"+ data.products_img_list[i][0] +"' >"+img+"</a><br>");
 
-                    }else {$('#id_img-adm').append("<input type='checkbox' class='img-adm-ck' id='"+data.products_img_list[i][3]+"_id_main'>is main");
+                    if (data.products_img_list[i][1] == true){
+                        $('#id_img-adm').append("<input type='checkbox' checked class='img-adm-ck' id='"+data.products_img_list[i][3]+"_id_main'>is main <br>");
+
+                    }else {$('#id_img-adm').append("<input type='checkbox' class='img-adm-ck' id='"+data.products_img_list[i][3]+"_id_main'>is main <br>");
+
                     }
                     if (data.products_img_list[i][2] == true){
-                        $('#id_img-adm').append("<input type='checkbox' checked class='img-adm-ck' id='"+data.products_img_list[i][3]+"_id_active'>is active");
+                        $('#id_img-adm').append("<input type='checkbox' checked class='img-adm-ck' id='"+data.products_img_list[i][3]+"_id_active'>is active<br>");
 
-                    }else {$('#id_img-adm').append("<input type='checkbox' class='img-adm-ck' id='"+data.products_img_list[i][3]+"_id_active'>is active");
+                    }else {$('#id_img-adm').append("<input type='checkbox' class='img-adm-ck' id='"+data.products_img_list[i][3]+"_id_active'>is active<br>");
                     }
-
                 }
+                $('.img_id_for_del').click(ImageDelete)
             }
         })
 
     }
+
+    //(Admin_product) <!-- delete image (js:AutoProductList : ajax)
+    function ImageDelete() {
+        $('#show_img_for_del').empty();
+        $('#div-del-img').show();
+
+        var data = {};
+        data.id_img = $(this).attr('data-id_img');
+        data.img = $(this).attr('data-img');
+        // data.name = document.getElementById('id_name').value;
+        $('#id_img_for_del').val(data.id_img);
+        // $('#id_prod_name').val(data.name);
+        $('#show_img_for_del').append("<img src='" + data.img + "' class='' >");
+        console.log(data.id_img, data.name)
+    }
+
+    function ClouseBlockDeleteImg() {
+        $('#div-del-img').hide();
+    }
+
+    //(Admin_product) <!-- Sends data to change the product data.
     function changeproduct() {
         var tdata = {};
         var data = {};
@@ -592,15 +631,6 @@ jQuery(document).ready(function ($) {
                 data.status_new = document.getElementById('id_status_new').checked;
                 data.prod_active = document.getElementById('id_prod_active').checked;
 
-                $.ajax({
-                type: "GET",
-                url: "",
-                data: data,
-
-                success: function (data) {
-                    location.reload();
-                    }
-                });
             }
         })
 

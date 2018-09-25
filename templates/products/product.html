@@ -8,18 +8,18 @@
 
     <div class="product-item">
         <div class="row">
-            <div class = "col-9">
+            <div class = "col-8">
                 <div class="in_col_9">
                 {# url 'product_save' - в url name=product_save #}
-{#                <form id="form_product_change" method="post" action="{% url 'adm_products' %}">#}
-                <form id="form_product_change" action="{% url 'adm_products' %}">
+                <form id="form_product_change" action="{% url 'adm_products' %}" method="post">
                     {% csrf_token %}
                     <div class="orange_div" id="adm-prod-article">
                         <label for="id_article">Артикул</label><br>
                         {{ form1.article }}
                     </div>
                     <div class="orange_div" id="adm-prod-category">
-                        <label for="id_category">Category</label><br>
+                        <label for="id_category">Category</label>
+                        <button type="button" class="btn-danger mini_btn" href="javascript:" id="btn_mini_cat_new">n e w</button><br>
                         {{ form1.category }}
                     </div>
                     <div class="orange_div" id="adm-prod-name">
@@ -27,7 +27,8 @@
                         {{ form1.name }}
                     </div>
                     <div class="orange_div" id="adm-prod-fabric">
-                        <label for="id_fabric">fabric</label><br>
+                        <label for="id_fabric">fabric</label>
+                        <button type="button" class="btn-danger mini_btn" href="javascript:" id="btn_mini_fabric_new">n e w</button><br>
                         {{ form1.fabric }}
                     </div>
                     <div class="orange_div" id="adm-prod-year_model">
@@ -65,57 +66,34 @@
                         </div>
                     </div>
 
-
-{#                    <div class="row">#}
-                        <div class = "orange_div" id="id-active">
-    {#                    <label for id="id_prod_active">active</label><br>#}
-                            active<br>
-                         {{ form1.prod_active }}
-                        </div>
-                        <div class = "orange_div" id="id-status_sale">
-    {#                    <label for id="id_status_sale">Sale</label><br>#}
-                            Sale<br>
-                        {{ form1.status_sale }}
-                        </div>
-                        <div class = "orange_div" id="id-status_new">
-    {#                    <label for id="id_status_new">New</label><br>#}
-                            New<br>
-                        {{ form1.status_new }}
-                        </div>
-{#                    </div>#}
-
-{#                    <div id="id_img-adm" class="line-img orange_div">#}
-{#                        <!-- Заполняется из js-->#}
-    {#                    <img src="/madia/product_images/LS2OF562_Pink.jpg" class='img-adm'>#}
-{#                    </div>#}
-                </form>
-                </div>
-
-                    <div id="id_img-adm" class="line-img orange_div">
-                        <!-- Заполняется из js-->
-    {#                    <img src="/madia/product_images/LS2OF562_Pink.jpg" class='img-adm'>#}
+                    <div class = "orange_div" id="id-active">
+{#                    <label for id="id_prod_active">active</label><br>#}
+                        active<br>
+                     {{ form1.prod_active }}
+                    </div>
+                    <div class = "orange_div" id="id-status_sale">
+{#                    <label for id="id_status_sale">Sale</label><br>#}
+                        Sale<br>
+                    {{ form1.status_sale }}
+                    </div>
+                    <div class = "orange_div" id="id-status_new">
+{#                    <label for id="id_status_new">New</label><br>#}
+                        New<br>
+                    {{ form1.status_new }}
                     </div>
 
-{#            <div class="row">#}
-                <div class = "orange_div" id="div-prod-form-img">
-                <form id="form_img_add" method="POST" action="{% url 'adm_products' %}" enctype="multipart/form-data">{% csrf_token %}
-{#                    {% render_field form2.product type="hidden" %}#}
-{#                    {{ form2.instance.product }}#}
-                    {{ form2.product| add_class:"HiddenInput" }}
-
-                    {{ form2.image }}
-                    {{ form2.is_main }}
-                    {{ form2.is_active }}
-                    <button type="submit" class="btn btn-outline my-2 my-sm-0" id="create-img">Добавить картинку</button>
+                    <button type="submit" class="btn btn-outline my-2 my-sm-0 hidediv" href="javascript:" id="change-product">Перекроить</button>
+                    <button type="submit" class="btn btn-outline my-2 my-sm-0" href="javascript:" id="btn_adding-product">Добавить новый продукт</button>
                 </form>
                 </div>
-{#                    <div class = "orange_div" id="">#}
-                <a type="submit" class="btn btn-outline my-2 my-sm-0" href="javascript:" id="change-product">Перекроить</a>
-{#                    </div>#}
-{#                </div>#}
+                <div id="id_img-adm" class="line-img orange_div">
+                    <!-- Заполняется из js-->
+{#                    <img src="/madia/product_images/LS2OF562_Pink.jpg" class='img-adm'>#}
+                </div>
+                <button type="button" class="btn btn-outline my-2 my-sm-0 hidediv" id="btn_add-show-img_block" href="javascript:">Добавить картинку</button>
 
             </div>
-            <div class = "col-3 orange_div" id="product_list">
+            <div class = "col-4 orange_div" id="product_list">
                 <table class="table text-left">
                     <thead>
                         <tr>
@@ -151,6 +129,34 @@
 
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <div class = "orange_div hidediv b-popup" id="div-prod-form-img">
+            <div class="orange_div" id="div-prod-form-img-content">
+                <form id="form_img_add" method="POST" action="{% url 'adm_products_img_add' %}" enctype="multipart/form-data">{% csrf_token %}
+    {#                    {% render_field form2.product type="hidden" %}#}
+    {#                    {{ form2.instance.product }}#}
+                    {{ form2.product| add_class:"HiddenInput" }}
+                    {{ form2.image }}<br>
+                    основная {{ form2.is_main }}
+                    активная {{ form2.is_active }}
+                    <button type="submit" class="btn btn-outline my-2 my-sm-0 pos_btns_add_img" id="create-img">Добавить картинку</button>
+                    <button type="button" class="btn btn-outline my-2 my-sm-0 pos_btns_add_img" id="btn_end-create-img">Выйти</button>
+                </form>
+            </div>
+        </div>
+        <div class="orange_div hidediv b-popup" id="div-del-img">
+            <div class="orange_div" id="div-del-img-cont">
+            <form action="{% url 'image_product_del' %}" method="post">
+                {% csrf_token %}
+                <input hidden type="number" name="img_for_del" id="id_img_for_del">
+{#                <input hidden name="name" id="id_prod_name">#}
+                <div id="show_img_for_del">
+                    <!-- Заполняется из js-->
+                </div><br>
+                <button type="submit" class="btn btn-outline my-2 my-sm-0" id="">Удалить картинку</button>
+                <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_cancel-del-img" href="javascript:">Выйти</button>
+            </form>
             </div>
         </div>
     </div>

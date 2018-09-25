@@ -35,16 +35,17 @@ def adm_products(request):
         try:
             article = request.POST.get('article')
             if Product.objects.filter(article=article).exists():
-                print("наш запрос изменение", request)
+
                 product = Product.objects.get(article=article)
-                args['form1'] = ProductForm(request.GET, instance=product)
+                args['form1'] = ProductForm(request.POST, instance=product)
+                print("наш запрос изменение", request)
                 if args['form1'].is_valid():
+                    print("Valid = True")
                     args['form1'].save()
-                    dumps = json.dumps("OK")
-                    return HttpResponse(dumps)
+                    return redirect('/admin_product')
             else:
                 print("наш запрос создание", request)
-                args['form1'] = ProductForm(request.GET)
+                args['form1'] = ProductForm(request.POST)
                 if args['form1'].is_valid():
                     print("NEW_____NEW_____NEW")
                     args['form1'].save()
@@ -55,7 +56,15 @@ def adm_products(request):
             print("U_______________MultiValueDictKeyError")
         except:
             print("U_______________XZ___KeyError")
+            return redirect('/admin_product')
+    return render(request, 'products/product.html', args)
 
+
+@login_required
+@transaction.atomic
+def adm_products_img_add(request):
+    args = dict()
+    args.update(csrf(request))
     if request.POST:
         print("_______________POST________________")
         # args['form2'] = ProductImageForm()
@@ -64,7 +73,7 @@ def adm_products(request):
             print("NEW_____IMAGE_____NEW")
             args['form2'].save()
             return redirect('/admin_product')
-    return render(request, 'products/product.html', args)
+    return redirect('/admin_product')
 
 
 # sends js data to the output of pictures for the selected product (js:AutoProductList)
@@ -86,6 +95,20 @@ def adm_product_img(request):
 
 @login_required
 @transaction.atomic
+def image_product_del(request):
+    args = dict()
+    if request.POST:
+        args.update(csrf(request))
+        img = request.POST.get('img_for_del')
+        del_img = ProductImage.objects.get(id=img)
+        del_img.delete()
+        print("удаление image_product_del")
+
+    return redirect('/admin_product')
+
+
+@login_required
+@transaction.atomic
 def adm_product_save(request):
     if request.method == "GET":
         json_data = request.GET
@@ -98,16 +121,16 @@ def adm_product_save(request):
                 for dic in json_data_elem:
                     if dic == "image_id":
                         for id in json_data_elem[dic]:
-                            print("image_id____________________image_id__", json_data_elem[dic][id],
-                                  "type elem ->", type(json_data_elem[dic][id]), end="\n")
+                            # print("image_id____________________image_id__", json_data_elem[dic][id],
+                            #       "type elem ->", type(json_data_elem[dic][id]), end="\n")
                             fotka = ProductImage.objects.get(id=int(id))
                             fotka.is_main = json_data_elem[dic][id][0]
                             fotka.is_active = json_data_elem[dic][id][1]
                             fotka.save()
 
-                    else:
-                        print("test____________________test", json_data_elem[dic],
-                              "type elem ->", type(json_data_elem[dic]), end="\n")
+                    # else:
+                    #     print("test____________________test", json_data_elem[dic],
+                    #           "type elem ->", type(json_data_elem[dic]), end="\n")
 
     dumps = json.dumps("OK")
     return HttpResponse(dumps)
