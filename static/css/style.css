@@ -3,6 +3,7 @@ html, body{
             max-width: 100%;
             font-family: 'Roboto', sans-serif;
             background-color: black;
+            font-size: 1vw;
         }
 
 .section-bg{
@@ -192,7 +193,7 @@ html, body{
     width:300px;
     height: 250px;
     text-align: center;
-    font-size:13px;
+    font-size:1.1vw;
     color: white;
     background-color: #5f2424;
     position: fixed;
@@ -427,18 +428,19 @@ html, body{
 }
 
 .img-responsive-in-list{
-    width: 200px;
+    max-width: 10vw;
+    max-height: 11vw;
 }
 .img-responsive-in-list-mini{
     width: 80px;
     margin: 5px;
 }
 .product-item-list{
-    height: 360px;
+    height: 23vw;
     /*background-color: lemonchiffon;*/
     border: 1px solid lightgray;
     position: relative;
-    padding: 10px 0 10px 0;
+    padding: 1vw 0 1vw 0;
     text-align: center;
     margin-bottom: 10px;
 }
@@ -448,7 +450,7 @@ html, body{
     position: absolute;
     bottom: 0;
     right: 0;
-    padding: 15px;
+    padding: 1vw;
 }
 
 .center-block{
@@ -511,17 +513,17 @@ html, body{
 .old_price{
     /*color: red;*/
     position: absolute;
-    top: 15%;
-    padding: 21px;
+    top: 1vw;
+    padding: 1vw;
     /*border-top:2px solid #f00;*/
 }
 .line-draw{
     position: relative ;
     border-top:2px solid #f00;
-    width: 80px;
+    width: 5vw;
     transform: rotate(10deg);
-    top: -15px;
-    left: 5px;
+    top: -1.2vw;
+    /*left: 0.5vw;*/
 
 }
 .line-draw-item{
@@ -548,7 +550,7 @@ html, body{
 #brand_back{
     position: relative;
     top: 3vh;
-    left: -480px;
+    left: -26vw;
 }
 .scroll_ord{
     max-height: 81vh;
@@ -734,7 +736,7 @@ html, body{
     width:65vw;
     height: 75vh;
     text-align: center;
-    font-size:13px;
+    font-size:1.1vw;
     color: white;
     background-color: #0e0404e0;
     position: fixed;
@@ -754,13 +756,13 @@ html, body{
 }
 /*//////////////////////Конец модального окна 2 ////////////////////////*/
 .ord_prod_list{
-    font-size: 17pt;
+    font-size: 1vw;
     color: darkorange;
     text-align: center;
     padding-left: 4vh;
 }
 .ord_prod_add{
-    font-size: 17pt;
+    font-size: 1.4vw;
     color: darkorange;
     text-align: center;
     padding-left: 4vh;
@@ -779,7 +781,7 @@ html, body{
 .text_price{
     /*position: absolute;*/
     /*top: 6vh;*/
-    font-size: 10px;
+    font-size: 0.6vw;
 }
 #btn_ord_calc{
     position: absolute;
@@ -818,7 +820,7 @@ html, body{
     left: 33vw;
 }
 #id-ord-list-prod{
-    font-size: 18px;
+    font-size: 1.4vw;
     position: relative;
     /*top: 4vh;*/
     /*left: 1vw;*/
@@ -838,7 +840,7 @@ html, body{
 
 }
 #adm-ord-addprod-1{
-    font-size: 20px;
+    font-size: 1.6vw;
 
 }
 .input_nmb{
@@ -871,7 +873,7 @@ html, body{
 }
 /* //////////////////////////////////////////admin product*/
 .orange_div{
-    font-size: 21px;
+    font-size: 1.6vw;
     color: darkorange;
 }
 #adm-prod-article{
@@ -880,7 +882,7 @@ html, body{
     left: 1vw;
 }
 #id_article{
-    height: 30px;
+    height: 4vh;
 }
 #adm-prod-category{
     position: absolute;
@@ -888,7 +890,7 @@ html, body{
     left: 9vw;
 }
 #id_category{
-    height: 30px;
+    height: 4vh;
     width: 9vw;
 }
 #adm-prod-name{
@@ -897,7 +899,7 @@ html, body{
     left: 19.7vw;
 }
 #id_name{
-    height: 30px;
+    height: 4vh;
 }
 #adm-prod-fabric{
     position: absolute;
@@ -905,7 +907,7 @@ html, body{
     left: 34.8vw;
 }
 #id_fabric{
-    height: 30px;
+    height: 4vh;
 }
 #adm-prod-year_model{
     position: absolute;
@@ -913,7 +915,7 @@ html, body{
     left: 45.4vw;
 }
 #id_year_model{
-    height: 30px;
+    height: 4vh;
     width: 5vw;
 }
 #adm-prod-price{
@@ -922,7 +924,7 @@ html, body{
     left: 34.8vw;
 }
 #id_price{
-    height: 30px;
+    height: 4vh;
 }
 #adm-prod-discount{
     position: absolute;
@@ -930,7 +932,7 @@ html, body{
     left: 46.5vw;
 }
 #id_discount{
-    height: 30px;
+    height: 4vh;
 }
 #adm-prod-description{
     position: absolute;
@@ -963,13 +965,13 @@ html, body{
     left: 1vw;
 }
 #change-product{
-    font-size: 21px;
+    font-size: 1.6vw;
     position: absolute;
     top: 80vh;
     left: 1vw;
 }
 #btn_add-show-img_block{
-    font-size: 21px;
+    font-size: 1.6vw;
     position: absolute;
     top: 83vh;
     left: 17vw;
@@ -980,7 +982,7 @@ html, body{
     margin-top: 3vh;
 }
 #btn_adding-product{
-    font-size: 21px;
+    font-size: 1.6vw;
     position: absolute;
     top: 55vh;
     left: 1vw;
@@ -997,7 +999,7 @@ html, body{
     width:40vw;
     height: 17vh;
     text-align: center;
-    font-size:21px;
+    font-size: 1.6vw;
     color: darkorange;
     background-color: #0e0404e0;
     position: fixed;
@@ -1009,7 +1011,7 @@ html, body{
 }
 .mini_btn{
     margin-left: 1vw;
-    font-size: 10px;
+    font-size: 0.6vw;
 }
 .pos_btns_add_img{
     position: relative;
@@ -1033,7 +1035,7 @@ html, body{
     width:55vw;
     height: 80vh;
     text-align: center;
-    font-size:21px;
+    font-size: 1.6vw;
     color: darkorange;
     background-color: #0e0404e0;
     position: fixed;
