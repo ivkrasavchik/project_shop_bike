@@ -61,14 +61,15 @@
 
             <table class="" cellspacing="2" border="1" cellpadding="5">
                 <thead>
-                    <tr>
-{#                        <th>номер заказа</th>#}
-{#                        <th>заказчик</th>#}
-{#                        <th>имя заказчика</th>#}
-{#                        <th>телефон</th>#}
-{#                        <th>дата заказа</th>#}
-{#                        <th>дата выполнения заказа</th>#}
-{#                        <th>статус заказа</th>#}
+                    <tr class="visible0">
+                        <th style="width: 3vw"></th>
+                        <th style="width: 10vw"></th>
+                        <th style="width: 7vw"></th>
+                        <th style="width: 7vw"></th>
+                        <th style="width: 12vw"></th>
+                        <th style="width: 9vw"></th>
+                        <th style="width: 7vw"></th>
+                        <th style="width: 5vw"></th>
                     </tr>
                 </thead>
                 <tbody class="list">
@@ -76,14 +77,14 @@
 
                     <tr >
 
-                        <td style="width: 95px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.pk }}</a></td>
-                        <td style="width: 130px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.user }}</a></td>
-                        <td style="width: 130px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.customer_name }}</a></td>
-                        <td style="width: 120px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.customer_phone }}</a></td>
-                        <td  style="width: 190px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.created }}</a></td>
-                        <td style="width: 190px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.data_completed }}</a></td>
-                        <td style="width: 120px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.status_ord }}</a></td>
-                        <td style="width: 130px"><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.total_price }}</a></td>
+                        <td><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.pk }}</a></td>
+                        <td><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.user }}</a></td>
+                        <td><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.customer_name }}</a></td>
+                        <td><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.customer_phone }}</a></td>
+                        <td><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.created }}</a></td>
+                        <td><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.data_completed }}</a></td>
+                        <td><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.status_ord }}</a></td>
+                        <td><a class="href_on_ord" data-ord_id="{{ order.pk }}" href="javascript:">{{ order.total_price }}</a></td>
 
                     </tr>
 

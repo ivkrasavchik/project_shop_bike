@@ -579,7 +579,7 @@ jQuery(document).ready(function ($) {
         // data.name = document.getElementById('id_name').value;
         $('#id_img_for_del').val(data.id_img);
         // $('#id_prod_name').val(data.name);
-        $('#show_img_for_del').append("<img src='" + data.img + "' class='' >");
+        $('#show_img_for_del').append("<img src='" + data.img + "' class='img_for_del' >");
         console.log(data.id_img, data.name)
     }
 
