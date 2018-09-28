@@ -112,8 +112,8 @@ html, body{
 .img-adm{
     display: inherit;
     margin: 5px;
-    /*width: 210px;*/
-    height: 210px;
+    max-width: 12vw;
+    max-height: 19vh;
     z-index: 10;
 }
 .img-in-order{
@@ -873,7 +873,7 @@ html, body{
 }
 /* //////////////////////////////////////////admin product*/
 .orange_div{
-    font-size: 1.6vw;
+    font-size: 1.3vw;
     color: darkorange;
 }
 #adm-prod-article{
@@ -896,7 +896,7 @@ html, body{
 #adm-prod-name{
     position: absolute;
     top: 0vh;
-    left: 19.7vw;
+    left: 18.6vw;
 }
 #id_name{
     height: 4vh;
@@ -912,7 +912,7 @@ html, body{
 #adm-prod-year_model{
     position: absolute;
     top: 0vh;
-    left: 45.4vw;
+    left: 46.3vw;
 }
 #id_year_model{
     height: 4vh;
@@ -978,7 +978,7 @@ html, body{
 }
 .in_col_9{
     position: relative;
-    margin-left: 7vw;
+    margin-left: 4vw;
     margin-top: 3vh;
 }
 #btn_adding-product{
@@ -997,9 +997,9 @@ html, body{
 }
 #div-prod-form-img-content{
     width:40vw;
-    height: 17vh;
+    height: 18vh;
     text-align: center;
-    font-size: 1.6vw;
+    font-size: 1.3vw;
     color: darkorange;
     background-color: #0e0404e0;
     position: fixed;
@@ -1016,7 +1016,7 @@ html, body{
 .pos_btns_add_img{
     position: relative;
     top: 5vh;
-    left: 6vw;
+    left: 4vw;
 }
 #img-attr-js{
     position: relative;
@@ -1043,4 +1043,15 @@ html, body{
     padding-top: 2vh;
     right: 27vw;
     border: 3px solid darkorange;
+}
+.f1_short_description{
+    width: 29vw;
+}
+#id_short_description{
+    width: 53vw;
+    height: 30vh;
+}
+#id_description{
+    width: 53vw;
+    height: 30vh;
 }

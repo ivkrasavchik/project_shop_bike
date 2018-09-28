@@ -13,7 +13,8 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = '__all__'
         widgets = {
-            'short_description': Textarea(attrs={'cols': 90, 'rows': 7, 'placeholder': "Краткое описание"}),
+            'short_description': Textarea(attrs={'placeholder': "Краткое описание"}),
+            # 'short_description': Textarea(attrs={'cols': 90, 'rows': 7, 'placeholder': "Краткое описание"}),
             'description': Textarea(attrs={'cols': 90, 'rows': 10, 'placeholder': "Полное описание"}),
             'article': TextInput(attrs={'size': 7, 'placeholder': "Артикул"}),
             'name': TextInput(attrs={'cols': 20, 'rows': 1, 'placeholder': "Имя"}),
