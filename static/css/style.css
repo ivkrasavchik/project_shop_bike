@@ -261,11 +261,11 @@ html, body{
 
 .list-users{
     position: relative;
-    top: 12vh;
+    top: 16vh;
     width: 100%;
-    height:81vh;
+    height: 77vh;
     background-color: burlywood;
-    padding: 15px;
+    padding: 1vw;
     overflow:scroll;
 
 }
@@ -281,21 +281,25 @@ html, body{
 }
 
 .data-users{
-    /*position: fixed;*/
+    position: absolute;
     width: 100%;
-    min-height: 35vh;
-    max-height:65vh;
+    top: 0vh;
+    left: 0vw;
+    /*min-height: 35vh;*/
+    height: 50vh;
     background-color: lightskyblue;
-    padding: 15px;
+    padding: 1vw;
 
 }
 
 .list-order{
-    /*width: 70%;*/
-    /*position: fixed;*/
+    position: absolute;
+    width: 100%;
+    top: 50vh;
+    left: 0vw;
     background-color: lemonchiffon;
-    padding: 15px;
-    height: 58vh;
+    padding: 1vw;
+    height: 44vh;
     overflow: auto;
 
 }
@@ -609,7 +613,7 @@ html, body{
 .id_customer_phone_f{
     position: absolute;
     top: -2vh;
-    left: 20.4vw;
+    left: 21.3vw;
 }
 #id_customer_phone_f{
     width: 6.7vw;
@@ -622,7 +626,7 @@ html, body{
 .id_create_f{
     position: absolute;
     top: -2vh;
-    left: 27.8vw;
+    left: 28.8vw;
 }
 #id_create_f{
    width: 9.5vw;
@@ -631,7 +635,7 @@ html, body{
 .id_data_completed_f{
     position: absolute;
     top: -2vh;
-    left: 38.5vw;
+    left: 41.3vw;
 }
 #id_data_completed_f{
    width: 8.5vw;
@@ -644,7 +648,7 @@ html, body{
 .id_status_ord_f{
     position: absolute;
     top: -2vh;
-    left: 47.5vw;
+    left: 50.2vw;
 }
 #id_status_ord_f{
     width: 7vw;
@@ -663,7 +667,7 @@ html, body{
 /*//////////////////////////////////END///TABLE////////////////*/
 .order_item{
     position: relative;
-    top: 14vh;
+    top: 16vh;
     color: darkorange;
     /*outline: 1px solid darkorange;*/
 }
@@ -715,7 +719,7 @@ html, body{
 }
 #line_ord_form{
     position: relative;
-    top: 42vh;
+    top: 43vh;
     width: 30vw;
 }
 .prod_list_ord{
@@ -793,9 +797,10 @@ html, body{
     padding: 2px;
 }
 .btns_ord_prodlist{
-    position: relative;
-    right: -13vw;
+    position: absolute;
+    right: 0vw;
     margin: 2vh;
+    top: 67vh;
 }
 .add_product{
     color: darkorange;
@@ -866,7 +871,7 @@ html, body{
 }
 #DivSearchForm{
     position: fixed;
-    top: 8vh;
+    top: 9vh;
 }
 #ord_prod_list_cont{
     height: 62vh;
@@ -1080,4 +1085,8 @@ html, body{
 #id_comments{
     width: 15vw;
     height: 8vh;
+}
+
+#navbarSupportedContent{
+    height: 6vh;
 }
