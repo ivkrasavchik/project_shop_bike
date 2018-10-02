@@ -24,6 +24,19 @@
 
             {% block content %}
             {% endblock content %}
+    <div class="b-popup hidediv" id="popup1">
+        <div class="b-popup-content ">
+            {% include 'account/login.html' %}
+            {# <a href="javascript:PopUpHide()">Hide popup</a>#}
+        </div>
+    </div>
+    <div class="b-popup hidediv" id="popup2">
+        <div class="b-popup-content ">
+            {% include 'account/register.html' %}
+            {# <a href="javascript:PopUpHide()">Hide popup</a>#}
+        </div>
+
+    </div>
 {#        </div>#}
 {#    </div>#}
         <!--footer-->

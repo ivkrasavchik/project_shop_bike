@@ -20,15 +20,22 @@ html, body{
     height: 61vh;
 }
 #img-home1{
-    max-width: 100%;
+    width: 79vw;
     margin-bottom: 5vh;
-    right: 0;
+    text-align: center;
+    top: 8vh;
+    left: 9vw;
+    position: absolute;
 }
 .orange-link{
     color: darkorange;
 }
 .orange-link:hover{
     color: darkorange;
+}
+#link{
+    position: absolute;
+    top: 8vh;
 }
 .link{
     /*display: block;*/
@@ -40,6 +47,7 @@ html, body{
     /*border: 1px;*/
     border-color: darkorange;
     margin: 1vh;
+;
 }
 .link:hover{
     background-color: rgba(10,10,10, 1);
@@ -62,6 +70,8 @@ html, body{
     background-color: rgba(10,10,10, 0.8);
     color: darkorange;
     top: 8vh;
+    left: -3vw;
+    width: 62vw;
     text-align: center;
 }
 .prod-list{
@@ -104,7 +114,7 @@ html, body{
 }
 
 .line-img{
-    max-width: 100%;
+    max-width: 64vw;
     display: flex;
     overflow-x: auto;
     overflow-y: hidden;
@@ -190,26 +200,26 @@ html, body{
 }
 
 .b-popup-content{
-    width:300px;
-    height: 250px;
+    width: 23vw;
+    height: 30vh;
     text-align: center;
     font-size:1.1vw;
     color: white;
     background-color: #5f2424;
     position: fixed;
-    top: 7vh;
-    right: 10px;
+    top: 8vh;
+    right: 1vw;
     border: 3px solid darkorange;
 
 }
 .b-popup .section-bg{
-    margin:40px auto 0 auto;
-    width:200px;
-    height:300px;
-    padding:10px;
+    margin:0.4vw auto 0 auto;
+    width:17vw;
+    height:30vh;
+    padding:1vw;
     background-color: #c5c5c5;
-    border-radius:5px;
-    box-shadow: 0 0 10px #000;
+    border-radius: 0.5vw;
+    box-shadow: 0 0 1vw #000;
 }
 .hidediv{
     display: none;
@@ -217,24 +227,24 @@ html, body{
 /*конец блока для модального окна*/
 
 #reg{
-    margin-left: 10px;
+    margin-left: 1vw;
     color: darkorange;
 }
 
 #id_username{
     background-color: burlywood;
-    width: 250px;
-    margin: 5px;
-    padding: 10px;
-    height: 30px;
+    width: 19vw;
+    margin: 0.5vw;
+    padding: 1vw;
+    height: 3vh;
 
 }
 
 #id_password{
     background-color: burlywood;
-    margin: 5px;
-    padding: 10px;
-    height: 30px;
+    margin: 0.5vw;
+    padding: 1vw;
+    height: 3vh;
 }
 #id_password1{
     background-color: burlywood;
@@ -275,7 +285,7 @@ html, body{
     width: 100%;
     height: 62%;
     background-color: lightblue;
-    padding: 15px;
+    padding: 1vw;
     min-width: 17%;
     overflow-y:scroll;
 }
@@ -323,17 +333,17 @@ html, body{
      border-top:none;
 }
 #category{
-    width: 100px;
-    height: 30px;
+    width: 10vw;
+    height: 3vh;
 }
 
 #address_delivery{
-    width: 300px;
-    height: 100px;
+    width: 30vw;
+    height: 10vh;
 }
 #short_description{
-    width: 300px;
-    height: 100px;
+    width: 30vw;
+    height: 10vh;
 }
 /*#reg_btn{*/
     /*!*background-color: #5f2424;*!*/
@@ -347,7 +357,7 @@ html, body{
     /*height:100%;*/
     top: 6vh;
     /*margin-top: 50px;*/
-    padding: 15px;
+    padding: 1vw;
     /*background-color: dimgray;*/
 }
 .product_list{
@@ -357,7 +367,7 @@ html, body{
     /*width: 100%;*/
     height:80vh;
     /*background-color: lightblue;*/
-    padding: 15px;
+    padding: 1vw;
     /*min-width: 17%;*/
     overflow-y:auto;
 }
@@ -379,8 +389,8 @@ html, body{
     border-top-left-radius:  5px;
     border-top-right-radius:  5px;
     color: darkorange;
-    padding: 3px;
-    margin-right: 10px;
+    padding: 0.5vw;
+    margin-right: 1vw;
 }
 .my-tabs:hover{
     color: white;
@@ -391,8 +401,8 @@ html, body{
     border-top-left-radius:  5px;
     border-top-right-radius:  5px;
     color: darkorange;
-    padding: 10px;
-    margin-right: 10px;
+    padding: 0.4vw;
+    margin-right: 1vw;
     background-color: #5f2424;
 }
 .my-href:hover{
@@ -403,8 +413,8 @@ html, body{
     border: 1px darkorange solid;
     border-radius:  5px;
     color: darkorange;
-    padding: 10px;
-    margin: 13px;
+    padding: 0.4vw;
+    margin: 1vw;
 }
 .my-btn:hover{
     color: white;
@@ -433,20 +443,21 @@ html, body{
 
 .img-responsive-in-list{
     max-width: 10vw;
-    max-height: 11vw;
+    max-height: 18vh;
 }
 .img-responsive-in-list-mini{
-    width: 80px;
-    margin: 5px;
+    width: 7vh;
+    margin: 0vw;
 }
 .product-item-list{
-    height: 23vw;
+    height: 36vh;
+    width: 13vw;
     /*background-color: lemonchiffon;*/
     border: 1px solid lightgray;
     position: relative;
     padding: 1vw 0 1vw 0;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 1vw;
 }
 
 .prod_it_list_footer{
@@ -473,19 +484,19 @@ html, body{
     background-color: black;
 }
 .img-full-size-block{
-    margin: 10px;
-    padding: 10px;
+    margin: 1vw;
+    padding: 1vw;
 }
 .del-from-basket{
-    margin-left: 15px;
-    margin-right: 15px;
+    margin-left: 1vw;
+    margin-right: 1vw;
     color: darkorange;
 }
 .del-from-basket:hover{
     color: red;
 }
 .us-prod-ord{
-    margin: 5px;
+    margin: 0.5vw;
 }
 #total-orders-summ{
     display: block;
@@ -503,7 +514,7 @@ html, body{
 }
 .adm-prod_in_ord{
     color: darkorange;
-    padding: 10px;
+    padding: 1vw;
 }
 .discount_container{
     position: absolute;
@@ -512,31 +523,38 @@ html, body{
     width: 30%;
     color: white;
     font-weight: 700;
-    padding: 3px;
+    padding: 0.3vw;
 }
 .old_price{
     /*color: red;*/
     position: absolute;
-    top: 1vw;
+    top: 2vh;
+    left: -4vw;
     padding: 1vw;
     /*border-top:2px solid #f00;*/
+}
+.new_price{
+    position: absolute;
+    top: 5vh;
+    left: -4vw;
+    padding: 1vw;
 }
 .line-draw{
     position: relative ;
     border-top:2px solid #f00;
     width: 5vw;
     transform: rotate(10deg);
-    top: -1.2vw;
+    top: -1.2vh;
     /*left: 0.5vw;*/
 
 }
 .line-draw-item{
     position: relative ;
     border-top:2px solid #f00;
-    width: 80px;
+    width: 5vw;
     transform: rotate(10deg);
-    top: -45px;
-    left: 50px;
+    top: -5vh;
+    left: 3vw;
 }
 .hiddem_forms_fild{
     /*visibility: hidden;*/
@@ -807,26 +825,26 @@ html, body{
 }
 #id_filter_add_prod_a{
     position: absolute;
-    top: 3vh;
+    top: 5vh;
     left: 6vw;
 }
 #id_filter_add_prod_p{
     position: absolute;
-    top: 3vh;
+    top: 5vh;
     left: 13vw;
 }
 #btn_prod_filter{
     position: absolute;
-    top: 5vh;
-    left: 26vw;
+    top: 8vh;
+    left: 28vw;
 }
 #btn_add_prod_hide{
     position: absolute;
-    top: 5vh;
-    left: 33vw;
+    top: 8vh;
+    left: 35vw;
 }
 #id-ord-list-prod{
-    font-size: 1.4vw;
+    font-size: 1vw;
     position: relative;
     /*top: 4vh;*/
     /*left: 1vw;*/
@@ -846,7 +864,7 @@ html, body{
 
 }
 #adm-ord-addprod-1{
-    font-size: 1.6vw;
+    font-size: 1.2vw;
 
 }
 .input_nmb{
@@ -866,7 +884,7 @@ html, body{
 }
 #btn_add_prod_to_ord{
     position: absolute;
-    top: 30vh;
+    top: 34vh;
     left: 13.5vw;
 }
 #DivSearchForm{
@@ -879,7 +897,7 @@ html, body{
 }
 /* //////////////////////////////////////////admin product*/
 .orange_div{
-    font-size: 1.3vw;
+    font-size: 1.1vw;
     color: darkorange;
 }
 #adm-prod-article{
@@ -888,7 +906,7 @@ html, body{
     left: 1vw;
 }
 #id_article{
-    height: 4vh;
+    height: 3vh;
 }
 #adm-prod-category{
     position: absolute;
@@ -896,7 +914,7 @@ html, body{
     left: 9vw;
 }
 #id_category{
-    height: 4vh;
+    height: 3vh;
     width: 9vw;
 }
 #adm-prod-name{
@@ -905,7 +923,8 @@ html, body{
     left: 18.6vw;
 }
 #id_name{
-    height: 4vh;
+    height: 3vh;
+    width: 15vw;
 }
 #adm-prod-fabric{
     position: absolute;
@@ -913,32 +932,38 @@ html, body{
     left: 34.8vw;
 }
 #id_fabric{
-    height: 4vh;
+    height: 3vh;
 }
 #adm-prod-year_model{
     position: absolute;
-    top: 0vh;
-    left: 46.3vw;
+    top: 8vh;
+    left: 34.8vw;
 }
 #id_year_model{
-    height: 4vh;
+    height: 3vh;
     width: 5vw;
 }
 #adm-prod-price{
     position: absolute;
     top: 8vh;
-    left: 34.8vw;
+    left: 18.6vw;
 }
 #id_price{
-    height: 4vh;
+    height: 3vh;
 }
 #adm-prod-discount{
     position: absolute;
     top: 8vh;
-    left: 46.5vw;
+    left: 29.5vw;
 }
 #id_discount{
-    height: 4vh;
+    height: 3vh;
+}
+#adm-prod-sizes{
+    position: absolute;
+    top: 0vh;
+    left: 49vw;
+
 }
 #adm-prod-description{
     position: absolute;
@@ -953,9 +978,14 @@ html, body{
 #id-status_sale{
     position: absolute;
     top: 10vh;
-    left: 6vw;
+    left: 5vw;
 }
 #id-status_new{
+    position: absolute;
+    top: 10vh;
+    left: 8vw;
+}
+#id-second_hands{
     position: absolute;
     top: 10vh;
     left: 11vw;
@@ -1090,3 +1120,69 @@ html, body{
 #navbarSupportedContent{
     height: 6vh;
 }
+#Error_massage{
+    position: absolute;
+    top: 12vh;
+    left: 2vw;
+    height: 31vh;
+    width: 15vw;
+    color: #ff0200;
+    padding: 1vw;
+    background-color: #0e0404e0;
+    border: 3px solid darkorange;
+}
+#block_button{
+    /*display: block;*/
+}
+#div-adding_fabric_cont{
+    width:55vw;
+    height: 80vh;
+    text-align: center;
+    font-size: 1.6vw;
+    color: darkorange;
+    background-color: #0e0404e0;
+    position: fixed;
+    top: 14vh;
+    padding-top: 2vh;
+    right: 27vw;
+    border: 3px solid darkorange;
+    overflow-y: auto;
+}
+#fabric_short_d{
+    width: 50vw;
+    height: 14vh;
+}
+#fabric_d{
+    width: 50vw;
+    height: 21vh;
+}
+
+#div-adding_product_category_cont{
+    width:55vw;
+    height: 80vh;
+    text-align: center;
+    font-size: 1.6vw;
+    color: darkorange;
+    background-color: #0e0404e0;
+    position: fixed;
+    top: 14vh;
+    padding-top: 2vh;
+    right: 27vw;
+    border: 3px solid darkorange;
+    overflow-y: auto;
+}
+.check_fild{
+    width: 1.2vw;
+    height: 1.2vw;
+}
+.brands_list{
+    display: block;
+    position: relative;
+    background-color: rgba(10,10,10, 0.8);
+    color: darkorange;
+    top: 8vh;
+    /*left: -3vw;*/
+    /*width: 62vw;*/
+    text-align: center;
+}
+

@@ -4,6 +4,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
 from django.core.serializers import json
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import transaction
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
@@ -12,10 +13,41 @@ from django.utils.datastructures import MultiValueDictKeyError
 
 from landing.forms import Login, UserCreation
 from orders.forms import BasketForm
-from .forms import ProductImageForm, ProductForm
+from .forms import ProductImageForm, ProductForm, AddingFabricForm, AddProductCatForm
 from products.models import *
 # import requests
 import json
+
+
+# adm_product (product.html)
+@login_required
+@transaction.atomic
+def adding_fabric(request):
+    args = dict()
+    args.update(csrf(request))
+    if request.POST and request.FILES:
+
+        form = AddingFabricForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+    elif request.POST:
+        form = AddingFabricForm(request.POST)
+        if form.is_valid():
+            form.save()
+    return redirect('/admin_product')
+
+
+# adm_product (product.html)
+@login_required
+@transaction.atomic
+def adding_product_cat(request):
+    args = dict()
+    args.update(csrf(request))
+    if request.POST:
+        form = AddProductCatForm(request.POST)
+        if form.is_valid():
+            form.save()
+    return redirect('/admin_product')
 
 
 # adm_product (product.html)
@@ -29,35 +61,91 @@ def adm_products(request):
 
     args['form1'] = ProductForm(request.POST or None)
     args['form2'] = ProductImageForm()
+    args['form3'] = AddingFabricForm()
+    args['form4'] = AddProductCatForm()
 
     # if request.method == "GET":
     if request.POST:
-        try:
-            article = request.POST.get('article')
-            if Product.objects.filter(article=article).exists():
+        if request.POST.get('SearchProduct'):
+            args['products'] = Product.objects.filter(article__contains=request.POST.get('SearchProduct'))
+            if len(args['products']) == 0:
+                args['products'] = Product.objects.filter(name__contains=request.POST.get('SearchProduct'))
+                if len(args['products']) == 0:
+                    args['products'] = Product.objects.all()
+        else:
+            try:
+                article = request.POST.get('article')
+                if Product.objects.filter(article=article).exists():
 
-                product = Product.objects.get(article=article)
-                args['form1'] = ProductForm(request.POST, instance=product)
-                print("наш запрос изменение", request)
-                if args['form1'].is_valid():
-                    print("Valid = True")
-                    args['form1'].save()
-                    return redirect('/admin_product')
-            else:
-                print("наш запрос создание", request)
-                args['form1'] = ProductForm(request.POST)
-                if args['form1'].is_valid():
-                    print("NEW_____NEW_____NEW")
-                    args['form1'].save()
-                    dumps = json.dumps("OK")
-                    return HttpResponse(dumps)
+                    product = Product.objects.get(article=article)
+                    args['form1'] = ProductForm(request.POST, instance=product)
+                    print("наш запрос изменение", request)
+                    if args['form1'].is_valid():
+                        print("TUT TUT TUT", request.POST.get('sizes'))
+                        nf = args['form1'].save(commit=False)
+                        nf.save(force_update=True)
+                        args['form1'].save_m2m()
+                        return redirect('/admin_product')
+                else:
+                    print("наш запрос создание", request)
+                    args['form1'] = ProductForm(request.POST)
 
-        except MultiValueDictKeyError:
-            print("U_______________MultiValueDictKeyError")
-        except:
-            print("U_______________XZ___KeyError")
-            return redirect('/admin_product')
+                    if args['form1'].is_valid():
+                        nf = args['form1'].save(commit=False)
+                        nf.save()
+                        args['form1'].save_m2m()
+                        return redirect('/admin_product')
+
+            except MultiValueDictKeyError:
+                print("U_______________MultiValueDictKeyError")
+            except:
+                print("U_______________XZ___KeyError")
+                return redirect('/admin_product')
     return render(request, 'products/product.html', args)
+
+
+# adm_product (product.html)
+@login_required
+@transaction.atomic
+def adm_new_products(request):
+    args = dict()
+    args.update(csrf(request))
+    if request.POST and request.POST.get('article'):
+        products = ProductImage.objects.filter(product__article=request.POST.get('article')).values(
+            'id', 'product_id', 'product__article', 'product__category__name', 'product__name', 'product__fabric__name',
+            'product__price', 'product__discount', 'product__year_model', 'product__prod_active', 'product__status_new',
+            'product__status_sale', 'product__second_hands', 'product__short_description', 'product__description',
+            'is_active', 'is_main', 'image'
+        )
+        if len(products) == 0:
+            product = Product.objects.get(article=request.POST.get('article'))
+
+            products = [
+                {'product_id': product.id, 'product__name': product.name, 'product__article': product.article,
+                 'product__category__name': product.category.name, 'product__fabric__name': product.fabric.name,
+                 'product__price': product.price, 'product__discount': product.discount,
+                 'product__year_model': product.year_model, 'product__prod_active': product.prod_active,
+                 'product__status_new': product.status_new, 'product__status_sale': product.status_sale,
+                 'product__second_hands': product.second_hands, 'product__short_description': product.short_description,
+                 'product__description': product.description,
+                 }
+            ]
+        json_orders_user = json.dumps(list(products), cls=DjangoJSONEncoder)
+        return JsonResponse(json_orders_user, safe=False)
+    return JsonResponse(False, safe=False)
+
+
+# adm_product (product.html)
+@login_required
+@transaction.atomic
+def adm_sizes_for_new_products(request):
+    args = dict()
+    args.update(csrf(request))
+    if request.POST and request.POST.get('article'):
+        sizes = ProductSizes.objects.filter(product__article=request.POST.get('article')).values('id', 'name_size')
+        json_orders_user = json.dumps(list(sizes), cls=DjangoJSONEncoder)
+        return JsonResponse(json_orders_user, safe=False)
+    return JsonResponse(False, safe=False)
 
 
 @login_required
@@ -66,31 +154,30 @@ def adm_products_img_add(request):
     args = dict()
     args.update(csrf(request))
     if request.POST:
-        print("_______________POST________________")
         # args['form2'] = ProductImageForm()
         args['form2'] = ProductImageForm(request.POST, request.FILES)
         if args['form2'].is_valid():
-            print("NEW_____IMAGE_____NEW")
             args['form2'].save()
+            # return render(request, 'products/product.html', args)
             return redirect('/admin_product')
     return redirect('/admin_product')
 
 
 # sends js data to the output of pictures for the selected product (js:AutoProductList)
-@login_required
-@transaction.atomic
-def adm_product_img(request):
-    args = dict()
-    # args.update(csrf(request))
-    products_img_list = []
-    if request.POST:
-        name = request.POST.get('name')
-        for img in ProductImage.objects.filter(product__name=name):
-            products_img_list.append([img.image.url, img.is_main, img.is_active, img.id])
-
-        args['products_img_list'] = products_img_list
-        dumps = json.dumps(args)
-        return HttpResponse(dumps)
+# @login_required
+# @transaction.atomic
+# def adm_product_img(request):
+#     args = dict()
+#     # args.update(csrf(request))
+#     products_img_list = []
+#     if request.POST:
+#         name = request.POST.get('name')
+#         for img in ProductImage.objects.filter(product__name=name):
+#             products_img_list.append([img.image.url, img.is_main, img.is_active, img.id])
+#
+#         args['products_img_list'] = products_img_list
+#         dumps = json.dumps(args)
+#         return HttpResponse(dumps)
 
 
 @login_required

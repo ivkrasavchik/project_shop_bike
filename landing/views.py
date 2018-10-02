@@ -27,7 +27,8 @@ def alt_login(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
-            return render(request, 'landing/home.html', args)
+            return redirect('/')
+            # return render(request, 'landing/home.html', args)
     return render(request, 'landing/home.html', args)
 
 

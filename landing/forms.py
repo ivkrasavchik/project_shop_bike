@@ -20,7 +20,7 @@ class Login(AuthenticationForm):
         label="Введите Ваш login",
         max_length=254,
         widget=forms.TextInput(attrs={'autofocus': True,
-                                      'style': 'margin:5px; padding:10px;height:30px;',
+                                      'style': 'margin: 0.5vw; padding:1vw;height:3vh;',
                                       'class': 'form-control col-sm-12',
                                       'placeholder': 'Введите Ваш Email'
                                       }),
@@ -30,7 +30,7 @@ class Login(AuthenticationForm):
         label="Введите Ваш пароль",
         strip=False,
         widget=forms.PasswordInput(attrs={
-            'style': 'margin:5px; padding:10px;height:30px;',
+            'style': 'margin:0.5vw; padding:1vw;height:3vh;',
             'class': 'form-control col-sm-8',
             'placeholder': 'Введите Ваш пароль'
         }),
@@ -60,7 +60,7 @@ class UsernameFieldEmail(CharField):
 
     widget = EmailInput(attrs={
             'autofocus': True,
-            'style': 'margin:5px; padding:10px;height:30px;',
+            'style': 'margin: 0.5vw; padding:1vw;height:3vh;',
             'class': 'form-control col-sm-12',
             'placeholder': 'Введите Ваш Email'
         })
@@ -79,16 +79,16 @@ class UserCreation(UserCreationForm):
         label="Password",
         strip=False,
         widget=forms.PasswordInput(attrs={
-            'style':'margin:5px; padding:10px;height:30px;',
-            'class':'form-control col-sm-8',
+            'style': 'margin: 0.5vw; padding:1vw;height:3vh;',
+            'class': 'form-control col-sm-8',
             'placeholder': 'Введите Ваш пароль'
         }),
     )
     password2 = forms.CharField(
         label="Password confirmation",
         widget=forms.PasswordInput(attrs={
-            'style':'margin:5px; padding:10px;height:30px;',
-            'class':'form-control col-sm-8',
+            'style': 'margin:0.5vw; padding:1vw;height:3vh;',
+            'class': 'form-control col-sm-8',
             'placeholder': 'Подтвердите пароль'
         }),
         strip=False,

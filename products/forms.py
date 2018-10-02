@@ -9,6 +9,9 @@ class ProductForm(forms.ModelForm):
                                       to_field_name="name", widget=forms.Select())
     fabric = forms.ModelChoiceField(queryset=Fabric.objects.all(), to_field_name="name", widget=forms.Select())
 
+    # sizes = forms.ModelMultipleChoiceField(queryset=ProductSizes.objects.all(), to_field_name="name_size",
+    #                                        widget=forms.SelectMultiple())
+
     class Meta:
         model = Product
         fields = '__all__'
@@ -30,3 +33,38 @@ class ProductImageForm(forms.ModelForm):
     class Meta:
         model = ProductImage
         fields = '__all__'
+
+    # def __init__(self, *args, **kwargs):
+    #     super(ProductImageForm, self).__init__(*args, **kwargs)
+    #     self.fields['product'].required = False
+
+
+class AddingFabricForm(forms.ModelForm):
+
+    class Meta:
+        model = Fabric
+        fields = '__all__'
+        widgets = {
+                   'short_description': Textarea(attrs={
+                        'placeholder': "Краткое описание", 'id': "fabric_short_d"
+                   }),
+                   'description': Textarea(attrs={
+                       'placeholder': "Полное описание", 'id': "fabric_d"
+                   }),
+                   'name': TextInput(attrs={
+                       'placeholder': "Наименование производителя", 'id': "fabric_name"
+                   })
+        }
+
+
+class AddProductCatForm(forms.ModelForm):
+
+    class Meta:
+        model = ProductCategory
+        fields = '__all__'
+        widgets = {
+            'name': TextInput(attrs={
+                'placeholder': "Название категории", 'id': "category_name"
+            })
+        }
+

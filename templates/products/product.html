@@ -11,7 +11,7 @@
             <div class = "col-8">
                 <div class="in_col_9">
                 {# url 'product_save' - в url name=product_save #}
-                <form id="form_product_change" action="{% url 'adm_products' %}" method="post">
+                <form id="form_product_change" action="{% url 'adm_products' %}" method="post" name="adm_product_form">
                     {% csrf_token %}
                     <div class="orange_div" id="adm-prod-article">
                         <label for="id_article">Артикул</label><br>
@@ -19,7 +19,8 @@
                     </div>
                     <div class="orange_div" id="adm-prod-category">
                         <label for="id_category">Category</label>
-                        <button type="button" class="btn-danger mini_btn" href="javascript:" id="btn_mini_cat_new">n e w</button><br>
+                        <button type="button" class="btn-danger mini_btn" href="javascript:" id="btn_mini_cat_new">
+                            n e w</button><br>
                         {{ form1.category }}
                     </div>
                     <div class="orange_div" id="adm-prod-name">
@@ -28,7 +29,8 @@
                     </div>
                     <div class="orange_div" id="adm-prod-fabric">
                         <label for="id_fabric">fabric</label>
-                        <button type="button" class="btn-danger mini_btn" href="javascript:" id="btn_mini_fabric_new">n e w</button><br>
+                        <button type="button" class="btn-danger mini_btn" href="javascript:" id="btn_mini_fabric_new">
+                            n e w</button><br>
                         {{ form1.fabric }}
                     </div>
                     <div class="orange_div" id="adm-prod-year_model">
@@ -37,23 +39,24 @@
                     </div>
                     <div class="orange_div" id="adm-prod-price">
                         <label for="id_price">price</label><br>
-                        {{ form1.price }}
+                        {{ form1.price|safe }}
                     </div>
                     <div class="orange_div" id="adm-prod-discount">
                         <label for="id_discount">discount</label><br>
-                        {{ form1.discount }}
+                        {{ form1.discount|safe }}
                     </div>
-
+                    <div class="orange_div" id="adm-prod-sizes">
+                        <label for="id_sizes">Sizes</label><br>
+                        {{ form1.sizes }}
+                    </div>
                     <div class="orange_div" id="adm-prod-description">
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active ">
-                                <a href="#short_description" aria-controls="home" role="tab" data-toggle="tab" class="my-tabs">
-                                    Краткое описание
-                                </a>
+                                <a href="#short_description" aria-controls="home" role="tab" data-toggle="tab"
+                                   class="my-tabs">Краткое описание</a>
                             </li>
-                            <li role="presentation"><a href="#description" class="my-tabs" aria-controls="profile" role="tab" data-toggle="tab">
-                                Полное описание
-                                </a>
+                            <li role="presentation"><a href="#description" class="my-tabs" aria-controls="profile"
+                                                       role="tab" data-toggle="tab">Полное описание</a>
                             </li>
                         </ul>
                         <div class="tab-content product-description-tabs">
@@ -65,35 +68,47 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class = "orange_div" id="id-active">
-{#                    <label for id="id_prod_active">active</label><br>#}
+                    <div class="orange_div" id="id-active">
                         active<br>
-                     {{ form1.prod_active }}
+                     {{ form1.prod_active|add_class:"check_fild" }}
                     </div>
-                    <div class = "orange_div" id="id-status_sale">
-{#                    <label for id="id_status_sale">Sale</label><br>#}
+                    <div class="orange_div" id="id-status_sale">
                         Sale<br>
-                    {{ form1.status_sale }}
+                    {{ form1.status_sale|add_class:"check_fild" }}
                     </div>
-                    <div class = "orange_div" id="id-status_new">
-{#                    <label for id="id_status_new">New</label><br>#}
+                    <div class="orange_div" id="id-status_new">
                         New<br>
-                    {{ form1.status_new }}
+                    {{ form1.status_new|add_class:"check_fild" }}
                     </div>
-
-                    <button type="submit" class="btn btn-outline my-2 my-sm-0 hidediv" href="javascript:" id="change-product">Перекроить</button>
-                    <button type="submit" class="btn btn-outline my-2 my-sm-0" href="javascript:" id="btn_adding-product">Добавить новый продукт</button>
+                    <div class="orange_div" id="id-second_hands">
+                        Second Hand<br>
+                    {{ form1.second_hands|add_class:"check_fild" }}
+                    </div>
+                    <button type="submit" class="btn btn-outline my-2 my-sm-0 hidediv" href="javascript:"
+                            id="change-product">Перекроить</button>
+                    <button type="submit" class="btn btn-outline my-2 my-sm-0" href="javascript:"
+                            id="btn_adding-product">Добавить новый продукт</button>
                 </form>
                 </div>
                 <div id="id_img-adm" class="line-img orange_div">
                     <!-- Заполняется из js-->
 {#                    <img src="/madia/product_images/LS2OF562_Pink.jpg" class='img-adm'>#}
                 </div>
-                <button type="button" class="btn btn-outline my-2 my-sm-0 hidediv" id="btn_add-show-img_block" href="javascript:">Добавить картинку</button>
+                <button type="button" class="btn btn-outline my-2 my-sm-0 hidediv" id="btn_add-show-img_block"
+                        href="javascript:">Добавить картинку</button>
 
             </div>
             <div class = "col-4 orange_div" id="product_list">
+                <div id="div-find-product">
+                    <form action="" name="find_product" id="form-find-product" method="post">
+                        {% csrf_token %}
+                        <input name="SearchProduct" type="search" class="search-label-icon">
+                        <button type="submit" class="btn btn-outline my-2 my-sm-0"
+                                style="position: relative; top: 1vh"
+                        >Искать</button>
+                    </form>
+                </div>
+
                 <table class="table text-left">
                     <thead>
                         <tr>
@@ -106,19 +121,7 @@
                             <tr>
                             <td>
 
-                            <a href="javascript:" class="product_list"
-                               data-productname="{{ product.name }}"
-                               data-article="{{ product.article }}"
-                               data-price="{{ product.price|safe }}"
-                               data-discount="{{ product.discount }}"
-                               data-category="{{ product.category }}"
-                               data-short_description="{{ product.short_description }}"
-                               data-description="{{ product.description }}"
-                               data-prod_active="{{ product.prod_active }}"
-                               data-status_new="{{ product.status_new }}"
-                               data-status_sale="{{ product.status_sale }}"
-                               data-year_model="{{ product.year_model }}"
-                               data-fabric="{{ product.fabric }}"
+                            <a href="javascript:" class="product_list" data-article="{{ product.article }}"
                                 > {{ product.article }}</a><br>
                             </td>
                             <td>
@@ -133,34 +136,68 @@
         </div>
         <div class = "orange_div hidediv b-popup" id="div-prod-form-img">
             <div class="orange_div" id="div-prod-form-img-content">
-                <form id="form_img_add" method="POST" action="{% url 'adm_products_img_add' %}" enctype="multipart/form-data">{% csrf_token %}
+                <form id="form_img_add" method="POST" action="{% url 'adm_products_img_add' %}"
+                      enctype="multipart/form-data">{% csrf_token %}
     {#                    {% render_field form2.product type="hidden" %}#}
     {#                    {{ form2.instance.product }}#}
+{#                    {{ form2.product }}#}
                     {{ form2.product| add_class:"HiddenInput" }}
                     {{ form2.image }}<br>
                     основная {{ form2.is_main }}
                     активная {{ form2.is_active }}
-                    <button type="submit" class="btn btn-outline my-2 my-sm-0 pos_btns_add_img" id="create-img">Добавить картинку</button>
-                    <button type="button" class="btn btn-outline my-2 my-sm-0 pos_btns_add_img" id="btn_end-create-img">Выйти</button>
+                    <button type="submit" class="btn btn-outline my-2 my-sm-0 pos_btns_add_img" id="create-img">
+                        Добавить картинку</button>
+                    <button type="button" class="btn btn-outline my-2 my-sm-0 pos_btns_add_img" id="btn_end-create-img">
+                        Выйти</button>
                 </form>
             </div>
         </div>
+{#    /////////////////////////////////////////Hiden div for large image and delete#}
         <div class="orange_div hidediv b-popup" id="div-del-img">
             <div class="orange_div" id="div-del-img-cont">
             <form action="{% url 'image_product_del' %}" method="post">
                 {% csrf_token %}
                 <input hidden type="number" name="img_for_del" id="id_img_for_del">
-{#                <input hidden name="name" id="id_prod_name">#}
                 <div id="show_img_for_del">
                     <!-- Заполняется из js-->
                 </div><br>
                 <div class="block_btn_img_del">
-                <button type="submit" class="btn btn-outline my-2 my-sm-0" id="">Удалить картинку</button>
-                <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_cancel-del-img" href="javascript:">Выйти</button>
+                <button type="submit" class="btn btn-outline my-2 my-sm-0" >Удалить картинку</button>
+                <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_cancel-del-img" href="javascript:">
+                    Выйти</button>
                 </div>
             </form>
             </div>
         </div>
+{#    /////////////////////////////////////////Hiden div for adding fabric#}
+        <div class="orange_div hidediv b-popup" id="div-adding_fabric">
+            <div class="orange_div" id="div-adding_fabric_cont">
+                <h3>Добавить производителя</h3>
+                <form action="{% url 'adding_fabric' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form3.as_p }}
+
+                    <button type="submit" class="btn btn-outline my-2 my-sm-0" >Добавить</button>
+                    <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_cancel_add_fabric"
+                            href="javascript:">Выйти</button>
+                </form>
+            </div>
+        </div>
+{#    /////////////////////////////////////////Hiden div for adding category of product#}
+        <div class="orange_div hidediv b-popup" id="div-adding_product_category">
+            <div class="orange_div" id="div-adding_product_category_cont">
+                <h3>Добавить категорию товара</h3>
+                <form action="{% url 'adding_product_cat' %}" method="post">
+                    {% csrf_token %}
+                    {{ form4.as_p }}
+
+                    <button type="submit" class="btn btn-outline my-2 my-sm-0" >Добавить</button>
+                    <button type="button" class="btn btn-outline my-2 my-sm-0" id="btn_cancel_add_prod_cat"
+                            href="javascript:">Выйти</button>
+                </form>
+            </div>
+        </div>
+
     </div>
 
 {% endblock %}

@@ -1,86 +1,50 @@
-{% extends 'wrapper.html' %}
-{#{% extends 'base.html' %}#}
+{#{% extends 'wrapper.html' %}#}
+{% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
 
-{% block user_content %}
+{% block content %}
+{#{% block user_content %}#}
 
-
-    <div class="col-7">
-        <div class="item-list">
-            <div class="img-home">
+{#    <div class="col-7">#}
+{#        <div class="item-list">#}
+{#            <div class="img-home">#}
                 <img src="{% static '/img/moto_1.jpg' %}" id="img-home1">
-                <div class="link" id="link-1">
-                    <a href="{% url 'brands'%}" class="orange-link">
-                       <h3>Актуальные бренды </h3>
-                    </a>
+                <div id="link">
+                    <div class="link" id="link-1">
+                        <a href="{% url 'brands'%}" class="orange-link">
+                           <h3>Актуальные бренды </h3>
+                        </a>
+                    </div>
+                    <div class="link" id="link-2">
+                        <a href="/temp_link/" class="orange-link">
+                            <h3>Новости Байк-клубов</h3>
+                        </a>
+                    </div>
+                    <div class="link" id="link-3">
+                        <a href="{% url 'all_product'%}" class="orange-link">
+                            <h3>Каталог</h3>
+                        </a>
+                    </div>
+                    <div class="link" id="link-4">
+                        <a href="{% url 'baraholka'%}" class="orange-link">
+                            <h3>Барахолка</h3>
+                        </a>
+                    </div>
                 </div>
-                <div class="link" id="link-2">
-                    <a href="/temp_link/" class="orange-link">
-                        <h3>Новости Байк-клубов</h3>
-                    </a>
-                </div>
-                <div class="link" id="link-3">
-                    <a href="{% url 'all_product'%}" class="orange-link">
-                        <h3>Каталог</h3>
-                    </a>
-                </div>
-                <div class="link" id="link-4">
-                    <a href="{% url 'baraholka'%}" class="orange-link">
-                        <h3>Барахолка</h3>
-                    </a>
-                </div>
-            </div>
 {#        <h2>Товары на распродаже</h2><br>#}
 {#            <div class="row">#}
 
 
 {#            </div>#}
         </div>
-        <div id="home-img-flex" class="line-img">
-                {% for img in product_image %}
-
-                    {% include 'products/product_item.html' %}
-                {% endfor %}
-        </div>
-    </div>
+{#        <div id="home-img-flex" class="line-img">#}
+{#                {% for img in product_image %}#}
+{##}
+{#                    {% include 'products/product_item.html' %}#}
+{#                {% endfor %}#}
+{#        </div>#}
+{#    </div>#}
 {#            {% include 'footer.html' %}#}
 {% endblock %}
 
-
-{#            <div class="col-3" id="basket_view">#}
-{#                <div>#}
-{#                    <h5>Корзина</h5><br>#}
-{#                    <h6>Товар1 в корзине</h6><br>#}
-{#                    <h6>Товар2 в корзине</h6><br>#}
-{#                    <h6>Товар3 в корзине</h6><br>#}
-{#                    <h6>Товар4 в корзине</h6><br>#}
-{#                    <h6>Товар5 в корзине</h6><br>#}
-{#                </div>#}
-{#            </div>#}
-{#        <div class="row">#}
-{#            <div class="col-3" id="reklama1">#}
-{#               Блок рекламы#}
-{#            </div>#}
-{#        </div>#}
-{#        </div>#}
-{##}
-{#    </div>#}
-{#    <div class="b-popup" id="popup1">#}
-{#        <div class="b-popup-content">#}
-{#            {% include 'account/login.html' %}#}
-            {# <a href="javascript:PopUpHide()">Hide popup</a>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div class="b-popup" id="popup2">#}
-{#        <div class="b-popup-content">#}
-{#            {% include 'account/register.html' %}#}
-            {# <a href="javascript:PopUpHide()">Hide popup</a>#}
-{#        </div>#}
-{#    </div>#}
-{##}
-{##}
-{##}
-{##}
-{#    {% include 'footer.html' %}#}
-{#{% endblock %}#}

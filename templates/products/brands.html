@@ -4,7 +4,7 @@
 {% load i18n %}
 
 {% block user_content %}
-    <div class="col-7 item-list">
+    <div class="col-7 brands_list">
         {% for elem in brands %}
             <a href="{% url 'brand' elem.id %}">
             {% if elem.logo %}

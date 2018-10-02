@@ -24,13 +24,16 @@ function PopUpRegHide(){
     $("#popup2").hide();
 }
 
-function delHide(btn) {
+function delHide(btn, btn2, check) {
     console.log(btn);
-    $("#"+btn.id+"").show();
+    $("#"+check.id+"").prop('checked', false);
+    $("#"+btn2.id+"").addClass('hidediv');
+    $("#"+btn.id+"").removeClass('hidediv');
     }
-function delHide2(btn) {
-    console.log(btn.id);
-    $("#"+btn.id+"").toggleClass('hidediv');
+function delHide2(btn2, btn1) {
+    console.log(btn2.id, btn1.id);
+    $("#"+btn1.id+"").addClass('hidediv');
+    $("#"+btn2.id+"").toggleClass('hidediv');
 }
 
 jQuery(document).ready(function ($) {
@@ -38,7 +41,7 @@ jQuery(document).ready(function ($) {
     $('#change-profile').click(change_profile_view);
     $('#reg_btn').click(ValueReg);
     $('.product_list').click(AutoProductList);
-    $('#change-product').click(changeproduct);
+    // $('#change-product').click(changeproduct);
     $('.href_on_ord').click(ord_filter);
     $('.href_on_prod').click(SelectedIdProduct);
     $('#btn_prod_filter').click(ProductFind);
@@ -55,9 +58,13 @@ jQuery(document).ready(function ($) {
     $('#btn_add-show-img_block').click(ShowBlockAddingImg);
     $('#btn_end-create-img').click(ClouseBlockAddingImg);
     $('#btn_cancel-del-img').click(ClouseBlockDeleteImg);
+    $('#btn_cancel_add_fabric').click(CancelAddFabric);
+    $('#btn_mini_fabric_new').click(AddFabric);
+    $('#btn_cancel_add_prod_cat').click(CancelAddProdCat);
+    $('#btn_mini_cat_new').click(AddingProductCat);
 
-//; location.reload()
-    <!--Resets the order number in the session-->
+
+    //(Orders) <!--Resets the order number in the session-->
     function sessionfalse(e) {
         $("#order_ord").val("");
         // $(".input_order_ord").empty();
@@ -136,6 +143,7 @@ jQuery(document).ready(function ($) {
         if (json_dict == false) {
             console.log("Нет такой позиции")
         } else {
+            console.log("Заказ № ", document.getElementById('order_ord').value);
             $('.tbl_ord_add_prod > tbody ').empty();
             for (i = 0; i < json_dict.length; i++) {
                 var img = "<img src='/media/" + json_dict[i].image + "' class='img-responsive-in-list-mini'>";
@@ -246,8 +254,8 @@ jQuery(document).ready(function ($) {
             success: function (arv) {
                 $('#col5top_1').empty();
                 console.log(arv);
-                $('#col5top_1').append('<p style="word-break:break-all;color:darkorange;font-size:20px;' +
-                    'width:24vw;height:64vh;white-space:pre-wrap;overflow-y:auto;padding:1vw; text-align: left">'+arv+'</p>');
+                $('#col5top_1').append('<p style="word-break:break-all;color:darkorange;font-size:1vw;' +
+                    'width:24vw;height:59vh;white-space:pre-wrap;overflow-y:auto;padding:1vw; text-align: left">'+arv+'</p>');
             }
         });
 
@@ -372,26 +380,31 @@ jQuery(document).ready(function ($) {
             $("#add_block_list").show();
             $('.table_prod_in_ord > tbody ').empty();
             $('#block_button').empty();
-            var vh = 0;
+            var vh = -2;
+            var vw = 0;
+            var dvh = 3;
+            var dvw = 0;
             for (i=0; i < json_dict.length; i++){
-                vh += 10;
+                // vh += 10;
+                // dvh += 10;
                 var img = "<img src='/media/" + json_dict[i].image + "' class='img-responsive-in-list-mini'>";
                 var id_nmb_prod = "prod_nmb_"+json_dict[i].product__productinbasket;
                 var id_price_prod = "prod_price_"+ json_dict[i].product__productinbasket;
                 var id_size_prod = "prod_size_"+ json_dict[i].product__productinbasket;
                 var id_btn1 = "id_btn1_"+ json_dict[i].product__productinbasket;
                 var id_btn2 = "id_btn2_"+ json_dict[i].product__productinbasket;
+                var id_check = "id_check_"+ json_dict[i].product__productinbasket;
 
                 console.log(id_nmb_prod);
                 $('.table_prod_in_ord > tbody ').append(
                     '<tr><td>'+img+'</td><td>'
-                   + json_dict[i].product__article +'</td><td width="350">'
+                   + json_dict[i].product__article +'</td><td style="width:20vw; height: 10vh">'
                     + json_dict[i].product__name + '(price: '+json_dict[i].product__price+')'+'</td><td>'
                     // + json_dict[i].product__productinbasket__nmb +'</td><td>'
-                    + '<input id="'+id_nmb_prod+'" onchange="delHide('+id_btn1+')" style="width:65px; height:39px" type="number" min="0" value="'+ json_dict[i].product__productinbasket__nmb +'"></td><td>'
-                    + '<input id="'+id_price_prod+'" step="0.01" pattern="\d+(\.\d{2})?" onchange="delHide('+id_btn1+')" style="width:95px; height:39px" type="number" min="0" value="'+ json_dict[i].product__productinbasket__price_per_item +'"></td><td>'
+                    + '<input id="'+id_nmb_prod+'" onchange="delHide('+id_btn1+', '+id_btn2+', '+id_check+')" style="width:3vw; height:3vh" type="number" min="0" value="'+ json_dict[i].product__productinbasket__nmb +'"></td><td>'
+                    + '<input id="'+id_price_prod+'" step="0.01" pattern="\d+(\.\d{2})?" onchange="delHide('+id_btn1+', '+id_btn2+', '+id_check+')" style="width:5vw; height:3vh" type="number" min="0" value="'+ json_dict[i].product__productinbasket__price_per_item +'"></td><td>'
                     // + json_dict[i].product__productinbasket__sizes +'</td><td>' +
-                    + '<select style="height:39px" onchange="delHide('+id_btn1+')" id="'+id_size_prod+'">'
+                    + '<select style="height:3vh" onchange="delHide('+id_btn1+', '+id_btn2+', '+id_check+')" id="'+id_size_prod+'">'
                     + '<option value="'+json_dict[i].product__productinbasket__sizes +'" selected>'+json_dict[i].product__productinbasket__sizes +'</option>'
                     + '<option value="XXXL">XXXL</option>'
                     + '<option value="XXL">XXL</option>'
@@ -402,16 +415,22 @@ jQuery(document).ready(function ($) {
                     + '<option value="XS">XS</option>'
                     + '<option value="XXS">XXS</option>'
                     + '</select></td><td>'
-                    + '<input type="checkbox" onchange="delHide2('+id_btn2+')" style="width:20px;height:20px;"></td></tr>'
-                );
-                $('#block_button ').append(
-                    '<button style="position: absolute; top: '+vh+'vh; right: 8vw" type="button" class="btn btn-outline my-2 my-sm-0 edit-prod hidediv" id="'+id_btn1+'" href="javascript:" ' +
+                    + '<input type="checkbox" id="'+id_check+'" onchange="delHide2('+id_btn2+', '+id_btn1+')" style="width:20px;height:20px;"></td><td width="0">'
+                    + '<button style="position: relative; top: '+vh+'vh; right: '+vw+'vw; height: 4vh" type="button" class="btn btn-outline my-2 my-sm-0 edit-prod hidediv" id="'+id_btn1+'" href="javascript:" ' +
                         'data-prod_in_bask="'+json_dict[i].product__productinbasket+'" ' +
                         'data-old_nmb="'+json_dict[i].product__productinbasket__nmb+'" ' +
                         'data-old_price="'+json_dict[i].product__productinbasket__price_per_item+'">Изменить</button>'+
-                    '<button style="position: absolute; top: '+vh+'vh; right: 3vw" type="button" class="btn btn-outline my-2 my-sm-0 del-prod hidediv" id="'+id_btn2+'" href="javascript:" ' +
-                        'data-prod_in_bask="'+json_dict[i].product__productinbasket+'">Удалить</button>'
+                        '<button style="position: relative; top: '+dvh+'vh; right: '+dvw+'vw; height: 4vh" type="button" class="btn btn-outline my-2 my-sm-0 del-prod hidediv" id="'+id_btn2+'" href="javascript:" ' +
+                        'data-prod_in_bask="'+json_dict[i].product__productinbasket+'">Удалить</button></td></tr>'
                 );
+                // $('#block_button ').append(
+                //     '<button style="position: relative; top: '+vh+'vh; right: 0vw; height: 4vh" type="button" class="btn btn-outline my-2 my-sm-0 edit-prod hidediv" id="'+id_btn1+'" href="javascript:" ' +
+                //         'data-prod_in_bask="'+json_dict[i].product__productinbasket+'" ' +
+                //         'data-old_nmb="'+json_dict[i].product__productinbasket__nmb+'" ' +
+                //         'data-old_price="'+json_dict[i].product__productinbasket__price_per_item+'">Изменить</button>'+
+                //     '<button style="position: relative; top: '+dvh+'vh; right: 0vw; height: 4vh" type="button" class="btn btn-outline my-2 my-sm-0 del-prod hidediv" id="'+id_btn2+'" href="javascript:" ' +
+                //         'data-prod_in_bask="'+json_dict[i].product__productinbasket+'">Удалить</button>'
+                // );
             }
             $('.del-prod').click(DelFromBasket);
             $('.edit-prod').click(EditFromBasket);
@@ -471,6 +490,24 @@ jQuery(document).ready(function ($) {
         return true
     });
 
+    //(Admin_product) <!-- Show div "div-adding_fabric".
+    function CancelAddFabric() {
+        $("#div-adding_fabric").hide();
+    }
+
+    function AddFabric() {
+        $("#div-adding_fabric").show();
+    }
+
+    //(Admin_product) <!-- Show div "div-adding_product_category".
+    function AddingProductCat() {
+        $("#div-adding_product_category").show();
+    }
+    function CancelAddProdCat() {
+        $("#div-adding_product_category").hide();
+    }
+
+
     //(Admin_product) <!-- Show div "div-prod-form-img".
     function ShowBlockAddingImg() {
         $('#div-prod-form-img').show();
@@ -480,52 +517,31 @@ jQuery(document).ready(function ($) {
         // $('#btn_add-show-img_block').show();
     }
 
-    //(Admin_product) <!-- Filles out the form to change the product data.
+    //(Admin_product) <!-- Fills out the form to change the product data.
     function AutoProductList() {
         $('#change-product').show();
         $('#btn_add-show-img_block').show();
         $('#btn_adding-product').hide();
         var data = {};
-        data.name = $(this).attr('data-productname');
+        // data.name = $(this).attr('data-productname');
         data.article = $(this).attr('data-article');
-        data.price = $(this).attr('data-price');
-        data.discount = $(this).attr('data-discount');
-        data.category = $(this).attr('data-category');
-        data.short_description = $(this).attr('data-short_description');
-        data.description = $(this).attr('data-description');
-        data.manufacturer = $(this).attr('data-manufacturer');
-        data.year_model = $(this).attr('data-year_model');
-        data.status_sale = $(this).attr('data-status_sale');
-        data.status_new = $(this).attr('data-status_new');
-        data.prod_active = $(this).attr('data-prod_active');
-        data.fabric = $(this).attr('data-fabric');
-
-        if (data.status_sale === "True"){
-            $('#id_status_sale').prop('checked', true)
-        }else {
-            $('#id_status_sale').prop('checked', false)
-        }
-        if (data.status_new === "True"){
-            $('#id_status_new').attr('checked', true)
-        }else {
-            $('#id_status_new').attr('checked', false)
-        }
-        if (data.prod_active === "True"){
-            $('#id_prod_active').attr('checked', true)
-        }else {
-            $('#id_prod_active').attr('checked', false)
-        }
-
-        $('#id_product').val(data.name);
-        $('#id_name').val(data.name);
-        $('#id_article').val(data.article);
-        $('#id_discount').val(data.discount);
-        $('#id_category').val(data.category);
-        $('#id_fabric').val(data.fabric);
-        $('#id_short_description').val(data.short_description);
-        $('#id_description').val(data.description);
-        $('#id_year_model').val(data.year_model);
-        $('#id_price').val(data.price);
+        // data.price = $(this).attr('data-price');
+        // data.discount = $(this).attr('data-discount');
+        // data.category = $(this).attr('data-category');
+        // data.short_description = $(this).attr('data-short_description');
+        // data.description = $(this).attr('data-description');
+        // data.manufacturer = $(this).attr('data-manufacturer');
+        // data.year_model = $(this).attr('data-year_model');
+        // data.status_sale = $(this).attr('data-status_sale');
+        // data.status_new = $(this).attr('data-status_new');
+        // data.prod_active = $(this).attr('data-prod_active');
+        // data.fabric = $(this).attr('data-fabric');
+        // data.sizes = $(this).attr('data-sizes');
+        // data.sizes2 = document.adm_product_form.sizes;
+        // console.log(data.sizes);
+        // for (var n=0; n<data.sizes.length; n++){
+        //     console.log(data.sizes.options[n].text)
+        // }
 
 
         var csrf_token = $('#form_product_change [name="csrfmiddlewaretoken"]').val();
@@ -533,38 +549,106 @@ jQuery(document).ready(function ($) {
 
         $.ajax({
             type: "POST",
-            url: "adm_img/",
+            url: "adm_new_products/",
             data: data,
-            dataType: "json",
-            cache: false,
 
-            success: function(data){
-                prodImgList = data.products_img_list;
-                $('#id_img-adm').empty();
-                for (i=0; i < data.products_img_list.length; i++){
-
-                    var url_img="javascript:";
-                    // var url_img="{% url 'image_product' "+data.products_img_list[i][3]+" %}";
-                    var img = "<img src='" + data.products_img_list[i][0] + "' class='img-adm' id="+data.products_img_list[i][3]+">";
-
-                    $('#id_img-adm').append("<a href=" + url_img + " class='img_id_for_del' data-id_img = '" + data.products_img_list[i][3] + "' " +
-                        "data-img = '"+ data.products_img_list[i][0] +"' >"+img+"</a><br>");
-
-                    if (data.products_img_list[i][1] == true){
-                        $('#id_img-adm').append("<input type='checkbox' checked class='img-adm-ck' id='"+data.products_img_list[i][3]+"_id_main'>is main <br>");
-
-                    }else {$('#id_img-adm').append("<input type='checkbox' class='img-adm-ck' id='"+data.products_img_list[i][3]+"_id_main'>is main <br>");
-
-                    }
-                    if (data.products_img_list[i][2] == true){
-                        $('#id_img-adm').append("<input type='checkbox' checked class='img-adm-ck' id='"+data.products_img_list[i][3]+"_id_active'>is active<br>");
-
-                    }else {$('#id_img-adm').append("<input type='checkbox' class='img-adm-ck' id='"+data.products_img_list[i][3]+"_id_active'>is active<br>");
-                    }
-                }
-                $('.img_id_for_del').click(ImageDelete)
+            success: function (arv) {
+                AdmEditFormProduct(arv)
             }
-        })
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "adm_sizes_for_new_products/",
+            data: data,
+
+            success: function (arv) {
+                AdmEditFormProductSizes(arv)
+            }
+        });
+
+    }
+
+    //(Admin_product) <!-- SELECT MULTIPLE Fills sizes of product on the form to change the product data.(js:AutoProductList)
+    function AdmEditFormProductSizes(arv) {
+        var json_dict = JSON.parse(arv);
+
+        // name form, name Select field
+        var select_form = document.adm_product_form.sizes;
+
+        // clear select field
+        for (var s0=0; s0<select_form.length; s0++){
+            select_form.options[s0].selected=false
+        }
+        // Fill select field
+        for (var s=0; s<json_dict.length; s++){
+            select_form.options[(json_dict[s].id)-1].selected=true
+        }
+    }
+
+    //(Admin_product) <!-- Fills out the form to change the product data.(js:AutoProductList)
+    function AdmEditFormProduct(arv) {
+
+        var json_dict = JSON.parse(arv);
+        console.log(json_dict);
+
+            if (json_dict[0].product__status_sale) {
+                $('#id_status_sale').prop('checked', true);
+            } else {
+                $('#id_status_sale').prop('checked', false);
+            }
+            if (json_dict[0].product__status_new) {
+                $('#id_status_new').prop('checked', true);
+            } else {
+                $('#id_status_new').prop('checked', false);
+            }
+            if (json_dict[0].product__prod_active) {
+                $('#id_prod_active').prop('checked', true);
+            } else {
+                $('#id_prod_active').prop('checked', false);
+            }
+            if (json_dict[0].product__second_hands) {
+                $('#id_second_hands').prop('checked', true);
+            } else {
+                $('#id_second_hands').prop('checked', false);
+            }
+
+            $('#id_product').val(json_dict[0].product__name);
+            $('#id_name').val(json_dict[0].product__name);
+            $('#id_article').val(json_dict[0].product__article);
+            $('#id_discount').val(json_dict[0].product__discount);
+            $('#id_category').val(json_dict[0].product__category__name);
+            $('#id_fabric').val(json_dict[0].product__fabric__name);
+            $('#id_short_description').val(json_dict[0].product__short_description);
+            $('#id_description').val(json_dict[0].product__description);
+            $('#id_year_model').val(json_dict[0].product__year_model);
+            $('#id_price').val(json_dict[0].product__price);
+            // $('#id_sizes').val(data.sizes);
+
+            $('#id_img-adm').empty();
+            if (json_dict[0].image){
+            for (var im = 0; im < json_dict.length; im++) {
+                var url_img = "javascript:";
+                var img = "<img src='/media/" + json_dict[im].image + "' class='img-adm' id=" + json_dict[im].id + ">";
+
+                $('#id_img-adm').append("<a href=" + url_img + " class='img_id_for_del' data-id_img = '" + json_dict[im].id + "' " +
+                    "data-img = '" + json_dict[im].image + "' >" + img + "</a><br>");
+                if (json_dict[im].is_main) {
+                    $('#id_img-adm').append("<input type='checkbox' checked class='img-adm-ck ' id='" + json_dict[im].id + "_id_main'>is_main <br>");
+                } else {
+                    $('#id_img-adm').append("<input type='checkbox' class='img-adm-ck ' id='" + json_dict[im].id + "_id_main'>is main <br>");
+                }
+                if (json_dict[im].is_active) {
+                    $('#id_img-adm').append("<input type='checkbox' checked class='img-adm-ck ' id='" + json_dict[im].id + "_id_active'>is active<br>");
+                } else {
+                    $('#id_img-adm').append("<input type='checkbox' class='img-adm-ck ' id='" + json_dict[im].id + "_id_active'>is active<br>");
+                }
+            }
+            $('.img_id_for_del').click(ImageDelete);
+            }else {
+                alert("Нет ни одного фото для "+ document.getElementById('id_product').value);
+                ShowBlockAddingImg()
+            }
 
     }
 
@@ -588,6 +672,7 @@ jQuery(document).ready(function ($) {
     }
 
     //(Admin_product) <!-- Sends data to change the product data.
+    //Образец отправки и js JSON объект
     function changeproduct() {
         var tdata = {};
         var data = {};
@@ -616,21 +701,21 @@ jQuery(document).ready(function ($) {
             cache: false,
 
             success: function (arv) {
-                data = {};
-                data.article = document.getElementById('id_article').value;
-                data.description = document.getElementById('id_description').value;
-                data.short_description = document.getElementById('id_short_description').value;
-                data.description = document.getElementById('id_description').value;
-                data.year_model = document.getElementById('id_year_model').value;
-                data.price = document.getElementById('id_price').value;
-                data.fabric = document.getElementById('id_fabric').value;
-                data.category = document.getElementById('id_category').value;
-                data.discount = document.getElementById('id_discount').value;
-                data.name = document.getElementById('id_name').value;
-                data.status_sale = document.getElementById('id_status_sale').checked;
-                data.status_new = document.getElementById('id_status_new').checked;
-                data.prod_active = document.getElementById('id_prod_active').checked;
-
+                // data = {};
+                // data.article = document.getElementById('id_article').value;
+                // data.description = document.getElementById('id_description').value;
+                // data.short_description = document.getElementById('id_short_description').value;
+                // data.description = document.getElementById('id_description').value;
+                // data.year_model = document.getElementById('id_year_model').value;
+                // data.price = document.getElementById('id_price').value;
+                // data.fabric = document.getElementById('id_fabric').value;
+                // data.category = document.getElementById('id_category').value;
+                // data.discount = document.getElementById('id_discount').value;
+                // data.name = document.getElementById('id_name').value;
+                // data.status_sale = document.getElementById('id_status_sale').checked;
+                // data.status_new = document.getElementById('id_status_new').checked;
+                // data.prod_active = document.getElementById('id_prod_active').checked;
+                console.log("Save end")
             }
         })
 
@@ -664,7 +749,7 @@ jQuery(document).ready(function ($) {
         data.password1 = pass1;
         data.password2 = pass2;
 
-        console.log("ajax ->" + data.username + "pass1 ->" + data.password1);
+        // console.log("ajax ->" + data.username + "pass1 ->" + data.password1);
 
         var csrf_token = $('#reg_form [name="csrfmiddlewaretoken"]').val();
         data["csrfmiddlewaretoken"] = csrf_token;

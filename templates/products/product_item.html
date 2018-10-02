@@ -13,20 +13,27 @@
                     {{ img.product.discount }} %
                 </div>
             {% endif %}
-        <div class="prod_it_list_footer">
+            <div id="size_tag">
             {% for tag in img.product.sizes.all %}
                 {{ tag }},
             {% endfor %}
+            </div>
+        <div class="prod_it_list_footer">
+
             <br><br>
                             {#add:+, sub:-,mul:*,numerator|div:denominator - /#}
             {% if img.product.discount %}
                 <div class="old_price">
                     {{ img.product.price }}
+                    <div class="line-draw"></div>
                 </div>
-                <div class="line-draw"></div>
+                <div class="new_price">
                 {{ img.product.price|div:100|mul:img.product.discount|sub:img.product.price|abs|floatformat:"-2"}} Руб.
+                </div>
              {% else %}
+                <div class="new_price">
                 {{ img.product.price|floatformat:"-2"}} Руб.
+                </div>
             {% endif %}
             <a href="{% url 'product' img.product.id %}" class="my-btn">Описание</a>
         </div>

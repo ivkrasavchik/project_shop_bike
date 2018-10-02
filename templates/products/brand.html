@@ -13,7 +13,7 @@
                 <img src="{{ elem.logo.url }}" class="img-responsive-in-list ">
             {% endif %}
             {{ elem.name }}<br>
-            <h4>{{ elem.description }}</h4>
+            <p style="word-break: break-all; color: darkorange; white-space: pre-wrap; padding: 1vw; font-size: 1.3vw">{{ elem.description }}</p>
         {% endfor %}
     </div>
 {% endblock %}

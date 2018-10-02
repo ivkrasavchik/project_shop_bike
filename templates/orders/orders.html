@@ -11,7 +11,7 @@
           <div class="orders-list scroll_ord">
             <div class="fix">
 
-                <form action="" id="" method="post">{% csrf_token %}
+                <form action="" method="post">{% csrf_token %}
                     <div class="N-ord">
                         <label for="N-ord">№ ord.</label><br>
                         <input id="N-ord" name="nord">
@@ -137,19 +137,21 @@
         </div>
     </div>
 
-    {% if request.session.pk == False %}
+    {% if request.session.pk == False or not request.session.pk %}
         <div id="add_product" class="add_block hidediv">
     {% else %}
         <div id="add_product" class="add_block">
-        <h1>Незакончена операция добавления товара в ордер № {{ request.session.pk }}</h1>
-        <form action="{% url 'sessionFalse' %}">{% csrf_token %}
-        <button type="submit" class="btn btn-outline my-2 my-sm-0" id="btn_session_false" href="">Жесткое завершение</button>
-        </form>
+            <div id="Error_massage">
+                <h3>Незакончена операция добавления товара в ордер № {{ request.session.pk }}</h3>
+                <form action="{% url 'sessionFalse' %}">{% csrf_token %}
+                <button type="submit" class="btn btn-outline my-2 my-sm-0" id="btn_session_false" href="">Жесткое завершение</button>
+                </form>
+            </div>
     {% endif %}
-        <div class="add_block_content">
-            {% include 'orders/order_prod_add.html' %}
+            <div class="add_block_content">
+                {% include 'orders/order_prod_add.html' %}
+            </div>
         </div>
-    </div>
 
 {#    {% if request.session.pk %}#}
 {#        <div id="add_block_add" class="add_block">#}

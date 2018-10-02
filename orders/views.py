@@ -241,7 +241,7 @@ def order_recount(request):
 def ord_editing_save(request):
     args = {}
     args.update(csrf(request))
-    print(request.session['pk'])
+    # print(request.session['pk'])
     if request.POST:
         if request.POST.get('order_id'):  # and type(request.POST.get('order_id')) == int:
             order = Order.objects.get(id=request.POST.get('order_id'))
