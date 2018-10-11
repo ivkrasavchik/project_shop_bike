@@ -1,4 +1,4 @@
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['192.168.0.200']  # ip address or *
 
 
