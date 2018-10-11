@@ -1,5 +1,5 @@
 DEBUG = False
-ALLOWED_HOSTS = ['*', ]  # ip address or *
+ALLOWED_HOSTS = ['192.168.0.200']  # ip address or *
 
 
 DATABASES = {
