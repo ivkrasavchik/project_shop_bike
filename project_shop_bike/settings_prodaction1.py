@@ -1,5 +1,5 @@
 DEBUG = False
-AllOWED_HOSTS = ['*']  # ip address or *
+ALLOWED_HOSTS = ['*']  # ip address or *
 
 DATABASES = {
     'default': {
