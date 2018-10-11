@@ -1,5 +1,5 @@
 DEBUG = False
-ALLOWED_HOSTS = ['192.168.0.200']  # ip address or *
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'www.chipmotors.com']  # ip address or *
 
 
 DATABASES = {
