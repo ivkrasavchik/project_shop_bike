@@ -5,8 +5,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'db1',
-        'USER': 'chipmotors',
-        'PASSWORD': 'django_shop_db',
+        'USER': 'chipadmin',
+        'PASSWORD': '1qsx2wdc',
         'HOST': 'localhost',
         'PORT': '',                 # Set to empty string for default.
     }
