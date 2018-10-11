@@ -1,7 +1,6 @@
 DEBUG = True
 ALLOWED_HOSTS = ['192.168.0.200']  # ip address or *
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
